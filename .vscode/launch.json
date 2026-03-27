@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-GeksApplication<geks>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.imaltuna.geks.GeksApplication",
+            "projectName": "geks",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
