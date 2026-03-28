@@ -3,7 +3,10 @@ package com.imaltuna.geks.model;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -41,21 +44,21 @@ public class erabiltzailea {
     private String izena;
     private String abizena;
     private String erabiltzaile_izena;
-    private String erabiltzaile_rola;
+
+    public enum rola{
+        admin,
+        arrunta
+    }
+
+    @Enumerated(EnumType.STRING) // <- hau da garrantzitsua
+    @Column(name = "erabiltzaile_rola", nullable = false)
+    private rola erabiltzaile_rola;
     private Date alta_data;
     private Date baja_data;
     private String pasahitza;
 
-    // public erabiltzailea(String izena, String abizena, String erabiltzaile_izena,
-    //         String erabiltzaile_rola, Date alta_data, Date baja_data, String pasahitza) {
-    //     this.izena = izena;
-    //     this.abizena = abizena;
-    //     this.erabiltzaile_izena = erabiltzaile_izena;
-    //     this.erabiltzaile_rola = erabiltzaile_rola;
-    //     this.alta_data = alta_data;
-    //     this.baja_data = baja_data;
-    //     this.pasahitza = pasahitza;
-    // }
+   
+    
     public int getId_erabiltzailea() {
         return id_erabiltzailea;
     }
@@ -80,10 +83,10 @@ public class erabiltzailea {
     public void setErabiltzaile_izena(String erabiltzaile_izena) {
         this.erabiltzaile_izena = erabiltzaile_izena;
     }
-    public String getErabiltzaile_rola() {
+    public rola getErabiltzaile_rola() {
         return erabiltzaile_rola;
     }
-    public void setErabiltzaile_rola(String erabiltzaile_rola) {
+    public void setErabiltzaile_rola(rola erabiltzaile_rola) {
         this.erabiltzaile_rola = erabiltzaile_rola;
     }
     public Date getAlta_data() {
