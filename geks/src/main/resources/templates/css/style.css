@@ -1,27 +1,55 @@
-.menua{
+.menua {
     color: #1e3a8a;
     font-weight: 500;
     text-align: left;
     margin-bottom: 12px;
 }
-i{
-    font-size: 20px;
+
+i {
+    font-size: 1.25rem;
 }
-.header{
+
+.header {
     background-color: #1e3a8a;
 }
-.nav-main{
+
+/* .nav-main {
     background-color: #f8f9fa;
     min-height: 100%;
+} */
+
+.main{
+    width: 100%;
 }
-.gehiBotoia{
+
+.gehiBotoia {
     background-color: #1e3a8a;
 }
-p{
+
+p {
     margin: 0;
 }
-h2, .spanH2{
+
+h2, .spanH2 {
     color: #1e3a8a;
     font-weight: bold;
     margin: 0;
+}
+
+/* Responsive izan dadin pantalla 480px baino txikiagoa denean letra tamaina, ikono tamaina eta botoien tamaina txikitu egiten da. */
+@media (max-width: 480px) {
+    body {
+        font-size: 0.875rem;
+    }
+    .btn-responsive {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+        border-radius: 0.25rem;
+    }
+    i {
+        font-size: 0.875rem;
+    }
+    .main, .nav{
+        padding: 0.25rem !important;
+    }
 }
