@@ -58,18 +58,6 @@ public class gailuElektronikoa {
     private String mota;
 
 
-    
-
-    public gailuElektronikoa(String marka, String modeloa, String serie_zenb, Date alta_data,
-            Date baja_data, gailuEgoera egoera, String mota) {
-        this.marka = marka;
-        this.modeloa = modeloa;
-        this.serie_zenb = serie_zenb;
-        this.alta_data = alta_data;
-        this.baja_data = baja_data;
-        this.egoera = egoera;
-        this.mota = mota;
-    }
 
     public int getId_gailua() {
         return id_gailua;
