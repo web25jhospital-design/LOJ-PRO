@@ -34,43 +34,40 @@ public class gela {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_gela;
+    private Integer idGela;
 
-    private String id_eraikina;
+    private String idEraikina;
     private String izena;
     private String deskribapena;
 
-    public Integer getId_gela() {
-        return id_gela;
+    
+    public Integer getIdGela() {
+        return idGela;
     }
-
-    public void setId_gela(Integer id_gela) {
-        this.id_gela = id_gela;
+    public void setIdGela(Integer idGela) {
+        this.idGela = idGela;
     }
-
-    public String getId_eraikina() {
-        return id_eraikina;
+    public String getIdEraikina() {
+        return idEraikina;
     }
-
-    public void setId_eraikina(String id_eraikina) {
-        this.id_eraikina = id_eraikina;
+    public void setIdEraikina(String idEraikina) {
+        this.idEraikina = idEraikina;
     }
-
     public String getIzena() {
         return izena;
     }
-
     public void setIzena(String izena) {
         this.izena = izena;
     }
-
     public String getDeskribapena() {
         return deskribapena;
     }
-
     public void setDeskribapena(String deskribapena) {
         this.deskribapena = deskribapena;
     }
+
+
+    
 
     // Getter-ak eta Setter-ak (Lombok baduzu @Data jarri dezakezu gainean)
 

@@ -3,6 +3,8 @@ package com.imaltuna.geks.model;
 
 import java.util.Date;
 
+
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -39,31 +41,30 @@ public class erabiltzailea {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_erabiltzailea;
+    private Integer idErabiltzailea;
 
     private String izena;
     private String abizena;
-    private String erabiltzaile_izena;
+    private String erabiltzaileIzena;
 
-    public enum rola{
-        admin,
-        arrunta
-    }
+    // public enum rola{
+    //     admin,
+    //     arrunta
+    // }
 
     @Enumerated(EnumType.STRING) // <- hau da garrantzitsua
-    @Column(name = "erabiltzaile_rola", nullable = false)
-    private rola erabiltzaile_rola;
-    private Date alta_data;
-    private Date baja_data;
+    @Column(name = "erabiltzaileRola", nullable = false)
+    private rola erabiltzaileRola;
+    private Date altaData;
+    private Date bajaData;
     private String pasahitza;
 
-   
-    
-    public int getId_erabiltzailea() {
-        return id_erabiltzailea;
+
+    public Integer getIdErabiltzailea() {
+        return idErabiltzailea;
     }
-    public void setId_erabiltzailea(int id_erabiltzailea) {
-        this.id_erabiltzailea = id_erabiltzailea;
+    public void setIdErabiltzailea(Integer idErabiltzailea) {
+        this.idErabiltzailea = idErabiltzailea;
     }
     public String getIzena() {
         return izena;
@@ -77,29 +78,29 @@ public class erabiltzailea {
     public void setAbizena(String abizena) {
         this.abizena = abizena;
     }
-    public String getErabiltzaile_izena() {
-        return erabiltzaile_izena;
+    public String getErabiltzaileIzena() {
+        return erabiltzaileIzena;
     }
-    public void setErabiltzaile_izena(String erabiltzaile_izena) {
-        this.erabiltzaile_izena = erabiltzaile_izena;
+    public void setErabiltzaileIzena(String erabiltzaileIzena) {
+        this.erabiltzaileIzena = erabiltzaileIzena;
     }
-    public rola getErabiltzaile_rola() {
-        return erabiltzaile_rola;
+    public rola getErabiltzaileRola() {
+        return erabiltzaileRola;
     }
-    public void setErabiltzaile_rola(rola erabiltzaile_rola) {
-        this.erabiltzaile_rola = erabiltzaile_rola;
+    public void setErabiltzaileRola(rola erabiltzaileRola) {
+        this.erabiltzaileRola = erabiltzaileRola;
     }
-    public Date getAlta_data() {
-        return alta_data;
+    public Date getAltaData() {
+        return altaData;
     }
-    public void setAlta_data(Date alta_data) {
-        this.alta_data = alta_data;
+    public void setAltaData(Date altaData) {
+        this.altaData = altaData;
     }
-    public Date getBaja_data() {
-        return baja_data;
+    public Date getBajaData() {
+        return bajaData;
     }
-    public void setBaja_data(Date baja_data) {
-        this.baja_data = baja_data;
+    public void setBajaData(Date bajaData) {
+        this.bajaData = bajaData;
     }
     public String getPasahitza() {
         return pasahitza;
@@ -107,6 +108,7 @@ public class erabiltzailea {
     public void setPasahitza(String pasahitza) {
         this.pasahitza = pasahitza;
     }
+   
 
     // Getter-ak eta Setter-ak (Lombok baduzu @Data jarri dezakezu gainean)
 }

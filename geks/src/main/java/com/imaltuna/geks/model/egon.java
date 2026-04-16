@@ -36,44 +36,45 @@ public class egon {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_egon;
+    private Integer idEgon;
 
-    private Integer id_gailua;
-    private Integer id_gela;
-    private Date hasiera_data;
-    private Date amaiera_data;
-
-
-    public Integer getId_egon() {
-        return id_egon;
-    }
-    public void setId_egon(Integer id_egon) {
-        this.id_egon = id_egon;
-    }
-    public Integer getId_gailua() {
-        return id_gailua;
-    }
-    public void setId_gailua(Integer id_gailua) {
-        this.id_gailua = id_gailua;
-    }
-    public Integer getId_gela() {
-        return id_gela;
-    }
-    public void setId_gela(Integer id_gela) {
-        this.id_gela = id_gela;
-    }
-    public Date getHasiera_data() {
-        return hasiera_data;
-    }
-    public void setHasiera_data(Date hasiera_data) {
-        this.hasiera_data = hasiera_data;
-    }
-    public Date getAmaiera_data() {
-        return amaiera_data;
-    }
-    public void setAmaiera_data(Date amaiera_data) {
-        this.amaiera_data = amaiera_data;
-    }
+    private Integer idGailua;
+    private Integer idGela;
+    private Date hasieraData;
+    private Date amaieraData;
     
+    public Integer getIdEgon() {
+        return idEgon;
+    }
+    public void setIdEgon(Integer idEgon) {
+        this.idEgon = idEgon;
+    }
+    public Integer getIdGailua() {
+        return idGailua;
+    }
+    public void setIdGailua(Integer idGailua) {
+        this.idGailua = idGailua;
+    }
+    public Integer getIdGela() {
+        return idGela;
+    }
+    public void setIdGela(Integer idGela) {
+        this.idGela = idGela;
+    }
+    public Date getHasieraData() {
+        return hasieraData;
+    }
+    public void setHasieraData(Date hasieraData) {
+        this.hasieraData = hasieraData;
+    }
+    public Date getAmaieraData() {
+        return amaieraData;
+    }
+    public void setAmaieraData(Date amaieraData) {
+        this.amaieraData = amaieraData;
+    }
+
+
+
     // Getter-ak eta Setter-ak (Lombok baduzu @Data jarri dezakezu gainean)
 }

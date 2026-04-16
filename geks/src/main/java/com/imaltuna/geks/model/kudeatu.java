@@ -39,61 +39,65 @@ public class kudeatu {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_kudeatu;
+    private Integer idKudeatu;
 
-    private Integer id_gailua;
-    private Integer id_erabiltzailea;
-    private Date kudeatze_data;
+    private Integer idGailua;
+    private Integer idErabiltzailea;
+    private Date kudeatzeData;
 
-    public enum kudeaketa_mota{
+    public enum kudeaketaMota{
         gehitu,
         editatu,
         ezabatu
     }
 
     @Enumerated(EnumType.STRING) // <- hau da garrantzitsua
-    @Column(name = "kudeatze_mota", nullable = false)
-    private kudeaketa_mota kudeatze_mota;
+    @Column(name = "kudeatzeMota", nullable = false)
+    private kudeaketaMota kudeatzeMota;
 
-    public Integer getId_kudeatu() {
-        return id_kudeatu;
+    public Integer getIdKudeatu() {
+        return idKudeatu;
     }
 
-    public void setId_kudeatu(Integer id_kudeatu) {
-        this.id_kudeatu = id_kudeatu;
+    public void setIdKudeatu(Integer idKudeatu) {
+        this.idKudeatu = idKudeatu;
     }
 
-    public Integer getId_gailua() {
-        return id_gailua;
+    public Integer getIdGailua() {
+        return idGailua;
     }
 
-    public void setId_gailua(Integer id_gailua) {
-        this.id_gailua = id_gailua;
+    public void setIdGailua(Integer idGailua) {
+        this.idGailua = idGailua;
     }
 
-    public Integer getId_erabiltzailea() {
-        return id_erabiltzailea;
+    public Integer getIdErabiltzailea() {
+        return idErabiltzailea;
     }
 
-    public void setId_erabiltzailea(Integer id_erabiltzailea) {
-        this.id_erabiltzailea = id_erabiltzailea;
+    public void setIdErabiltzailea(Integer idErabiltzailea) {
+        this.idErabiltzailea = idErabiltzailea;
     }
 
-    public Date getKudeatze_data() {
-        return kudeatze_data;
+    public Date getKudeatzeData() {
+        return kudeatzeData;
     }
 
-    public void setKudeatze_data(Date kudeatze_data) {
-        this.kudeatze_data = kudeatze_data;
+    public void setKudeatzeData(Date kudeatzeData) {
+        this.kudeatzeData = kudeatzeData;
     }
 
-    public kudeaketa_mota getKudeatze_mota() {
-        return kudeatze_mota;
+    public kudeaketaMota getKudeatzeMota() {
+        return kudeatzeMota;
     }
 
-    public void setKudeatze_mota(kudeaketa_mota kudeatze_mota) {
-        this.kudeatze_mota = kudeatze_mota;
+    public void setKudeatzeMota(kudeaketaMota kudeatzeMota) {
+        this.kudeatzeMota = kudeatzeMota;
     }
+
+    
+
+    
     
     // Getter-ak eta Setter-ak (Lombok baduzu @Data jarri dezakezu gainean)
 

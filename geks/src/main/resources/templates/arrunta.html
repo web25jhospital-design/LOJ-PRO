@@ -26,9 +26,12 @@
                 <div class="container-fluid">
                     <a class="navbar-brand fw-bold" href="#">Miguel Altuna - Gailu Kudeaketa</a>
                     <div class="d-flex">
-                        <span class="navbar-text me-5">Kaixo,<span class="navbar-text"th:text=" ${erabiltzaileIzenaAbizena}">Hemen erabiltzailearen izen eta abizena agertuko dira</span></span>
-                        <button class="btn btn-outline-light btn-responsive" type="button">
-                            <i class="bi bi-box-arrow-right me-2"></i>Irten</button>
+                        <span class="navbar-text me-5">Kaixo, <span class="navbar-text"
+                                th:text="${logeatutakoErab}"></span>   (user Arrunta)</span>
+                        <form action="/logout" method="post">
+                            <button class="btn btn-outline-light btn-responsive" type="submit">
+                                <i class="bi bi-box-arrow-right me-2"></i>Irten</button>
+                        </form>
                     </div>
                 </div>
             </nav>
@@ -68,7 +71,8 @@
                     <nav class="navbar p-0">
                         <div class="container-fluid">
                             <div>
-                                <h2>Ongi etorri, <span class="spanH2 navbar-text"th:text=" ${erabiltzaileIzenaAbizena}">Hemen erabiltzailearen izen eta abizena agertuko dira</span>!</h2>
+                                <h2>Ongi etorri, <span class="spanH2 navbar-text"
+                                        th:text="${logeatutakoErab}"></span>!</h2>
                                 <p class="navbar-text">Miguel Altuna - Gailu Elektronikoen Kudeaketa Sistema</p>
                             </div>
                         </div>
@@ -140,11 +144,11 @@
 
 
                 </div>
+            </div>
+
+            <!-------------------------------------------------MAIN AMAIERA------------------------------------------>
+
         </div>
-
-        <!-------------------------------------------------MAIN AMAIERA------------------------------------------>
-
-    </div>
 
 
 

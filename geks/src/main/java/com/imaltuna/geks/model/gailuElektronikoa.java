@@ -36,14 +36,14 @@ import jakarta.persistence.Table;
 public class gailuElektronikoa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_gailua;
+    private Integer idGailua;
 
 
     private String marka;
     private String modeloa;
-    private String serie_zenb;
-    private Date alta_data;
-    private Date baja_data;
+    private String serieZenb;
+    private Date altaData;
+    private Date bajaData;
     
     public enum gailuEgoera{
         erabilgarri,
@@ -56,72 +56,57 @@ public class gailuElektronikoa {
     @Column(name = "egoera", nullable = false)
     private gailuEgoera egoera;
     private String mota;
-
-
-
-    public int getId_gailua() {
-        return id_gailua;
+    public Integer getIdGailua() {
+        return idGailua;
     }
-
-    public void setId_gailua(int id_gailua) {
-        this.id_gailua = id_gailua;
+    public void setIdGailua(Integer idGailua) {
+        this.idGailua = idGailua;
     }
-
     public String getMarka() {
         return marka;
     }
-
     public void setMarka(String marka) {
         this.marka = marka;
     }
-
     public String getModeloa() {
         return modeloa;
     }
-
     public void setModeloa(String modeloa) {
         this.modeloa = modeloa;
     }
-
-    public String getSerie_zenb() {
-        return serie_zenb;
+    public String getSerieZenb() {
+        return serieZenb;
     }
-
-    public void setSerie_zenb(String serie_zenb) {
-        this.serie_zenb = serie_zenb;
+    public void setSerieZenb(String serieZenb) {
+        this.serieZenb = serieZenb;
     }
-
-    public Date getAlta_data() {
-        return alta_data;
+    public Date getAltaData() {
+        return altaData;
     }
-
-    public void setAlta_data(Date alta_data) {
-        this.alta_data = alta_data;
+    public void setAltaData(Date altaData) {
+        this.altaData = altaData;
     }
-
-    public Date getBaja_data() {
-        return baja_data;
+    public Date getBajaData() {
+        return bajaData;
     }
-
-    public void setBaja_data(Date baja_data) {
-        this.baja_data = baja_data;
+    public void setBajaData(Date bajaData) {
+        this.bajaData = bajaData;
     }
-
     public gailuEgoera getEgoera() {
         return egoera;
     }
-
     public void setEgoera(gailuEgoera egoera) {
         this.egoera = egoera;
     }
-
     public String getMota() {
         return mota;
     }
-
     public void setMota(String mota) {
         this.mota = mota;
     }
+
+
+
 
     // Getter-ak eta Setter-ak (Lombok baduzu @Data jarri dezakezu gainean)
 }

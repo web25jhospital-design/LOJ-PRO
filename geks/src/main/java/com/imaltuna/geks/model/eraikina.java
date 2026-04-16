@@ -31,17 +31,17 @@ import jakarta.persistence.Table;
 public class eraikina {
 
     @Id
-    private String id_eraikina;
+    private String idEraikina;
 
     private String izena;
     private String deskribapena;
 
     
-    public String getId_eraikina() {
-        return id_eraikina;
+    public String getIdEraikina() {
+        return idEraikina;
     }
-    public void setId_eraikina(String id_eraikina) {
-        this.id_eraikina = id_eraikina;
+    public void setIdEraikina(String idEraikina) {
+        this.idEraikina = idEraikina;
     }
     public String getIzena() {
         return izena;
@@ -55,6 +55,9 @@ public class eraikina {
     public void setDeskribapena(String deskribapena) {
         this.deskribapena = deskribapena;
     }
+
+    
+
  
 
     // Getter-ak eta Setter-ak (Lombok baduzu @Data jarri dezakezu gainean)

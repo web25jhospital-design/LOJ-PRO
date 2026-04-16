@@ -4,7 +4,6 @@ package com.imaltuna.geks.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import com.imaltuna.geks.repository.erabiltzaileaRepository;
 
@@ -23,7 +22,7 @@ public class hasieraController {
     }
 
 
-    @GetMapping("/") // Nabigatzailean http://localhost:8080/ idaztean (GET eskaria)
+    //@GetMapping("/") // Nabigatzailean http://localhost:8080/ idaztean (GET eskaria)
     public String kaixo(Model model) {
         // Model-a "motxila" bat bezalakoa da: Javan sartzen ditugu datuak HTML-an erabili ahal izateko
        

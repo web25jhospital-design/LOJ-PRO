@@ -1,64 +1,49 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Miguel Altuna - Gailuak</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEKS Saioa Hasi</title>
+    <!-- style -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="/css/styleLogin.css"> 
+
+    <!-- js -->
+    <script src="/js/jquery-4.0.0.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- <script src="/js/login.js"></script> -->
 </head>
-<body class="bg-light">
 
+<body>
+    <div class="card text-center p-5 pb-1">
+        <div class="card-body p-0">
+            <h1>GEKS</h1>
+            <p class="card-text mb-5">Gailu Elektronikoen Kudeaketa Sistema</p>
 
-    <nav class="navbar navbar-dark bg-primary mb-4">
-        <div class="container">
-            <a class="navbar-brand" href="#">Miguel Altuna Inbentarioa</a>
-        </div>
-    </nav>
+            <!-- submit zakatzean formularioak, erabiltzaileak sartutako datuak pasatuko dizkio loginController-ari -->
+            <form action="/" method="post">
+                <div class="mb-4">
+                    <label for="inputErabiltzailea" class="form-label">Erabiltzailea</label>
+                    <input type="text" class="form-control" id="inputErabiltzailea" name="erabiltzailea" placeholder="Sar ezazu zure erabiltzailea">
+                    
+                </div>
+                <div class="mb-4">
+                    <label for="inputPassword" class="form-label">Pasahitza</label>
+                    <input type="password" class="form-control" id="inputPassword" name="pasahitza" placeholder="Sar ezazu zure pasahitza">
+                </div>
 
+                <!-- Erabiltzaile edo pasahitza okerra sartuz gero sistemak mezu bidez abixatuko du. -->
+                <p class="text-danger fw-light" th:text="${mezua}"></p>
 
-    <div class="container">
-        <div class="p-5 mb-4 bg-white rounded-3 shadow-sm">
-            <div class="container-fluid py-5 text-center">
-                <h1 class="display-5 fw-bold" th:text="${mezua}">Hemen mezua agertuko da</h1>
-                <p class="col-md-8 fs-4 mx-auto text-muted">
-                    Gailu elektronikoak, gelak eta eraikinak kudeatzeko zure web aplikazio berria.
-                </p>
-                <button class="btn btn-primary btn-lg" type="button">Hasi saioa</button>
-            </div>
+                <button type="submit" class="btn p-2 mb-5 mt-5" id="loginbutton">Sartu</button>
+            </form>
+        
+            <p class="copyRight fw-light">&copy MiguelAltuna</p>
         </div>
     </div>
 
-
-    <div class="container mt-5">
-    <h3 class="mb-3">Erabiltzaileen Zerrenda</h3>
-    <div class="table-responsive bg-white p-3 rounded shadow-sm">
-        <table class="table table-hover">
-            <thead class="table-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Izena</th>
-                    <th>Abizena</th>
-                    <th>Erabiltzaile Izena</th>
-                    <th>Alta Data</th>
-                    <th>Baja Data</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="erab : ${erabiltzailea}">
-                    <td th:text="${erab.id_erabiltzailea}"></td>
-                    <td th:text="${erab.izena}"></td>
-                    <td th:text="${erab.abizena}"></td>
-                    <td th:text="${erab.erabiltzaile_izena}"></td>
-                    <td th:text="${erab.alta_data}"></td>
-                    <td th:text="${erab.baja_data}">kajdslifeljl</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-<br>
-<br><br>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

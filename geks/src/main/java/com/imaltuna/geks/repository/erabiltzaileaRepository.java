@@ -9,6 +9,9 @@ import com.imaltuna.geks.model.erabiltzailea;
 
 @Repository // Spring-i esaten dio klase honek datu-basearekin komunikazioa kudeatzen duela
 public interface erabiltzaileaRepository extends JpaRepository<erabiltzailea, Long> {
+
+    public erabiltzailea findByerabiltzaileIzena(String erabiltzailea);
+    
    
     /* Hemen ez dugu metodorik idatzi behar momentuz.
        JpaRepository luzatzean, Spring-ek automatikoki ematen dizkigu:

@@ -8,7 +8,7 @@ import com.imaltuna.geks.model.eraikina;
 
 
 @Repository // Spring-i esaten dio klase honek datu-basearekin komunikazioa kudeatzen duela
-public interface eraikinaRepository extends JpaRepository<eraikina, Long> {
+public interface eraikinaRepository extends JpaRepository<eraikina, String> {
    
     /* Hemen ez dugu metodorik idatzi behar momentuz.
        JpaRepository luzatzean, Spring-ek automatikoki ematen dizkigu:
