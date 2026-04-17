@@ -117,12 +117,27 @@
                         </div>
                     </nav>
 
-
-                    <!-- HEMEN GEHITU FALTA DANA -->
-
-
-
-
+                    <!-- ERAIKINAK TAB-EKO DATUAK -->
+                    <!------------------------------------------------------------------------------------------------->
+                    <div class="table-responsive bg-white p-3 rounded shadow-sm">
+                        <table class="table table-hover">
+                            <thead class="table-white">
+                                <tr>
+                                    <th style="width: 12.11%;">ID</th>
+                                    <th class="w-33">Izena</th>
+                                    <th class="width: 50%">Deskribapena</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="e : ${eraikina}">
+                                    <td th:text="${e.idEraikina}"></td>
+                                    <td th:text="${e.izena}"></td>
+                                    <td th:text="${e.deskribapena}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!------------------------------------------------------------------------------------------------->
                 </div>
                 <!----------------------------------------------------------------------------------------------------------->
                 <!--                                               GELAK                                                   -->

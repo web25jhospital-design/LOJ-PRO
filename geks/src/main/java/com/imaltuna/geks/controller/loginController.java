@@ -43,10 +43,10 @@ public class loginController {
             
             if (erabDB.getErabiltzaileRola()==erabiltzaileRola){
                 //erabiltzailea zuzena bada eta admin baimenak baditu admin.html exekutatuko da
-                return "admin";
+                return "redirect:/admin"; // ✪
             }else {
                 //erabiltzailea zuzena bada eta arrunta baimenak baditu arrunta.html exekutatuko da
-                return "arrunta";
+                return "redirect:/arrunta"; // ✪
             }
 
         } else {
