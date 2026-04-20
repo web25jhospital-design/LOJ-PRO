@@ -1,6 +1,8 @@
 package com.imaltuna.geks.model;
 
 
+import java.util.Date;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,46 +31,50 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name = "gela")
-public class Gela {
+@Table(name = "egon")
+public class Egon {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idEgon;
+
+    private Integer idGailua;
     private Integer idGela;
-
-    private String idEraikina;
-    private String izena;
-    private String deskribapena;
-
+    private Date hasieraData;
+    private Date amaieraData;
     
+    public Integer getIdEgon() {
+        return idEgon;
+    }
+    public void setIdEgon(Integer idEgon) {
+        this.idEgon = idEgon;
+    }
+    public Integer getIdGailua() {
+        return idGailua;
+    }
+    public void setIdGailua(Integer idGailua) {
+        this.idGailua = idGailua;
+    }
     public Integer getIdGela() {
         return idGela;
     }
     public void setIdGela(Integer idGela) {
         this.idGela = idGela;
     }
-    public String getIdEraikina() {
-        return idEraikina;
+    public Date getHasieraData() {
+        return hasieraData;
     }
-    public void setIdEraikina(String idEraikina) {
-        this.idEraikina = idEraikina;
+    public void setHasieraData(Date hasieraData) {
+        this.hasieraData = hasieraData;
     }
-    public String getIzena() {
-        return izena;
+    public Date getAmaieraData() {
+        return amaieraData;
     }
-    public void setIzena(String izena) {
-        this.izena = izena;
-    }
-    public String getDeskribapena() {
-        return deskribapena;
-    }
-    public void setDeskribapena(String deskribapena) {
-        this.deskribapena = deskribapena;
+    public void setAmaieraData(Date amaieraData) {
+        this.amaieraData = amaieraData;
     }
 
 
-    
 
     // Getter-ak eta Setter-ak (Lombok baduzu @Data jarri dezakezu gainean)
-
 }
