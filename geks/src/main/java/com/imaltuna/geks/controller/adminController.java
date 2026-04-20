@@ -52,6 +52,8 @@ public class adminController {
         model.addAttribute("gailuak", gailuelektronikoaRepository.findAll());
         model.addAttribute("gailuEgoerak", gailuelektronikoaRepository.findDistinctEgoera());
         model.addAttribute("gailuMotak", gailuelektronikoaRepository.findDistinctMota());
+        model.addAttribute("gailuakGaurEgun", gailuelektronikoaRepository.findGailuakGaurEgun());
+        
 
         //Egon
         model.addAttribute("gailuaNon", egonRepository.findAll());

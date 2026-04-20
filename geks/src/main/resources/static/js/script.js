@@ -43,7 +43,7 @@ gailuakEgoeraAukeratua.addEventListener("change", gailuEgoeraKoloreaJarri);
 function gailuEgoeraKoloreaJarri(){
 switch (gailuakEgoeraAukeratua.value) {
     case "Guztiak":
-        kudeaketaMotaAukeratua.style.color = "black";
+        gailuakEgoeraAukeratua.style.color = "black";
         break;
     case "erabilgarri":
         gailuakEgoeraAukeratua.style.color = "rgb(1, 149, 151)";
@@ -58,6 +58,66 @@ switch (gailuakEgoeraAukeratua.value) {
         gailuakEgoeraAukeratua.style.color = "#1e3a8a";
 }
 };
+
+//---------------------------------------------------------------------------
+//----------------------GAILUAK BILAKETAK------------------------------------
+//---------------------------------------------------------------------------
+const gailuakMota = document.querySelector("#selektMota");
+gailuakMota.addEventListener("change", bilatuGailua);
+gailuakEgoeraAukeratua.addEventListener("change", bilatuGailua);
+const gailuakGela = document.querySelector("#selektGela");
+gailuakGela.addEventListener("change", bilatuGailua);
+const gailuakBilatu = document.querySelector("#bilatuGailua");
+gailuakBilatu.addEventListener("input", bilatuGailua);
+
+function bilatuGailua(){
+    const mota=gailuakMota.value;
+    const egoera=gailuakEgoeraAukeratua.value;
+    const gela=gailuakGela.value;
+    const gakoa=gailuakBilatu.value.toLowerCase();
+   
+    const errenkadakGailuak=document.querySelectorAll("#gailuakTaula tbody tr");
+    const errenkadakEgon=document.querySelectorAll("#egonTaula tbody tr");
+
+
+    //Gailuak taulako errenkada bakoitza aztertu
+    errenkadakGailuak.forEach(errenkada =>{
+        let motaIkusgai=false;
+        let egoeraIkusgai=false;
+        let gakoaIkusgai=false;
+        let gelaIkusgai=false;
+        
+
+        const errenkadakoMota=errenkada.querySelector(".tdMota");
+        //Gailu mota
+        if (mota==="Guztiak" || mota===errenkadakoMota.textContent){
+            motaIkusgai=true;
+        }
+        //Gailu egoera
+        const errenkadakoEgoera=errenkada.querySelector(".tdEgoera");
+        if (egoera==="Guztiak" || egoera===errenkadakoEgoera.textContent){
+            egoeraIkusgai=true;
+        }
+        //Gailua gakoa
+        const errenkadaTextua=errenkada.innerText.toLowerCase();
+        if (gakoa===null || errenkadaTextua.includes(gakoa)){
+            gakoaIkusgai=true;
+        }
+        //Gela
+        const errenkadakoGela=errenkada.querySelector(".tdIdGela");
+        //Gailu mota
+        if (gela==="Guztiak" || gela===errenkadakoGela.textContent){
+            gelaIkusgai=true;
+        }
+
+        if (motaIkusgai && gakoaIkusgai && egoeraIkusgai && gelaIkusgai){
+            errenkada.style.display="";
+        }else{
+            errenkada.style.display="none";
+        }
+    });
+}
+
 
 //------------------------------HISTORIKOAK----------------------------
 //---------------------------------------------------------------------
@@ -112,3 +172,48 @@ switch (kudeaketaMotaAukeratua.value) {
         kudeaketaMotaAukeratua.style.color = "#1e3a8a";
 }
 };
+
+//---------------------------------------------------------------------------
+//----------------------HISTORIKOA BILAKETAK GELAK---------------------------
+//---------------------------------------------------------------------------
+
+// const gailuakGelaHistoriokoa = document.querySelector("#selektGelaHistorikoa");
+// gailuakGelaHistoriokoa.addEventListener("change", bilatuGailuaGela);
+
+// const gailuakGailuaHistoriokoa = document.querySelector("#selektGailuaHistorikoa");
+// gailuakGailuaHistoriokoa.addEventListener("change", bilatuGailuaGela);
+
+// function bilatuGailuaGela(){
+//     const gelaHistorikoa=gailuakGelaHistoriokoa.value;
+//     const gailuaHistorikoa=gailuakGailuaHistoriokoa.value;
+   
+//     const errenkadakEgon=document.querySelectorAll("#egonTaula tbody tr");
+
+
+
+//     //Egon taulako errenkada bakoitza aztertu
+//     errenkadakEgon.forEach(errenkada =>{
+//         let gelaIkusgai=false;
+//         let gailuaIkusgai=false;
+        
+//         //Gela
+//         const errenkadakoID=errenkada.querySelector(".tdIdGela");
+//         if (gelaHistorikoa==="Guztiak" || gelaHistorikoa===errenkadakoID.textContent){
+//             gelaIkusgai=true;
+//             console.log("sartu da");
+//         }
+//         //Gailua
+//         const errenkadakoID=errenkada.querySelector(".tdIdGailua");
+//         if (gela==="Guztiak" || gailua===errenkadakoID.textContent){
+//             gailuaIkusgai=true;
+//         }
+        
+//         if (gelaIkusgai && gailuaIkusgai){
+//             errenkada.style.display="";
+//         }else{
+//             errenkada.style.display="none";
+//         }
+//     });
+
+
+// }

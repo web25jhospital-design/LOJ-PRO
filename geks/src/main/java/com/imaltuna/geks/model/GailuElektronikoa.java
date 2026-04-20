@@ -44,18 +44,16 @@ public class GailuElektronikoa {
     private String serieZenb;
     private Date altaData;
     private Date bajaData;
+    private String mota;
     
-    public enum gailuEgoera{
-        erabilgarri,
-        hartua,
-        mantenuan,
-        bajan
-    }
+    
 
     @Enumerated(EnumType.STRING) // <- hau da garrantzitsua
     @Column(name = "egoera", nullable = false)
-    private gailuEgoera egoera;
-    private String mota;
+    private GailuEgoera egoera;
+   
+
+
     public Integer getIdGailua() {
         return idGailua;
     }
@@ -92,10 +90,10 @@ public class GailuElektronikoa {
     public void setBajaData(Date bajaData) {
         this.bajaData = bajaData;
     }
-    public gailuEgoera getEgoera() {
+    public GailuEgoera getEgoera() {
         return egoera;
     }
-    public void setEgoera(gailuEgoera egoera) {
+    public void setEgoera(GailuEgoera egoera) {
         this.egoera = egoera;
     }
     public String getMota() {

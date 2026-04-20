@@ -156,24 +156,28 @@
                                     <th>ID</th>
                                     <th>Marka</th>
                                     <th>Modeloa</th>
-                                    <th>Serie Zenbakia</th>
+                                    <th>Serie Zenb</th>
                                     <th>Mota</th>
                                     <th>Egoera</th>
                                     <th>Alta Data</th>
                                     <th>Baja Data</th>
+                                    <th>Gela</th>
+                                    <th>Hartu Data</th>
                                     <th>Ekintzak</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="gailua : ${gailuak}">
+                                <tr th:each="gailua : ${gailuakGaurEgun}">
                                     <td th:text="${gailua.idGailua}"></td>
                                     <td th:text="${gailua.marka}"></td>
                                     <td th:text="${gailua.modeloa}"></td>
                                     <td th:text="${gailua.serieZenb}"></td>
-                                    <td th:text="${gailua.mota}"></td>
+                                    <td class="tdMota" th:text="${gailua.mota}"></td>
                                     <td class="tdEgoera" th:text="${gailua.egoera}"></td>
                                     <td th:text="${gailua.altaData}"></td>
                                     <td th:text="${gailua.bajaData}"></td>
+                                    <td class="tdIdGela" th:text="${gailua.idGela}"></td>
+                                    <td th:text="${gailua.hasieraData}"></td>
                                     <td>
                                         <Button class="btn p-1" type="button"><i
                                                 class="bi bi-pencil-square text-primary fs-5 fw-bold"></i></Button>
@@ -185,38 +189,6 @@
                         </table>
                     </div>
                     <!-- GailuElektronikoak TAULA AMAIERA-->
-                    <!-- Egon TAULA -->
-                    <h2 class="mt-5 mb-3">Gailuen Kokapena</h2>
-                    <div class="table-responsive bg-white p-3 rounded shadow-sm">
-                        <table class="table table-hover">
-                            <thead class="table-white">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>ID Gailua</th>
-                                    <th>ID Gela</th>
-                                    <th>Alta Data</th>
-                                    <th>Baja Data</th>
-                                    <th>Ekintzak</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr th:each="egon : ${gailuaNon}">
-                                    <td th:text="${egon.idEgon}"></td>
-                                    <td th:text="${egon.idGailua}"></td>
-                                    <td th:text="${egon.idGela}"></td>
-                                    <td th:text="${egon.hasieraData}"></td>
-                                    <td th:text="${egon.amaieraData}"></td>
-                                    <td>
-                                        <Button class="btn p-1" type="button"><i
-                                                class="bi bi-pencil-square text-primary fs-5 fw-bold"></i></Button>
-                                        <Button class="btn p-1" type="button"><i
-                                                class="bi bi-trash text-danger fs-5 fw-bold"></i></Button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- Egon TAULA AMAIERA-->
                     <!------------------ GAILUEN LAN LEIHOA AMAILERA------------------>
                 </div>
                 <!----------------------------------------------------------------------------------------------------------->
@@ -340,6 +312,7 @@
                     <!------------------ HISTORIKOEN HEADERA AMAIERA------------------>
                     <!---------------------- HISTORIKOEN LAN LEIHOA---------------------->
                     <!-- BILAKETA FORMULARIOA -->
+                    <h3 class="mt-5 mb-3">Gailuen Kudeaketa</h3>
                     <div class="card border-light p-3 mb-4 shadow-sm">
                         <form action="">
                             <div class="row">
@@ -360,7 +333,7 @@
                                     </select>
                                 </div>
                                 <div class="col-12 col-lg-3">
-                                    <label for="selektData" class="form-label fw-semibold">Kuadeta Data</label>
+                                    <label for="selektData" class="form-label fw-semibold">Kuadeatze Data</label>
                                     <input id="selektData" class="form-control" type="date" placeholder="Data ...">
                                 </div>
                                 <div class="col-12 col-lg-3">
@@ -398,6 +371,54 @@
                         </table>
                     </div>
                     <!-- Historikoak TAULA AMAIERA-->
+                     <!-- BILAKETA FORMULARIOA -->
+                    <h3 class="mt-5 mb-3">Gailuen Kokapena</h3>
+                    <div class="card border-light p-3 mb-4 shadow-sm">
+                        <form action="">
+                            <div class="row">
+                                <div class="col-12 col-lg-3">
+                                    <label for="selektGailuaHistorikoa" class="form-label fw-semibold">Gailua</label>
+                                    <select id="selektGailuaHistorikoa" class="form-select" aria-label="Default select example">
+                                        <option selected>Guztiak</option>
+                                        <option th:each="gailua : ${gailuak}" th:value="${gailua.idGailua}"
+                                            th:text="${gailua.idGailua}"></option>
+                                    </select>
+                                </div>
+                                <div class="col-12 col-lg-3">
+                                    <label for="selektGelaHistorikoa" class="form-label fw-semibold">Gela</label>
+                                    <select id="selektGelaHistorikoa" class="form-select" aria-label="Default select example">
+                                        <option selected>Guztiak</option>
+                                        <option th:each="gela : ${gelak}" th:value="${gela.idGela}" th:text="${gela.IdGela}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- BILAKETA FORMULARIOA AMAILERA -->
+                     <!-- Egon TAULA -->
+                    <div class="table-responsive bg-white p-3 rounded shadow-sm">
+                        <table id="egonTaula" class="table table-hover">
+                            <thead class="table-white">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>ID Gailua</th>
+                                    <th>ID Gela</th>
+                                    <th>Alta Data</th>
+                                    <th>Baja Data</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="egon : ${gailuaNon}">
+                                    <td th:text="${egon.idEgon}"></td>
+                                    <td class="tdIdGailua" th:text="${egon.idGailua}"></td>
+                                    <td class="tdIdGela" th:text="${egon.idGela}"></td>
+                                    <td th:text="${egon.hasieraData}"></td>
+                                    <td th:text="${egon.amaieraData}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Egon TAULA AMAIERA-->
                     <!------------------ HISTORIKOEN LAN LEIHOA AMAILERA------------------>
                 </div>
             </div>

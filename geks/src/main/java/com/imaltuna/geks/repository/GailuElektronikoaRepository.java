@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.imaltuna.geks.model.GailuElektronikoa;
+import com.imaltuna.geks.model.GailuTaulaGaurEgun;
 
 @Repository // Spring-i esaten dio klase honek datu-basearekin komunikazioa kudeatzen duela
 public interface GailuElektronikoaRepository extends JpaRepository<GailuElektronikoa, Long> {
@@ -20,6 +21,11 @@ public interface GailuElektronikoaRepository extends JpaRepository<GailuElektron
     @Query("select distinct mota from GailuElektronikoa")
     public List<String> findDistinctMota();
 
+    //Gailuen taula erakutsi ahal izateko selecta: hemen GailuElektronikoa eta Egon taulakin bat sortuko da:
+     @Query("SELECT new com.imaltuna.geks.model.GailuTaulaGaurEgun(" +
+           "g.idGailua, g.marka, g.modeloa, g.serieZenb, g.mota, g.egoera, g.altaData, g.bajaData, e.idGela, e.hasieraData)" +
+           "FROM GailuElektronikoa g LEFT JOIN Egon e ON g.idGailua = e.idGailua AND e.amaieraData IS NULL")
+    List<GailuTaulaGaurEgun> findGailuakGaurEgun();
 
 
     /*

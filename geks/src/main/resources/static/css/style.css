@@ -35,6 +35,11 @@ h2,
     font-weight: bold;
     margin: 0;
 }
+h3{
+    color: #1e3a8a;
+    font-weight: bold;
+    margin: 0;
+}
 
 /* Responsive izan dadin pantalla 480px baino txikiagoa denean letra tamaina, ikono tamaina eta botoien tamaina txikitu egiten da. */
 @media (max-width: 480px) {
