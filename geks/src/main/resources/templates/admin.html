@@ -294,7 +294,54 @@
                     </nav>
 
 
-                    <!-- HEMEN GEHITU FALTA DANA -->
+                      <!---------------------- GELAK LAN LEIHOA---------------------->
+                    <!-- BILAKETA FORMULARIOA -->
+                    <div class="card border-light p-3 mb-4 shadow-sm">
+                        <form action="">
+                            <div class="row">
+                                <div class="col-12 col-lg-3">
+                                    <label for="selektGela" class="form-label fw-semibold">Filtratu eraikinaren arabera</label>
+                                    <select id="selektGela" class="form-select" aria-label="Default select example">
+                                        <option selected>Eraikin guztiak</option>
+                                        <option th:each="era : ${eraikina}" th:value="${era.idEraikina}" th:text="${era.idEraikina}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- BILAKETA FORMULARIOA AMAILERA -->
+                    <!-- Gelak TAULA -->
+                    <div class="table-responsive bg-white p-3 rounded shadow-sm mb-4">
+                        <table id="gelakTaula" class="table table-hover">
+                            <thead class="table-white">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>ID Eraikina</th>
+                                    <th>Izena</th>
+                                    <th>Deskribapena</th>
+                                    <th>Ekintzak</th>
+                                    
+                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="gela : ${gelak}">
+                                    <td th:text="${gela.idGela}"></td>
+                                    <td th:text="${gela.idEraikina}"></td>
+                                    <td th:text="${gela.izena}"></td>
+                                    <td th:text="${gela.deskribapena}"></td>
+                                    <td>
+                                        <Button class="btn p-1" type="button"><i
+                                                class="bi bi-pencil-square text-primary fs-5 fw-bold"></i></Button>
+                                        <Button class="btn p-1" type="button"><i
+                                                class="bi bi-trash text-danger fs-5 fw-bold"></i></Button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Gelak TAULA AMAIERA-->
+
 
 
 
