@@ -33,7 +33,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "gailuelektronikoa")
-public class Gailuelektronikoa {
+public class GailuElektronikoa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idGailua;

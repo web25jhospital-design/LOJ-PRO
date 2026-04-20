@@ -6,10 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.imaltuna.geks.model.Gailuelektronikoa;
+import com.imaltuna.geks.model.GailuElektronikoa;
 
 @Repository // Spring-i esaten dio klase honek datu-basearekin komunikazioa kudeatzen duela
-public interface GailuelektronikoaRepository extends JpaRepository<Gailuelektronikoa, Long> {
+public interface GailuElektronikoaRepository extends JpaRepository<GailuElektronikoa, Long> {
 
     @Query("select distinct egoera from Gailuelektronikoa")
     public List<String> findDistinctEgoera();

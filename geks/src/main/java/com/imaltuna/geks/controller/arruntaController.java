@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.imaltuna.geks.repository.EgonRepository;
 import com.imaltuna.geks.repository.EraikinaRepository; // ✪ OXEL
-import com.imaltuna.geks.repository.GailuelektronikoaRepository;
+import com.imaltuna.geks.repository.GailuElektronikoaRepository;
 import com.imaltuna.geks.repository.GelaRepository;
 
 
@@ -19,13 +19,13 @@ public class arruntaController {
     // 'final' jartzen dugu behin esleituta ez dela aldatuko ziurtatzeko
    //private final erabiltzaileaRepository erabiltzaileaRepository;
     private final EraikinaRepository eraikinaRepository; // ✪ OXEL
-    private final GailuelektronikoaRepository gailuelektronikoaRepository;
+    private final GailuElektronikoaRepository gailuelektronikoaRepository;
     private final EgonRepository egonRepository;
     private final GelaRepository gelaRepository;
 
 
     @Autowired // Lotura automatikoa.  Spring-ek automatikoki bilatuko du Repository-aren inplementazioa
-    public arruntaController(EraikinaRepository eraikinaRepository, GailuelektronikoaRepository gailuelektronikoaRepository,
+    public arruntaController(EraikinaRepository eraikinaRepository, GailuElektronikoaRepository gailuelektronikoaRepository,
         EgonRepository egonRepository, GelaRepository gelaRepository) {
         // this.erabiltzaileaRepository = erabiltzaileaRepository;
         this.eraikinaRepository = eraikinaRepository; // ✪ OXEL
