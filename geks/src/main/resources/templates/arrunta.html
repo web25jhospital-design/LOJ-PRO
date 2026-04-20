@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -14,6 +14,7 @@
     <!-- js -->
     <script src="/js/jquery-4.0.0.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/script.js" defer></script>
 </head>
 
 <body>
@@ -27,7 +28,7 @@
                     <a class="navbar-brand fw-bold" href="#">Miguel Altuna - Gailu Kudeaketa</a>
                     <div class="d-flex">
                         <span class="navbar-text me-5">Kaixo, <span class="navbar-text"
-                                th:text="${logeatutakoErab}"></span>   (user Arrunta)</span>
+                                th:text="${session.logeatutakoErab}"></span> (user Arrunta)</span>
                         <form action="/logout" method="post">
                             <button class="btn btn-outline-light btn-responsive" type="submit">
                                 <i class="bi bi-box-arrow-right me-2"></i>Irten</button>
@@ -68,11 +69,11 @@
                 <!----------------------------------------------------------------------------------------------------------->
                 <div class="tab-pane fade show active" id="v-pills-Dashboard" role="tabpanel"
                     aria-labelledby="v-pills-Dashboard-tab" tabindex="0">
-                    <nav class="navbar p-0">
-                        <div class="container-fluid">
+                    <nav class="navbar p-0 mb-4">
+                        <div class="container-fluid p-0">
                             <div>
-                                <h2>Ongi etorri, <span class="spanH2 navbar-text"
-                                        th:text="${logeatutakoErab}"></span>!</h2>
+                                <h2>Ongi etorri, <span class="spanH2 navbar-text" th:text="${session.logeatutakoErab}"></span>!
+                                </h2>
                                 <p class="navbar-text">Miguel Altuna - Gailu Elektronikoen Kudeaketa Sistema</p>
                             </div>
                         </div>
@@ -87,29 +88,115 @@
                 <!----------------------------------------------------------------------------------------------------------->
                 <div class="tab-pane fade" id="v-pills-Gailuak" role="tabpanel" aria-labelledby="v-pills-Gailuak-tab"
                     tabindex="0">
-                    <nav class="navbar p-0">
-                        <div class="container-fluid">
+                    <nav class="navbar p-0 mb-4">
+                        <div class="container-fluid p-0">
                             <div>
                                 <h2>Gailuak</span></h2>
                                 <p class="navbar-text">Gailu elektronikoen kudeaketa</p>
                             </div>
                         </div>
                     </nav>
-
-
-
-
-                    <!-- HEMEN GEHITU FALTA DANA -->
-
-
+                    <!---------------------- GAILUEN LAN LEIHOA---------------------->
+                    <!-- BILAKETA FORMULARIOA -->
+                    <div class="card border-light p-3 mb-4 shadow-sm">
+                        <form action="">
+                            <div class="row">
+                                <div class="col-12 col-lg-3 d-flex flex-column">
+                                    <label for="bilatuGailua" class="form-label fw-semibold">Bilatu</label>
+                                    <input id="bilatuGailua" class="form-control" type="text" placeholder="Bilatu ...">
+                                    <!-- <i class="bi bi-search"></i> -->
+                                </div>
+                                <div class="col-12 col-lg-3">
+                                    <label for="selektMota" class="form-label fw-semibold">Mota</label>
+                                    <select id="selektMota" class="form-select" aria-label="Default select example">
+                                        <option selected>Guztiak</option>
+                                        <option th:each="gailuMota : ${gailuMotak}" th:value="${gailuMota}"
+                                            th:text="${gailuMota}"></option>
+                                    </select>
+                                </div>
+                                <div class="col-12 col-lg-3">
+                                    <label for="selektEgoera" class="form-label fw-semibold">Egoera</label>
+                                    <select id="selektEgoera" class="form-select" aria-label="Default select example">
+                                        <option selected>Guztiak</option>
+                                        <option th:each="gailuaEgoera : ${gailuEgoerak}" th:value="${gailuaEgoera}"
+                                            th:text="${gailuaEgoera}"></option>
+                                    </select>
+                                    <script>console.log(gailuEgoerak);</script>
+                                </div>
+                                <div class="col-12 col-lg-3">
+                                    <label for="selektGela" class="form-label fw-semibold">Gela</label>
+                                    <select id="selektGela" class="form-select" aria-label="Default select example">
+                                        <option selected>Guztiak</option>
+                                        <option th:each="gela : ${gelak}" th:value="${gela.idGela}" th:text="${gela.idGela}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- BILAKETA FORMULARIOA AMAILERA -->
+                    <!-- GailuElektronikoak TAULA -->
+                    <div class="table-responsive bg-white p-3 rounded shadow-sm mb-4">
+                        <table id="gailuakTaula" class="table table-hover">
+                            <thead class="table-white">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Marka</th>
+                                    <th>Modeloa</th>
+                                    <th>Serie Zenbakia</th>
+                                    <th>Mota</th>
+                                    <th>Egoera</th>
+                                    <th>Alta Data</th>
+                                    <th>Baja Data</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="gailua : ${gailuak}">
+                                    <td th:text="${gailua.idGailua}"></td>
+                                    <td th:text="${gailua.marka}"></td>
+                                    <td th:text="${gailua.modeloa}"></td>
+                                    <td th:text="${gailua.serieZenb}"></td>
+                                    <td th:text="${gailua.mota}"></td>
+                                    <td class="tdEgoera" th:text="${gailua.egoera}"></td>
+                                    <td th:text="${gailua.altaData}"></td>
+                                    <td th:text="${gailua.bajaData}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- GailuElektronikoak TAULA AMAIERA-->
+                    <!-- Egon TAULA -->
+                    <h2 class="mt-5 mb-3">Gailuen Kokapena</h2>
+                    <div class="table-responsive bg-white p-3 rounded shadow-sm">
+                        <table class="table table-hover">
+                            <thead class="table-white">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>ID Gailua</th>
+                                    <th>ID Gela</th>
+                                    <th>Alta Data</th>
+                                    <th>Baja Data</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="egon : ${gailuaNon}">
+                                    <td th:text="${egon.idEgon}"></td>
+                                    <td th:text="${egon.idGailua}"></td>
+                                    <td th:text="${egon.idGela}"></td>
+                                    <td th:text="${egon.hasieraData}"></td>
+                                    <td th:text="${egon.amaieraData}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Egon TAULA AMAIERA-->
                 </div>
                 <!----------------------------------------------------------------------------------------------------------->
                 <!--                                               ERAIKINAK                                               -->
                 <!----------------------------------------------------------------------------------------------------------->
                 <div class="tab-pane fade" id="v-pills-Eraikinak" role="tabpanel"
                     aria-labelledby="v-pills-Eraikinak-tab" tabindex="0">
-                    <nav class="navbar p-0">
-                        <div class="container-fluid">
+                    <nav class="navbar p-0 mb-4">
+                        <div class="container-fluid p-0">
                             <div>
                                 <h2>Eraikinak</span></h2>
                                 <p class="navbar-text">Eraikinen kudeaketa</p>
@@ -144,8 +231,8 @@
                 <!----------------------------------------------------------------------------------------------------------->
                 <div class="tab-pane fade" id="v-pills-Gelak" role="tabpanel" aria-labelledby="v-pills-Gelak-tab"
                     tabindex="0">
-                    <nav class="navbar p-0">
-                        <div class="container-fluid">
+                    <nav class="navbar p-0 mb-4">
+                        <div class="container-fluid p-0">
                             <div>
                                 <h2>Gelak</span></h2>
                                 <p class="navbar-text">Gelen kudeaketa</p>

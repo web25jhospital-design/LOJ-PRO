@@ -4,11 +4,12 @@ package com.imaltuna.geks.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.imaltuna.geks.model.gela;
+import com.imaltuna.geks.model.Gela;
 
 
 @Repository // Spring-i esaten dio klase honek datu-basearekin komunikazioa kudeatzen duela
-public interface gelaRepository extends JpaRepository<gela, Long> {
+public interface GelaRepository extends JpaRepository<Gela, Long> {
+
    
     /* Hemen ez dugu metodorik idatzi behar momentuz.
        JpaRepository luzatzean, Spring-ek automatikoki ematen dizkigu:

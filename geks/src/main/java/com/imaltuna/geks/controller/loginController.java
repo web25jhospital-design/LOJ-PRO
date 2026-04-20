@@ -7,19 +7,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.imaltuna.geks.model.erabiltzailea;
-import com.imaltuna.geks.model.rola;
-import com.imaltuna.geks.repository.erabiltzaileaRepository;
+import com.imaltuna.geks.model.Erabiltzailea;
+import com.imaltuna.geks.model.Rola;
+import com.imaltuna.geks.repository.ErabiltzaileaRepository;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller // Spring-i esaten dio klase honek HTTP eskariak (URLak) jasoko dituela
 public class loginController {
 
     // 'final' jartzen dugu behin esleituta ez dela aldatuko ziurtatzeko
-    private final erabiltzaileaRepository erabiltzaileaRepository;
+    private final ErabiltzaileaRepository erabiltzaileaRepository;
 
     @Autowired // Lotura automatikoa. Spring-ek automatikoki bilatuko du Repository-aren
                // inplementazioa
-    public loginController(erabiltzaileaRepository erabiltzaileaRepository) {
+    public loginController(ErabiltzaileaRepository erabiltzaileaRepository) {
         this.erabiltzaileaRepository = erabiltzaileaRepository;
     }
 
@@ -32,15 +34,17 @@ public class loginController {
 
     // Erabiltzaileak logina ongi burutu duen konprobatzen da
     @PostMapping("/")
-    public String loginaOnetsi(@RequestParam String erabiltzailea, @RequestParam String pasahitza, Model model) {
+    public String loginaOnetsi(@RequestParam String erabiltzailea, @RequestParam String pasahitza, Model model,HttpSession session) {
     // Model-a "motxila" bat bezalakoa da: Javan sartzen ditugu datuak HTML-an erabili ahal izateko
-        rola erabiltzaileRola= rola.admin;
+        Rola erabiltzaileRola= Rola.admin;
         
-        erabiltzailea erabDB = erabiltzaileaRepository.findByerabiltzaileIzena(erabiltzailea);
+        Erabiltzailea erabDB = erabiltzaileaRepository.findByerabiltzaileIzena(erabiltzailea);
         // Erabiltzailea zuzena den konprobatzen da
         if (erabDB != null && erabDB.getPasahitza().equals(pasahitza)) {
-            model.addAttribute("logeatutakoErab", erabDB.getErabiltzaileIzena());
-            
+            //model.addAttribute("logeatutakoErab", erabDB.getErabiltzaileIzena());
+            // Model-ean jarri beharrean, Saioan (session) gordetzen dugu erabiltzailea zein den jakiteko
+             session.setAttribute("logeatutakoErab", erabDB.getErabiltzaileIzena());
+             
             if (erabDB.getErabiltzaileRola()==erabiltzaileRola){
                 //erabiltzailea zuzena bada eta admin baimenak baditu admin.html exekutatuko da
                 return "redirect:/admin"; // ✪

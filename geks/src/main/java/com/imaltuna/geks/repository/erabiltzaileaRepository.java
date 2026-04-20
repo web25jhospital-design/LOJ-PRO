@@ -4,13 +4,13 @@ package com.imaltuna.geks.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.imaltuna.geks.model.erabiltzailea;
+import com.imaltuna.geks.model.Erabiltzailea;
 
 
 @Repository // Spring-i esaten dio klase honek datu-basearekin komunikazioa kudeatzen duela
-public interface erabiltzaileaRepository extends JpaRepository<erabiltzailea, Long> {
+public interface ErabiltzaileaRepository extends JpaRepository<Erabiltzailea, Long> {
 
-    public erabiltzailea findByerabiltzaileIzena(String erabiltzailea);
+    public Erabiltzailea findByerabiltzaileIzena(String erabiltzailea);
     
    
     /* Hemen ez dugu metodorik idatzi behar momentuz.

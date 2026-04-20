@@ -1,6 +1,6 @@
 package com.imaltuna.geks.model;
 
-public enum rola {
+public enum Rola {
     admin,
     arrunta
 }

@@ -6,7 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.imaltuna.geks.repository.eraikinaRepository; // ✪ OXEL
+import com.imaltuna.geks.repository.EgonRepository;
+import com.imaltuna.geks.repository.EraikinaRepository; // ✪ OXEL
+import com.imaltuna.geks.repository.GailuelektronikoaRepository;
+import com.imaltuna.geks.repository.GelaRepository;
 
 
 @Controller // Spring-i esaten dio klase honek HTTP eskariak (URLak) jasoko dituela
@@ -15,13 +18,20 @@ public class arruntaController {
 
     // 'final' jartzen dugu behin esleituta ez dela aldatuko ziurtatzeko
    //private final erabiltzaileaRepository erabiltzaileaRepository;
-    private final eraikinaRepository eraikinaRepository; // ✪ OXEL
+    private final EraikinaRepository eraikinaRepository; // ✪ OXEL
+    private final GailuelektronikoaRepository gailuelektronikoaRepository;
+    private final EgonRepository egonRepository;
+    private final GelaRepository gelaRepository;
 
 
     @Autowired // Lotura automatikoa.  Spring-ek automatikoki bilatuko du Repository-aren inplementazioa
-    public arruntaController(eraikinaRepository eraikinaRepository) {
-        //this.erabiltzaileaRepository = erabiltzaileaRepository;
+    public arruntaController(EraikinaRepository eraikinaRepository, GailuelektronikoaRepository gailuelektronikoaRepository,
+        EgonRepository egonRepository, GelaRepository gelaRepository) {
+        // this.erabiltzaileaRepository = erabiltzaileaRepository;
         this.eraikinaRepository = eraikinaRepository; // ✪ OXEL
+        this.gailuelektronikoaRepository = gailuelektronikoaRepository;
+        this.egonRepository = egonRepository;
+        this.gelaRepository = gelaRepository;
     }
 
     @GetMapping("/arrunta") // Nabigatzailean http://localhost:8080/ idaztean (GET eskaria)
@@ -30,7 +40,18 @@ public class arruntaController {
         // Datu-baseko eraikin guztiak zerrenda batean lortu eta HTMLra pasatu
         // HTML-an "eraikinak" erabiliko dugu (th:each bidez normalean)
         //model.addAttribute("erabiltzailea", erabiltzaileaRepository.findAll());
+        // Datu-baseko eraikin guztiak zerrenda batean lortu eta HTMLra pasatu
+        // HTML-an "eraikinak" erabiliko dugu (th:each bidez normalean)
         model.addAttribute("eraikina", eraikinaRepository.findAll()); // ✪ OXEL
+
+        //GailuElektronikoak
+        model.addAttribute("gailuak", gailuelektronikoaRepository.findAll());
+        model.addAttribute("gailuaNon", egonRepository.findAll());
+        model.addAttribute("gailuEgoerak", gailuelektronikoaRepository.findDistinctEgoera());
+        model.addAttribute("gailuMotak", gailuelektronikoaRepository.findDistinctMota());
+
+        //Gela
+        model.addAttribute("gelak", gelaRepository.findAll());
 
         // GAKOA: "arrunta" hitzak esaten dio Spring-i templates/arrunta.html fitxategia bilatzeko
         return "arrunta";

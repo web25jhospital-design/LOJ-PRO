@@ -30,7 +30,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "gela")
-public class gela {
+public class Gela {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

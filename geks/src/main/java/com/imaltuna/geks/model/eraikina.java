@@ -28,7 +28,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "eraikina")
-public class eraikina {
+public class Eraikina {
 
     @Id
     private String idEraikina;

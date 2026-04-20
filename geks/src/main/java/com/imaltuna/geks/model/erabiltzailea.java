@@ -3,8 +3,6 @@ package com.imaltuna.geks.model;
 
 import java.util.Date;
 
-
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -37,7 +35,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "erabiltzailea")
-public class erabiltzailea {
+public class Erabiltzailea {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,14 +45,14 @@ public class erabiltzailea {
     private String abizena;
     private String erabiltzaileIzena;
 
-    // public enum rola{
+    // public enum Rola{
     //     admin,
     //     arrunta
     // }
 
     @Enumerated(EnumType.STRING) // <- hau da garrantzitsua
     @Column(name = "erabiltzaileRola", nullable = false)
-    private rola erabiltzaileRola;
+    private Rola erabiltzaileRola;
     private Date altaData;
     private Date bajaData;
     private String pasahitza;
@@ -84,10 +82,10 @@ public class erabiltzailea {
     public void setErabiltzaileIzena(String erabiltzaileIzena) {
         this.erabiltzaileIzena = erabiltzaileIzena;
     }
-    public rola getErabiltzaileRola() {
+    public Rola getErabiltzaileRola() {
         return erabiltzaileRola;
     }
-    public void setErabiltzaileRola(rola erabiltzaileRola) {
+    public void setErabiltzaileRola(Rola erabiltzaileRola) {
         this.erabiltzaileRola = erabiltzaileRola;
     }
     public Date getAltaData() {
