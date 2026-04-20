@@ -7,9 +7,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.imaltuna.geks.repository.EgonRepository;
+import com.imaltuna.geks.repository.ErabiltzaileaRepository;
 import com.imaltuna.geks.repository.EraikinaRepository; // ✪ OXEL
 import com.imaltuna.geks.repository.GailuElektronikoaRepository;
 import com.imaltuna.geks.repository.GelaRepository;
+import com.imaltuna.geks.repository.KudeatuRepository;
 
 
 @Controller // Spring-i esaten dio klase honek HTTP eskariak (URLak) jasoko dituela
@@ -22,16 +24,20 @@ public class adminController {
     private final GailuElektronikoaRepository gailuelektronikoaRepository;
     private final EgonRepository egonRepository;
     private final GelaRepository gelaRepository;
+    private final KudeatuRepository kudeatuRepository;
+    private final ErabiltzaileaRepository erabiltzaileaRepository;
 
 
     @Autowired // Lotura automatikoa.  Spring-ek automatikoki bilatuko du Repository-aren inplementazioa
     public adminController(EraikinaRepository eraikinaRepository, GailuElektronikoaRepository gailuelektronikoaRepository,
-        EgonRepository egonRepository, GelaRepository gelaRepository) {
+        EgonRepository egonRepository, GelaRepository gelaRepository, KudeatuRepository kudeatuRepository, ErabiltzaileaRepository erabiltzaileaRepository) {
         // this.erabiltzaileaRepository = erabiltzaileaRepository;
         this.eraikinaRepository = eraikinaRepository; // ✪ OXEL
         this.gailuelektronikoaRepository = gailuelektronikoaRepository;
         this.egonRepository = egonRepository;
         this.gelaRepository = gelaRepository;
+        this.kudeatuRepository = kudeatuRepository;
+        this.erabiltzaileaRepository = erabiltzaileaRepository;
     }
 
     @GetMapping("/admin") // Nabigatzailean http://localhost:8080/ idaztean (GET eskaria)
@@ -44,12 +50,21 @@ public class adminController {
 
         //GailuElektronikoak
         model.addAttribute("gailuak", gailuelektronikoaRepository.findAll());
-        model.addAttribute("gailuaNon", egonRepository.findAll());
         model.addAttribute("gailuEgoerak", gailuelektronikoaRepository.findDistinctEgoera());
         model.addAttribute("gailuMotak", gailuelektronikoaRepository.findDistinctMota());
 
+        //Egon
+        model.addAttribute("gailuaNon", egonRepository.findAll());
+
         //Gela
         model.addAttribute("gelak", gelaRepository.findAll());
+
+        //Kudeaketa
+        model.addAttribute("kudeaketak", kudeatuRepository.findAll());
+        model.addAttribute("kudeaketaMotak", kudeatuRepository.findDistinctKudeatzeMota());
+
+        //Erabiltzaileak
+        model.addAttribute("erabiltzaileak", erabiltzaileaRepository.findAll());
         
 
         // GAKOA: "admin" hitzak esaten dio Spring-i templates/admin.html fitxategia bilatzeko

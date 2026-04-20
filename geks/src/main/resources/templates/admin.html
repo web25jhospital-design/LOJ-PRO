@@ -136,7 +136,6 @@
                                         <option th:each="gailuaEgoera : ${gailuEgoerak}" th:value="${gailuaEgoera}"
                                             th:text="${gailuaEgoera}"></option>
                                     </select>
-                                    <script>console.log(gailuEgoerak);</script>
                                 </div>
                                 <div class="col-12 col-lg-3">
                                     <label for="selektGela" class="form-label fw-semibold">Gela</label>
@@ -327,6 +326,7 @@
                 <!----------------------------------------------------------------------------------------------------------->
                 <!--                                             HISTORIKOA                                                -->
                 <!----------------------------------------------------------------------------------------------------------->
+                <!------------------ HISTORIKOEN HEADERA ---------------------------->
                 <div class="tab-pane fade" id="v-pills-Historikoa" role="tabpanel"
                     aria-labelledby="v-pills-Historikoa-tab" tabindex="0">
                     <nav class="navbar p-0 mb-4">
@@ -337,15 +337,68 @@
                             </div>
                         </div>
                     </nav>
-
-
-                    <!-- HEMEN GEHITU FALTA DANA -->
-
-
-
-
-
-
+                    <!------------------ HISTORIKOEN HEADERA AMAIERA------------------>
+                    <!---------------------- HISTORIKOEN LAN LEIHOA---------------------->
+                    <!-- BILAKETA FORMULARIOA -->
+                    <div class="card border-light p-3 mb-4 shadow-sm">
+                        <form action="">
+                            <div class="row">
+                                <div class="col-12 col-lg-3">
+                                    <label for="selektErab" class="form-label fw-semibold">Erabiltzailea</label>
+                                    <select id="selektErab" class="form-select" aria-label="Default select example">
+                                        <option selected>Guztiak</option>
+                                        <option th:each="erabiltzailea : ${erabiltzaileak}" th:value="${erabiltzailea.idErabiltzailea}"
+                                            th:text="${erabiltzailea.idErabiltzailea}"></option>
+                                    </select>
+                                </div>
+                                <div class="col-12 col-lg-3">
+                                    <label for="selektGailua" class="form-label fw-semibold">Gailua</label>
+                                    <select id="selektGailua" class="form-select" aria-label="Default select example">
+                                        <option selected>Guztiak</option>
+                                        <option th:each="gailua : ${gailuak}" th:value="${gailua.idGailua}"
+                                            th:text="${gailua.idGailua}"></option>
+                                    </select>
+                                </div>
+                                <div class="col-12 col-lg-3">
+                                    <label for="selektData" class="form-label fw-semibold">Kuadeta Data</label>
+                                    <input id="selektData" class="form-control" type="date" placeholder="Data ...">
+                                </div>
+                                <div class="col-12 col-lg-3">
+                                    <label for="selektKudeaketaMota" class="form-label fw-semibold">Kuadeta Mota</label>
+                                    <select id="selektKudeaketaMota" class="form-select" aria-label="Default select example">
+                                        <option selected>Guztiak</option>
+                                        <option th:each="kudeaketaMota : ${kudeaketaMotak}" th:value="${kudeaketaMota}" th:text="${kudeaketaMota}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- BILAKETA FORMULARIOA AMAILERA -->
+                    <!-- Historikoak TAULA -->
+                    <div class="table-responsive bg-white p-3 rounded shadow-sm mb-4">
+                        <table id="historikoakTaula" class="table table-hover">
+                            <thead class="table-white">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>ID Gailua</th>
+                                    <th>ID Erabiltzailea</th>
+                                    <th>Kudeatze Data</th>
+                                    <th>Kudeatze Mota</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="kudeaketa : ${kudeaketak}">
+                                    <td th:text="${kudeaketa.idKudeatu}"></td>
+                                    <td th:text="${kudeaketa.idGailua}"></td>
+                                    <td th:text="${kudeaketa.idErabiltzailea}"></td>
+                                    <td th:text="${kudeaketa.kudeatzeData}"></td>
+                                    <td class="tdMota" th:text="${kudeaketa.kudeatzeMota}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Historikoak TAULA AMAIERA-->
+                    <!------------------ HISTORIKOEN LAN LEIHOA AMAILERA------------------>
                 </div>
             </div>
         </div>

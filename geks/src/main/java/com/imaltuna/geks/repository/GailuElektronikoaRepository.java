@@ -11,13 +11,13 @@ import com.imaltuna.geks.model.GailuElektronikoa;
 @Repository // Spring-i esaten dio klase honek datu-basearekin komunikazioa kudeatzen duela
 public interface GailuElektronikoaRepository extends JpaRepository<GailuElektronikoa, Long> {
 
-    @Query("select distinct egoera from Gailuelektronikoa")
+    @Query("select distinct egoera from GailuElektronikoa")
     public List<String> findDistinctEgoera();
     // public GailuElektronikoa findDistinctByEgoera();
 
 
     
-    @Query("select distinct mota from Gailuelektronikoa")
+    @Query("select distinct mota from GailuElektronikoa")
     public List<String> findDistinctMota();
 
 

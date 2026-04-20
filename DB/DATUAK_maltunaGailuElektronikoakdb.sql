@@ -80,8 +80,7 @@ INSERT INTO kudeatu
 INSERT INTO egon 
 (id_gailua, id_gela, hasiera_data, amaiera_data) VALUES
 (1, 1, '2025-01-01', '2025-01-02'),
-(2, 2, '2025-02-02', NULL),
-(3, 3, '2025-03-03', NULL),
-(4, 4, '2025-01-04', NULL),
-(5, 5, '2025-03-05', NULL),
-(6, 6, '2024-02-06', NULL);
+(9, 2, '2025-02-02', NULL),
+(10, 3, '2025-03-03', NULL),
+(12, 4, '2025-01-04', NULL),
+(13, 5, '2025-03-05', NULL);
