@@ -79,7 +79,7 @@
                     <nav class="navbar p-0 mb-4">
                         <div class="container-fluid p-0">
                             <div>
-                                <h2>Ongi etorri, <span class="spanH2 navbar-text" th:text="${session.logeatutakoErab}"></span>
+                                <h2>Ongi etorri, <span class="spanH2 navbar-text"
                                         th:text="${session.logeatutakoErab}"></span>!
                                 </h2>
                                 <p class="navbar-text">Miguel Altuna - Gailu Elektronikoen Kudeaketa Sistema</p>
@@ -143,7 +143,8 @@
                                     <label for="selektGela" class="form-label fw-semibold">Gela</label>
                                     <select id="selektGela" class="form-select" aria-label="Default select example">
                                         <option selected>Guztiak</option>
-                                        <option th:each="gela : ${gelak}" th:value="${gela.idGela}" th:text="${gela.IdGela}"></option>
+                                        <option th:each="gela : ${gelak}" th:value="${gela.idGela}"
+                                            th:text="${gela.IdGela}"></option>
                                     </select>
                                 </div>
                             </div>
@@ -295,16 +296,18 @@
                     </nav>
 
 
-                      <!---------------------- GELAK LAN LEIHOA---------------------->
+                    <!---------------------- GELAK LAN LEIHOA---------------------->
                     <!-- BILAKETA FORMULARIOA -->
                     <div class="card border-light p-3 mb-4 shadow-sm">
                         <form action="">
                             <div class="row">
                                 <div class="col-12 col-lg-3">
-                                    <label for="selektGela" class="form-label fw-semibold">Filtratu eraikinaren arabera</label>
+                                    <label for="selektGela" class="form-label fw-semibold">Filtratu eraikinaren
+                                        arabera</label>
                                     <select id="selektGela" class="form-select" aria-label="Default select example">
                                         <option selected>Eraikin guztiak</option>
-                                        <option th:each="era : ${eraikina}" th:value="${era.idEraikina}" th:text="${era.idEraikina}"></option>
+                                        <option th:each="era : ${eraikina}" th:value="${era.idEraikina}"
+                                            th:text="${era.idEraikina}"></option>
                                     </select>
                                 </div>
                             </div>
@@ -321,8 +324,8 @@
                                     <th>Izena</th>
                                     <th>Deskribapena</th>
                                     <th>Ekintzak</th>
-                                    
-                                   
+
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -367,10 +370,47 @@
                         </div>
                     </nav>
 
+                    <div class="table-responsive bg-white p-3 rounded shadow-sm mb-4">
+                        <table id="erabiltzaileaTaula" class="table table-hover">
+                            <thead class="table-white">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Izena</th>
+                                    <th>Abizena</th>
+                                    <th>Erabiltzaile Izena</th>
+                                    <th>Rola</th>
+                                    <th>Alta Data</th>
+                                    <th>Baja Data</th>
+                                    <th>Ekintzak</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="erabiltzailea : ${erabiltzaileak}">
+    <td th:text="${erabiltzailea.idErabiltzailea}"></td>
+    <td th:text="${erabiltzailea.izena}"></td>
+    <td th:text="${erabiltzailea.abizena}"></td>
+    <td th:text="${erabiltzailea.erabiltzaileIzena}"></td>
+    <td>
+        <span th:if="${erabiltzailea.erabiltzaileRola.name() == 'admin'}" 
+              class="badge text-white" style="background-color: #28a745;">admin</span>
+        <span th:if="${erabiltzailea.erabiltzaileRola.name() == 'arrunta'}" 
+              class="badge text-white" style="background-color: #17a2b8;">arrunta</span>
+    </td>
+    <td th:text="${erabiltzailea.altaData}"></td>
+    <td th:text="${erabiltzailea.bajaData != null ? erabiltzailea.bajaData : '-'}"></td>
+    <td>
+        <button class="btn p-1" type="button">
+            <i class="bi bi-pencil-square text-primary fs-5 fw-bold"></i>
+        </button>
+        <button class="btn p-1" type="button">
+            <i class="bi bi-trash text-danger fs-5 fw-bold"></i>
+        </button>
+    </td>
+</tr>
 
-                    <!-- HEMEN GEHITU FALTA DANA -->
-
-
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <!----------------------------------------------------------------------------------------------------------->
                 <!--                                             HISTORIKOA                                                -->
