@@ -218,12 +218,46 @@
                             </div>
                         </div>
                     </nav>
-
-
-                    <!-- HEMEN GEHITU FALTA DANA -->
-
-
-
+                    <!---------------------- GELEN LAN LEIHOA---------------------->
+                    <!-- BILAKETA FORMULARIOA -->
+                    <div class="card border-light p-3 mb-4 shadow-sm">
+                        <form action="">
+                            <div class="row">
+                                <div class="col-12 col-lg-3">
+                                    <label for="selektEraikina" class="form-label fw-semibold">Eraikina</label>
+                                    <select id="selektEraikina" class="form-select" aria-label="Default select example">
+                                        <option selected>Guztiak</option>
+                                        <option th:each="e : ${eraikina}" th:value="${e.idEraikina}"
+                                            th:text="${e.idEraikina}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- BILAKETA FORMULARIOA AMAILERA -->
+                    <!-- Gela TAULA -->
+                    <div class="table-responsive bg-white p-3 rounded shadow-sm mb-4">
+                        <table id="gailuakTaula" class="table table-hover">
+                            <thead class="table-white">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>ID Eraikina</th>
+                                    <th>Izena</th>
+                                    <th>Deskribapena</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="gela : ${gelak}">
+                                    <td th:text="${gela.idGela}"></td>
+                                    <td th:text="${gela.idEraikina}"></td>
+                                    <td th:text="${gela.izena}"></td>
+                                    <td th:text="${gela.deskribapena}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Gela TAULA AMAIERA-->
+                    <!------------------ GELA LAN LEIHOA AMAILERA------------------>
                 </div>
             </div>
 

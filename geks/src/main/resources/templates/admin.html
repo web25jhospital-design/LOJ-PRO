@@ -182,9 +182,9 @@
                                     <td class="tdIdGela" th:text="${gailua.idGela}"></td>
                                     <td th:text="${gailua.hasieraData}"></td>
                                     <td>
-                                        <Button class="btn p-1" type="button"><i
+                                        <Button class="btn p-1" type="button" data-bs-toggle="modal" data-bs-target="#GailuUpdate"><i
                                                 class="bi bi-pencil-square text-primary fs-5 fw-bold"></i></Button>
-                                        <Button class="btn p-1" type="button"><i
+                                        <Button class="btn p-1" type="button" data-bs-toggle="modal" data-bs-target="#GailuEzabatu"><i
                                                 class="bi bi-trash text-danger fs-5 fw-bold"></i></Button>
                                     </td>
                                 </tr>
@@ -596,7 +596,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header" style="background-color: #1e3a8a; color: white;">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Gailu Elektronikoa Gehitu</h1>
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Gailu Elektronikoa Aldatu</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
