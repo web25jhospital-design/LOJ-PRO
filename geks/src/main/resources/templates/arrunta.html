@@ -121,13 +121,12 @@
                                         <option th:each="gailuaEgoera : ${gailuEgoerak}" th:value="${gailuaEgoera}"
                                             th:text="${gailuaEgoera}"></option>
                                     </select>
-                                    <script>console.log(gailuEgoerak);</script>
                                 </div>
                                 <div class="col-12 col-lg-3">
                                     <label for="selektGela" class="form-label fw-semibold">Gela</label>
                                     <select id="selektGela" class="form-select" aria-label="Default select example">
                                         <option selected>Guztiak</option>
-                                        <option th:each="gela : ${gelak}" th:value="${gela.idGela}" th:text="${gela.idGela}"></option>
+                                        <option th:each="gela : ${gelak}" th:value="${gela.idGela}" th:text="${gela.IdGela}"></option>
                                     </select>
                                 </div>
                             </div>
@@ -142,53 +141,33 @@
                                     <th>ID</th>
                                     <th>Marka</th>
                                     <th>Modeloa</th>
-                                    <th>Serie Zenbakia</th>
+                                    <th>Serie Zenb</th>
                                     <th>Mota</th>
                                     <th>Egoera</th>
                                     <th>Alta Data</th>
                                     <th>Baja Data</th>
+                                    <th>Gela</th>
+                                    <th>Hartu Data</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="gailua : ${gailuak}">
+                                <tr th:each="gailua : ${gailuakGaurEgun}">
                                     <td th:text="${gailua.idGailua}"></td>
                                     <td th:text="${gailua.marka}"></td>
                                     <td th:text="${gailua.modeloa}"></td>
                                     <td th:text="${gailua.serieZenb}"></td>
-                                    <td th:text="${gailua.mota}"></td>
+                                    <td class="tdMota" th:text="${gailua.mota}"></td>
                                     <td class="tdEgoera" th:text="${gailua.egoera}"></td>
                                     <td th:text="${gailua.altaData}"></td>
                                     <td th:text="${gailua.bajaData}"></td>
+                                    <td class="tdIdGela" th:text="${gailua.idGela}"></td>
+                                    <td th:text="${gailua.hasieraData}"></td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <!-- GailuElektronikoak TAULA AMAIERA-->
-                    <!-- Egon TAULA -->
-                    <h2 class="mt-5 mb-3">Gailuen Kokapena</h2>
-                    <div class="table-responsive bg-white p-3 rounded shadow-sm">
-                        <table class="table table-hover">
-                            <thead class="table-white">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>ID Gailua</th>
-                                    <th>ID Gela</th>
-                                    <th>Alta Data</th>
-                                    <th>Baja Data</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr th:each="egon : ${gailuaNon}">
-                                    <td th:text="${egon.idEgon}"></td>
-                                    <td th:text="${egon.idGailua}"></td>
-                                    <td th:text="${egon.idGela}"></td>
-                                    <td th:text="${egon.hasieraData}"></td>
-                                    <td th:text="${egon.amaieraData}"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- Egon TAULA AMAIERA-->
+                    <!------------------ GAILUEN LAN LEIHOA AMAILERA------------------>
                 </div>
                 <!----------------------------------------------------------------------------------------------------------->
                 <!--                                               ERAIKINAK                                               -->

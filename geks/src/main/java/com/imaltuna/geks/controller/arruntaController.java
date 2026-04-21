@@ -44,14 +44,20 @@ public class arruntaController {
         // HTML-an "eraikinak" erabiliko dugu (th:each bidez normalean)
         model.addAttribute("eraikina", eraikinaRepository.findAll()); // ✪ OXEL
 
+
         //GailuElektronikoak
         model.addAttribute("gailuak", gailuelektronikoaRepository.findAll());
-        model.addAttribute("gailuaNon", egonRepository.findAll());
         model.addAttribute("gailuEgoerak", gailuelektronikoaRepository.findDistinctEgoera());
         model.addAttribute("gailuMotak", gailuelektronikoaRepository.findDistinctMota());
+        model.addAttribute("gailuakGaurEgun", gailuelektronikoaRepository.findGailuakGaurEgun());
+        
+
+        //Egon
+        model.addAttribute("gailuaNon", egonRepository.findAll());
 
         //Gela
         model.addAttribute("gelak", gelaRepository.findAll());
+
 
         // GAKOA: "arrunta" hitzak esaten dio Spring-i templates/arrunta.html fitxategia bilatzeko
         return "arrunta";
