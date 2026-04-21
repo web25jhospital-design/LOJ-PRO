@@ -11,16 +11,19 @@ import com.imaltuna.geks.repository.EraikinaRepository;
 import com.imaltuna.geks.repository.GailuElektronikoaRepository;
 import com.imaltuna.geks.repository.GelaRepository;
 
-@Controller
+@Controller  // Spring-i esaten dio klase honek HTTP eskariak (URLak) jasoko dituela
 public class adminController {
 
-    private final EraikinaRepository eraikinaRepository;
+
+// 'final' jartzen dugu behin esleituta ez dela aldatuko ziurtatzeko
+    // private final erabiltzaileaRepository erabiltzaileaRepository;
+    private final EraikinaRepository eraikinaRepository; // ✪ OXEL
     private final GailuElektronikoaRepository gailuelektronikoaRepository;
     private final EgonRepository egonRepository;
     private final GelaRepository gelaRepository;
     private final ErabiltzaileaRepository erabiltzaileaRepository;
 
-    @Autowired
+    @Autowired // Lotura automatikoa.  Spring-ek automatikoki bilatuko du Repository-aren inplementazioa
     public adminController(EraikinaRepository eraikinaRepository,
                            GailuElektronikoaRepository gailuelektronikoaRepository,
                            EgonRepository egonRepository,
@@ -34,11 +37,13 @@ public class adminController {
         this.erabiltzaileaRepository = erabiltzaileaRepository;
     }
 
-    @GetMapping("/admin")
+    @GetMapping("/admin") // Nabigatzailean http://localhost:8080/ idaztean (GET eskaria)
     public String admin(Model model) {
 
-        // Eraikinak
-        model.addAttribute("eraikina", eraikinaRepository.findAll());
+  // Model-a "motxila" bat bezalakoa da: Javan sartzen ditugu datuak HTML-an erabili ahal izateko
+
+        // Datu-baseko eraikin guztiak zerrenda batean lortu eta HTMLra pasatu
+        // HTML-an "eraikinak" erabiliko dugu (th:each bidez normalean)        model.addAttribute("eraikina", eraikinaRepository.findAll());
 
         // GailuElektronikoak
         model.addAttribute("gailuak", gailuelektronikoaRepository.findAll());
@@ -51,6 +56,9 @@ public class adminController {
 
         // Erabiltzaileak
         model.addAttribute("erabiltzaileak", erabiltzaileaRepository.findAll());
+
+        
+ // GAKOA: "admin" hitzak esaten dio Spring-i templates/admin.html fitxategia bilatzeko
 
         return "admin";
     }
