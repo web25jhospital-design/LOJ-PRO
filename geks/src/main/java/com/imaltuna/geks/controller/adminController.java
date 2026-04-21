@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.imaltuna.geks.model.Erabiltzailea;
 import com.imaltuna.geks.model.GailuElektronikoa;
 import com.imaltuna.geks.repository.EgonRepository;
-import com.imaltuna.geks.repository.ErabiltzaileaRepository;
 import com.imaltuna.geks.repository.EraikinaRepository; // ✪ OXEL
 import com.imaltuna.geks.repository.GailuElektronikoaRepository;
 import com.imaltuna.geks.repository.GelaRepository;
@@ -21,7 +20,7 @@ import com.imaltuna.geks.repository.KudeatuRepository;
 
 import jakarta.servlet.http.HttpSession;
 
-@Controller // Spring-i esaten dio klase honek HTTP eskariak (URLak) jasoko dituela
+@Controller  // Spring-i esaten dio klase honek HTTP eskariak (URLak) jasoko dituela
 public class adminController {
 
     // 'final' jartzen dugu behin esleituta ez dela aldatuko ziurtatzeko
@@ -30,8 +29,6 @@ public class adminController {
     private final GailuElektronikoaRepository gailuelektronikoaRepository;
     private final EgonRepository egonRepository;
     private final GelaRepository gelaRepository;
-    private final KudeatuRepository kudeatuRepository;
-    private final ErabiltzaileaRepository erabiltzaileaRepository;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -47,8 +44,6 @@ public class adminController {
         this.gailuelektronikoaRepository = gailuelektronikoaRepository;
         this.egonRepository = egonRepository;
         this.gelaRepository = gelaRepository;
-        this.kudeatuRepository = kudeatuRepository;
-        this.erabiltzaileaRepository = erabiltzaileaRepository;
     }
 
 
@@ -61,8 +56,7 @@ public class adminController {
         // erabili ahal izateko
 
         // Datu-baseko eraikin guztiak zerrenda batean lortu eta HTMLra pasatu
-        // HTML-an "eraikinak" erabiliko dugu (th:each bidez normalean)
-        model.addAttribute("eraikina", eraikinaRepository.findAll()); // ✪ OXEL
+        // HTML-an "eraikinak" erabiliko dugu (th:each bidez normalean)        model.addAttribute("eraikina", eraikinaRepository.findAll());
 
         // GailuElektronikoak
         model.addAttribute("gailuak", gailuelektronikoaRepository.findAll());

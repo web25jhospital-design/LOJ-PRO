@@ -268,7 +268,56 @@
                     </nav>
 
 
-                    <!-- HEMEN GEHITU FALTA DANA -->
+                    <!---------------------- GELAK LAN LEIHOA---------------------->
+                    <!-- BILAKETA FORMULARIOA -->
+                    <div class="card border-light p-3 mb-4 shadow-sm">
+                        <form action="">
+                            <div class="row">
+                                <div class="col-12 col-lg-3">
+                                    <label for="selektGela" class="form-label fw-semibold">Filtratu eraikinaren
+                                        arabera</label>
+                                    <select id="selektGela" class="form-select" aria-label="Default select example">
+                                        <option selected>Eraikin guztiak</option>
+                                        <option th:each="era : ${eraikina}" th:value="${era.idEraikina}"
+                                            th:text="${era.idEraikina}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- BILAKETA FORMULARIOA AMAILERA -->
+                    <!-- Gelak TAULA -->
+                    <div class="table-responsive bg-white p-3 rounded shadow-sm mb-4">
+                        <table id="gelakTaula" class="table table-hover">
+                            <thead class="table-white">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>ID Eraikina</th>
+                                    <th>Izena</th>
+                                    <th>Deskribapena</th>
+                                    <th>Ekintzak</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="gela : ${gelak}">
+                                    <td th:text="${gela.idGela}"></td>
+                                    <td th:text="${gela.idEraikina}"></td>
+                                    <td th:text="${gela.izena}"></td>
+                                    <td th:text="${gela.deskribapena}"></td>
+                                    <td>
+                                        <Button class="btn p-1" type="button"><i
+                                                class="bi bi-pencil-square text-primary fs-5 fw-bold"></i></Button>
+                                        <Button class="btn p-1" type="button"><i
+                                                class="bi bi-trash text-danger fs-5 fw-bold"></i></Button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Gelak TAULA AMAIERA-->
+
 
 
 
@@ -293,10 +342,47 @@
                         </div>
                     </nav>
 
+                    <div class="table-responsive bg-white p-3 rounded shadow-sm mb-4">
+                        <table id="erabiltzaileaTaula" class="table table-hover">
+                            <thead class="table-white">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Izena</th>
+                                    <th>Abizena</th>
+                                    <th>Erabiltzaile Izena</th>
+                                    <th>Rola</th>
+                                    <th>Alta Data</th>
+                                    <th>Baja Data</th>
+                                    <th>Ekintzak</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="erabiltzailea : ${erabiltzaileak}">
+    <td th:text="${erabiltzailea.idErabiltzailea}"></td>
+    <td th:text="${erabiltzailea.izena}"></td>
+    <td th:text="${erabiltzailea.abizena}"></td>
+    <td th:text="${erabiltzailea.erabiltzaileIzena}"></td>
+    <td>
+        <span th:if="${erabiltzailea.erabiltzaileRola.name() == 'admin'}" 
+              class="badge text-white" style="background-color: #28a745;">admin</span>
+        <span th:if="${erabiltzailea.erabiltzaileRola.name() == 'arrunta'}" 
+              class="badge text-white" style="background-color: #17a2b8;">arrunta</span>
+    </td>
+    <td th:text="${erabiltzailea.altaData}"></td>
+    <td th:text="${erabiltzailea.bajaData != null ? erabiltzailea.bajaData : '-'}"></td>
+    <td>
+        <button class="btn p-1" type="button">
+            <i class="bi bi-pencil-square text-primary fs-5 fw-bold"></i>
+        </button>
+        <button class="btn p-1" type="button">
+            <i class="bi bi-trash text-danger fs-5 fw-bold"></i>
+        </button>
+    </td>
+</tr>
 
-                    <!-- HEMEN GEHITU FALTA DANA -->
-
-
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <!----------------------------------------------------------------------------------------------------------->
                 <!--                                             HISTORIKOA                                                -->
