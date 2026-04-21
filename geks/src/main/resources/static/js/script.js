@@ -214,9 +214,21 @@ switch (kudeaketaMotaAukeratua.value) {
 //             errenkada.style.display="none";
 //         }
 //     });
-
-
 // }
+
+//------------------------------ERABILTZAILEAK----------------------------
+//------------------------------------------------------------------------
+// Erabiltzaileen taulan, Rola zutabean bereiztu aukera ezberdinak:
+const erabiltzaileaTaulaTDRola= document.querySelectorAll(".tdRola");
+erabiltzaileaTaulaTDRola.forEach(item => {
+    switch (item.textContent) {
+        case "admin":
+            item.style.color = "rgb(1, 149, 151)";
+            break;
+        case "arrunta":
+            item.style.color = "#a27014";
+    }
+});
 
 
 // admin edo arrunta pantailak eguneratzean, aurkitzen zeneko erlaitzean manten dadin:
@@ -254,7 +266,11 @@ switch (kudeaketaMotaAukeratua.value) {
 //     });
 // });
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxx
+
+
+//---------------------
 // Formularioa balidatu
+//---------------------
 (function() {
     'use strict';
     
