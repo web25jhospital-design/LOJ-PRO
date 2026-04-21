@@ -43,7 +43,7 @@ public class loginController {
         if (erabDB != null && erabDB.getPasahitza().equals(pasahitza)) {
             //model.addAttribute("logeatutakoErab", erabDB.getErabiltzaileIzena());
             // Model-ean jarri beharrean, Saioan (session) gordetzen dugu erabiltzailea zein den jakiteko
-             session.setAttribute("logeatutakoErab", erabDB.getErabiltzaileIzena());
+             session.setAttribute("logeatutakoErab", erabDB);
              
             if (erabDB.getErabiltzaileRola()==erabiltzaileRola){
                 //erabiltzailea zuzena bada eta admin baimenak baditu admin.html exekutatuko da
