@@ -21,7 +21,7 @@ import com.imaltuna.geks.repository.KudeatuRepository;
 
 import jakarta.servlet.http.HttpSession;
 
-@Controller // Spring-i esaten dio klase honek HTTP eskariak (URLak) jasoko dituela
+@Controller  // Spring-i esaten dio klase honek HTTP eskariak (URLak) jasoko dituela
 public class adminController {
 
     // 'final' jartzen dugu behin esleituta ez dela aldatuko ziurtatzeko
