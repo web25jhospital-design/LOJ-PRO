@@ -217,3 +217,58 @@ switch (kudeaketaMotaAukeratua.value) {
 
 
 // }
+
+
+// admin edo arrunta pantailak eguneratzean, aurkitzen zeneko erlaitzean manten dadin:
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxx
+// // Detectar el hash en la URL y activar la pestaña correspondiente
+// document.addEventListener('DOMContentLoaded', function() {
+//    // Función para activar una pestaña por su ID
+//     function activateTab(tabId) {
+//         // Buscar el botón de la pestaña
+//         const tabButton = document.querySelector(`button[data-bs-target="${tabId}"]`);
+        
+//         if (tabButton) {
+//             // Usar Bootstrap para activar la pestaña
+//             const bsTab = new bootstrap.Tab(tabButton);
+//             bsTab.show();
+//         }
+//     }
+    
+//     // Verificar si hay hash en la URL al cargar
+//     const hash = window.location.hash;
+//     if (hash) {
+//         // Quitar el '#' del hash
+//         const tabId = hash.substring(1);
+//         activateTab('#' + tabId);
+//     }
+    
+//     // Opcional: cuando se cambie de pestaña, actualizar el hash en la URL
+//     const tabButtons = document.querySelectorAll('button[data-bs-toggle="pill"]');
+//     tabButtons.forEach(button => {
+//         button.addEventListener('shown.bs.tab', function(event) {
+//             const targetId = event.target.getAttribute('data-bs-target');
+//             // Actualizar el hash en la URL sin recargar la página
+//             history.pushState(null, null, targetId);
+//         });
+//     });
+// });
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxx
+// Formularioa balidatu
+(function() {
+    'use strict';
+    
+    // Obtener todos los formularios con validación de Bootstrap
+    var forms = document.querySelectorAll('.needs-validation');
+    
+    // Prevenir envío si no es válido
+    Array.prototype.slice.call(forms).forEach(function(form) {
+        form.addEventListener('submit', function(event) {
+            if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+    });
+})();
