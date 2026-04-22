@@ -21,7 +21,7 @@ import com.imaltuna.geks.repository.KudeatuRepository;
 
 import jakarta.servlet.http.HttpSession;
 
-@Controller  // Spring-i esaten dio klase honek HTTP eskariak (URLak) jasoko dituela
+@Controller // Spring-i esaten dio klase honek HTTP eskariak (URLak) jasoko dituela
 public class adminController {
 
     // 'final' jartzen dugu behin esleituta ez dela aldatuko ziurtatzeko
@@ -51,14 +51,12 @@ public class adminController {
         this.erabiltzaileaRepository = erabiltzaileaRepository;
     }
 
-
-    //--------------------------------------------------------------
-    //ADMIN.HTML Kargatu
-    //--------------------------------------------------------------
+    // --------------------------------------------------------------
+    // ADMIN.HTML Kargatu
+    // --------------------------------------------------------------
     @GetMapping("/admin") // Nabigatzailean http://localhost:8080/ idaztean (GET eskaria)
     public String admin(Model model) {
-        // Model-a "motxila" bat bezalakoa da: Javan sartzen ditugu datuak HTML-an
-        // erabili ahal izateko
+        // Model-a "motxila" bat bezalakoa da: Javan sartzen ditugu datuak HTML-an erabili ahal izateko
 
         // Datu-baseko eraikin guztiak zerrenda batean lortu eta HTMLra pasatu
         // HTML-an "eraikinak" erabiliko dugu (th:each bidez normalean)
@@ -83,16 +81,36 @@ public class adminController {
         // Erabiltzaileak
         model.addAttribute("erabiltzaileak", erabiltzaileaRepository.findAll());
 
-        // GAKOA: "admin" hitzak esaten dio Spring-i templates/admin.html fitxategia
-        // bilatzeko
+        // OXEL ↓
+        // --- NUEVOS CONTADORES ---
+
+        // Total de dispositivos
+        long guztiraGailuak = gailuelektronikoaRepository.count();
+        model.addAttribute("guztiraGailuak", guztiraGailuak);
+
+        // 2. Dispositivos disponibles (Filtrando por el ENUM 'erabilgarri')
+        long erabilgarri = gailuelektronikoaRepository.contarDisponibles();
+        model.addAttribute("erabilgarri", erabilgarri);
+
+        // Total de edificios
+        model.addAttribute("guztiraEraikinak", eraikinaRepository.count());
+
+        // Total de aulas
+        model.addAttribute("guztiraGelak", gelaRepository.count());
+
+        // Mantentzean daudenak, bajan, ...
+        model.addAttribute("mantenuan", gailuelektronikoaRepository.contarMantenuan());
+        model.addAttribute("bajan", gailuelektronikoaRepository.contarBajan());
+
+        // OXEL ↑
+
+        // GAKOA: "admin" hitzak esaten dio Spring-i templates/admin.html fitxategia bilatzeko
         return "admin";
     }
 
-    
-
-    //--------------------------------------------------------------
-    //GailuElektronikoa Gehitu
-    //--------------------------------------------------------------
+    // --------------------------------------------------------------
+    // GailuElektronikoa Gehitu
+    // --------------------------------------------------------------
     @PostMapping("/admin")
     public String sortuGailua(@ModelAttribute GailuElektronikoa gailuBerria, HttpSession session) {
 
@@ -102,8 +120,8 @@ public class adminController {
         // MySQL-ko sesio aldagaia ezarri
         jdbcTemplate.execute("SET @erabiltzailea = '" + erabiltzailea.getIdErabiltzailea() + "'");
 
-        // AltaData automatikoa  momentukoa jarri
-        gailuBerria.setAltaData(new Date()); 
+        // AltaData automatikoa momentukoa jarri
+        gailuBerria.setAltaData(new Date());
         // null hasieran
         gailuBerria.setBajaData(null); // null hasieran
 
