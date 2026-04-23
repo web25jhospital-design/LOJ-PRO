@@ -52,6 +52,13 @@ public interface GailuElektronikoaRepository extends JpaRepository<GailuElektron
 
     @Query(value = "SELECT COUNT(*) FROM gailuelektronikoa WHERE egoera = 'bajan'", nativeQuery = true)
     long contarBajan();
+    
+
+
+    // Azken 3 gailuak lortzen ditu alta dataren arabera ordenatuta (berrienak lehenago)
+    List<GailuElektronikoa> findTop3ByOrderByAltaDataDesc();
+
+
 
     // OXEL ↑
 

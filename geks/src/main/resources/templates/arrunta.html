@@ -81,8 +81,7 @@
 
 
                     <!-- HEMEN GEHITU FALTA DANA -->
-
-                                        <div class="g-4 mb-4 row">
+                    <div class="g-4 mb-4 row">
 
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="border-0 shadow-sm h-100 card">
@@ -90,7 +89,7 @@
                                     <div class="d-flex justify-content-between align-items-start mb-3">
                                         <div>
                                             <p class="text-muted mb-1 small">Gailu Guztira</p>
-                                            <h3 class="fw-bold mb-0">8</h3>
+                                            <h3 class="fw-bold mb-0" th:text="${guztiraGailuak}">0</h3> <!-- ✪ OXEL → th:text="${guztiraGailuak} -->
                                         </div>
                                         <div class="rounded p-2" style="background-color: rgba(59, 130, 246, 0.125);">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -103,7 +102,9 @@
                                             </svg>
                                         </div>
                                     </div>
-                                    <p class="text-muted small mb-0">6 erabilgarri</p>
+                                    <p class="text-muted small mb-0">
+                                        <span th:text="${erabilgarri}">0</span> erabilgarri <!-- ✪ OXEL → <span th:text="${erabilgarriGailuak}">0</span> erabilgarri -->
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -114,7 +115,7 @@
                                     <div class="d-flex justify-content-between align-items-start mb-3">
                                         <div>
                                             <p class="text-muted mb-1 small">Eraikinak</p>
-                                            <h3 class="fw-bold mb-0">3</h3>
+                                            <h3 class="fw-bold mb-0" th:text="${guztiraEraikinak}">0</h3> <!-- ✪ OXEL → th:text="${guztiraEraikinak}" -->
                                         </div>
                                         <div class="rounded p-2" style="background-color: rgba(16, 185, 129, 0.125);">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -142,7 +143,7 @@
                                     <div class="d-flex justify-content-between align-items-start mb-3">
                                         <div>
                                             <p class="text-muted mb-1 small">Gelak</p>
-                                            <h3 class="fw-bold mb-0">6</h3>
+                                            <h3 class="fw-bold mb-0" th:text="${guztiraGelak}">0</h3> <!-- ✪ OXEL →  th:text="${guztiraGelak}" -->
                                         </div>
                                         <div class="rounded p-2" style="background-color: rgba(245, 158, 11, 0.125);">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -170,7 +171,9 @@
                                     <div class="d-flex justify-content-between align-items-start mb-3">
                                         <div>
                                             <p class="text-muted mb-1 small">Gailuen Egoera</p>
-                                            <h3 class="fw-bold mb-0">1/1</h3>
+                                            <h3 class="fw-bold mb-0">
+                                                <span th:text="${mantenuan}">0</span> / <span th:text="${bajan}">0</span> <!-- ✪ OXEL → <span th:text="${mantenuan}">0</span> / <span th:text="${bajan}">0</span> -->
+                                            </h3>
                                         </div>
                                         <div class="rounded p-2" style="background-color: rgba(239, 68, 68, 0.125);">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -197,47 +200,34 @@
                                 <div class="card-body">
                                     <h5 class="fw-bold mb-3" style="color: rgb(30, 58, 138);">Azken Aldaketak</h5>
                                     <div class="list-group list-group-flush">
-                                        <div class="list-group-item border-0 px-0">
+                                        <div th:each="gailua : ${azkenMugimenduak}" class="list-group-item border-0 px-0"> <!-- ✪ OXEL → th:each="gailua : ${azkenMugimenduak}" -->
                                             <div class="d-flex justify-content-between">
                                                 <div>
-                                                    <p class="mb-1 fw-semibold">Gailua gehitu: Dell DL-2024-001</p>
-                                                    <small class="text-muted">Gela 101, Informatika gela</small>
-                                                </div><small class="text-muted">2024-01-15</small>
-                                            </div>
-                                        </div>
-                                        <div class="list-group-item border-0 px-0">
-                                            <div class="d-flex justify-content-between">
-                                                <div>
-                                                    <p class="mb-1 fw-semibold">Mantentze-lanak: Samsung SG-2023-089</p>
-                                                    <small class="text-muted">Gela 201, Bilera gela nagusia</small>
-                                                </div><small class="text-muted">2024-03-10</small>
-                                            </div>
-                                        </div>
-                                        <div class="list-group-item border-0 px-0">
-                                            <div class="d-flex justify-content-between">
-                                                <div>
-                                                    <p class="mb-1 fw-semibold">Gailua gehitu: Lenovo LN-2024-034</p>
-                                                    <small class="text-muted">Gela 302, Elektronika gela</small>
-                                                </div><small class="text-muted">2024-02-28</small>
+                                                    <p class="mb-1 fw-semibold"> <!-- Gailua gehitu: Dell DL-2024-001 --> <!-- ✪ OXEL →  ↓ </p> ↓ -->
+                                                        <span th:text="${gailua.egoera == 'erabilgarri' ? 'Gailu berria: ' : 'Aldaketa: '}">Gailua: </span> <!-- ✪ OXEL → <span th:text="${gailua.egoera == 'erabilgarri' ? 'Gailu berria: ' : 'Aldaketa: '}">Gailua: </span>  -->
+                                                        <span th:text="${gailua.marka} + ' ' + ${gailua.modeloa}">Dell Optiplex</span> <!-- ✪ OXEL → <span th:text="${gailua.marka} + ' ' + ${gailua.modeloa}">Dell Optiplex</span> -->
+                                                    </p>
+                                                    <small class="text-muted" th:text="'Serie zenbakia: ' + ${gailua.serieZenb}">SN12345</small> <!-- ✪ OXEL → th:text="'Serie zenbakia: ' + ${gailua.serieZenb}">SN12345</small> -->
+                                                </div>
+                                                <small class="text-muted" th:text="${#dates.format(gailua.altaData, 'yyyy-MM-dd')}">2024-01-15</small> <!-- ✪ OXEL → <small class="text-muted" th:text="${#dates.format(gailua.altaData, 'yyyy-MM-dd')}">2024-01-15</small> -->
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        
                         <div class="col-lg-4">
                             <div class="border-0 shadow-sm card">
                                 <div class="card-body">
                                     <h5 class="fw-bold mb-3" style="color: rgb(30, 58, 138);">Sistema Informazioa</h5>
                                     <div class="mb-3"><small class="text-muted d-block mb-1">Zure Rola</small><span
                                             class="badge"
-                                            style="background-color: rgb(16, 185, 129); padding: 0.5rem 1rem;">Administratzailea</span>
+                                            style="background-color: rgb(245, 158, 11);; padding: 0.5rem 1rem;">Arrunta</span> <!-- Rola: MySQL -->
                                     </div>
                                     <div class="mb-3"><small class="text-muted d-block mb-1">Baimenak</small>
-                                        <p class="mb-0 small">CRUD oso osoaren baimena daukazu</p>
-                                    </div>
-                                    <div><small class="text-muted d-block mb-1">Azken Sarrera</small>
-                                        <p class="mb-0 small">2026-03-17 08:30:00</p>
+                                        <p class="mb-0 small">Datuak ikusteko baimenak daukazu.</p>
                                     </div>
                                 </div>
                             </div>
