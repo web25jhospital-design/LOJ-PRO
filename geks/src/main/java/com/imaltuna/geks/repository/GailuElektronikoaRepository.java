@@ -42,6 +42,7 @@ public interface GailuElektronikoaRepository extends JpaRepository<GailuElektron
             "FROM GailuElektronikoa g LEFT JOIN Egon e ON g.idGailua = e.idGailua AND e.amaieraData IS NULL")
     List<GailuTaulaGaurEgun> findGailuakGaurEgun();
 
+    
 
 
     // OXEL ↓
