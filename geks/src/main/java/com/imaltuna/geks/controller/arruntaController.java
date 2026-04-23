@@ -1,11 +1,13 @@
 package com.imaltuna.geks.controller;
 
+import java.util.List; // ✪ OXEL
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.imaltuna.geks.model.GailuElektronikoa;
 import com.imaltuna.geks.repository.EgonRepository;
 import com.imaltuna.geks.repository.EraikinaRepository; // ✪ OXEL
 import com.imaltuna.geks.repository.GailuElektronikoaRepository;
@@ -57,6 +59,42 @@ public class arruntaController {
 
         //Gela
         model.addAttribute("gelak", gelaRepository.findAll());
+
+
+
+
+        // OXEL ↓
+        // --- NUEVOS CONTADORES ---
+
+        // Total de dispositivos
+        long guztiraGailuak = gailuelektronikoaRepository.count();
+        model.addAttribute("guztiraGailuak", guztiraGailuak);
+
+        // 2. Dispositivos disponibles (Filtrando por el ENUM 'erabilgarri')
+        long erabilgarri = gailuelektronikoaRepository.contarDisponibles();
+        model.addAttribute("erabilgarri", erabilgarri);
+
+        // Total de edificios
+        model.addAttribute("guztiraEraikinak", eraikinaRepository.count());
+
+        // Total de aulas
+        model.addAttribute("guztiraGelak", gelaRepository.count());
+
+        // Mantentzean daudenak, bajan, ...
+        model.addAttribute("mantenuan", gailuelektronikoaRepository.contarMantenuan());
+        model.addAttribute("bajan", gailuelektronikoaRepository.contarBajan());
+
+
+
+         // Azken 3 gailuak lortu
+        List<GailuElektronikoa> azkenMugimenduak = gailuelektronikoaRepository.findTop3ByOrderByAltaDataDesc();
+    
+        // HTMLra bidali
+        model.addAttribute("azkenMugimenduak", azkenMugimenduak);
+
+
+        // OXEL ↑
+
 
 
         // GAKOA: "arrunta" hitzak esaten dio Spring-i templates/arrunta.html fitxategia bilatzeko
