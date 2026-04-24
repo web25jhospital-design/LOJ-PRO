@@ -83,10 +83,12 @@ public class adminController {
         // Erabiltzaileak
         model.addAttribute("erabiltzaileak", erabiltzaileaRepository.findAll());
 
+
+
         // OXEL ↓
         // --- NUEVOS CONTADORES ---
 
-        // Total de dispositivos
+        // Gailuak guztira
         long guztiraGailuak = gailuelektronikoaRepository.count();
         model.addAttribute("guztiraGailuak", guztiraGailuak);
 
@@ -94,10 +96,10 @@ public class adminController {
         long erabilgarri = gailuelektronikoaRepository.contarDisponibles();
         model.addAttribute("erabilgarri", erabilgarri);
 
-        // Total de edificios
+        // Eraikinak guztira
         model.addAttribute("guztiraEraikinak", eraikinaRepository.count());
 
-        // Total de aulas
+        // Gelak guztira
         model.addAttribute("guztiraGelak", gelaRepository.count());
 
         // Mantentzean daudenak, bajan, ...
@@ -112,8 +114,9 @@ public class adminController {
         // HTMLra bidali
         model.addAttribute("azkenMugimenduak", azkenMugimenduak);
 
-
         // OXEL ↑
+
+
 
         // GAKOA: "admin" hitzak esaten dio Spring-i templates/admin.html fitxategia bilatzeko
         return "admin";
