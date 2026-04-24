@@ -3,7 +3,7 @@ package com.imaltuna.geks.controller;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired; // ✪ OXEL
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +16,7 @@ import com.imaltuna.geks.model.Erabiltzailea;
 import com.imaltuna.geks.model.GailuEgoera;
 import com.imaltuna.geks.model.GailuElektronikoa;
 import com.imaltuna.geks.model.GailuTaulaGaurEgun;
+import com.imaltuna.geks.model.Kudeatu;
 import com.imaltuna.geks.repository.EgonRepository;
 import com.imaltuna.geks.repository.ErabiltzaileaRepository;
 import com.imaltuna.geks.repository.EraikinaRepository;
@@ -62,8 +63,7 @@ public class adminController {
     // --------------------------------------------------------------
     @GetMapping("/admin") // Nabigatzailean http://localhost:8080/ idaztean (GET eskaria)
     public String admin(Model model) {
-        // Model-a "motxila" bat bezalakoa da: Javan sartzen ditugu datuak HTML-an
-        // erabili ahal izateko
+        // Model-a "motxila" bat bezalakoa da: Javan sartzen ditugu datuak HTML-an erabili ahal izateko
 
         // Datu-baseko eraikin guztiak zerrenda batean lortu eta HTMLra pasatu
         // HTML-an "eraikinak" erabiliko dugu (th:each bidez normalean)
@@ -88,8 +88,41 @@ public class adminController {
         // Erabiltzaileak
         model.addAttribute("erabiltzaileak", erabiltzaileaRepository.findAll());
 
-        // GAKOA: "admin" hitzak esaten dio Spring-i templates/admin.html fitxategia
-        // bilatzeko
+
+
+        // OXEL ↓
+        // --- NUEVOS CONTADORES ---
+
+        // Gailuak guztira
+        long guztiraGailuak = gailuelektronikoaRepository.count();
+        model.addAttribute("guztiraGailuak", guztiraGailuak);
+
+        // 2. Dispositivos disponibles (Filtrando por el ENUM 'erabilgarri')
+        long erabilgarri = gailuelektronikoaRepository.contarDisponibles();
+        model.addAttribute("erabilgarri", erabilgarri);
+
+        // Eraikinak guztira
+        model.addAttribute("guztiraEraikinak", eraikinaRepository.count());
+
+        // Gelak guztira
+        model.addAttribute("guztiraGelak", gelaRepository.count());
+
+        // Mantentzean daudenak, bajan, ...
+        model.addAttribute("mantenuan", gailuelektronikoaRepository.contarMantenuan());
+        model.addAttribute("bajan", gailuelektronikoaRepository.contarBajan());
+
+
+
+         // Azken 3 gailuak lortu
+        List<Kudeatu> azkenMugimenduak = kudeatuRepository.findKudeatuObjects(); // ✪ OXEL
+    
+        // HTMLra bidali
+        model.addAttribute("azkenMugimenduak", azkenMugimenduak); // ✪ OXEL
+        // OXEL ↑
+
+
+
+        // GAKOA: "admin" hitzak esaten dio Spring-i templates/admin.html fitxategia bilatzeko
         return "admin";
     }
 

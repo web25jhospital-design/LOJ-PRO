@@ -24,4 +24,16 @@ public interface KudeatuRepository extends JpaRepository<Kudeatu, Long> {
        - findById(id): Id baten bidez erabiltzailea bilatzeko.
        - deleteById(id): Erabiltzailea ezabatzeko.
     */
+
+
+
+        // OXEL eta JULEN ↓
+
+        @Query("SELECT k FROM Kudeatu k ORDER BY kudeatzeData DESC LIMIT 3")
+        public List<Kudeatu> findKudeatuObjects();
+
+        // OXEL eta JULEN ↑
+
+
+
 }

@@ -12,12 +12,23 @@ import com.imaltuna.geks.model.GailuTaulaGaurEgun;
 @Repository // Spring-i esaten dio klase honek datu-basearekin komunikazioa kudeatzen duela
 public interface GailuElektronikoaRepository extends JpaRepository<GailuElektronikoa, Integer> {
 
+
+    
+    // OXEL ↓
+        // Usamos una consulta nativa (SQL puro) para ir a lo seguro
+    @Query(value = "SELECT COUNT(*) FROM gailuelektronikoa WHERE egoera = 'erabilgarri'", nativeQuery = true)
+    long contarDisponibles();
+
+    // Cuenta dispositivos cuyo campo 'egoera' coincida con el texto pasado
+    long countByEgoera(String egoera);
+    // OXEL ↑
+
+
+
     @Query("select distinct egoera from GailuElektronikoa")
     public List<String> findDistinctEgoera();
     // public GailuElektronikoa findDistinctByEgoera();
 
-
-    
     @Query("select distinct mota from GailuElektronikoa")
     public List<String> findDistinctMota();
 
@@ -26,6 +37,23 @@ public interface GailuElektronikoaRepository extends JpaRepository<GailuElektron
            "g.idGailua, g.marka, g.modeloa, g.serieZenb, g.mota, g.egoera, g.altaData, g.bajaData, e.idGela, e.hasieraData, e.amaieraData)" +
            "FROM GailuElektronikoa g LEFT JOIN Egon e ON g.idGailua = e.idGailua AND e.amaieraData IS NULL")
     List<GailuTaulaGaurEgun> findGailuakGaurEgun();
+
+    
+
+
+    // OXEL ↓
+    @Query(value = "SELECT COUNT(*) FROM gailuelektronikoa WHERE egoera = 'mantenuan'", nativeQuery = true)
+    long contarMantenuan();
+
+    @Query(value = "SELECT COUNT(*) FROM gailuelektronikoa WHERE egoera = 'bajan'", nativeQuery = true)
+    long contarBajan();
+    
+
+
+    // Azken 3 gailuak lortzen ditu alta dataren arabera ordenatuta (berrienak lehenago)
+    List<GailuElektronikoa> findTop3ByOrderByAltaDataDesc();
+    // OXEL ↑
+
 
 
     /*
