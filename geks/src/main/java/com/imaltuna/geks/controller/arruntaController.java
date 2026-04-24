@@ -25,7 +25,7 @@ public class arruntaController {
     private final GailuElektronikoaRepository gailuelektronikoaRepository;
     private final EgonRepository egonRepository;
     private final GelaRepository gelaRepository;
-    private final KudeatuRepository KudeatuRepository;
+    private final KudeatuRepository KudeatuRepository; // ✪ OXEL
 
 
     @Autowired // Lotura automatikoa.  Spring-ek automatikoki bilatuko du Repository-aren inplementazioa
@@ -36,7 +36,7 @@ public class arruntaController {
         this.gailuelektronikoaRepository = gailuelektronikoaRepository;
         this.egonRepository = egonRepository;
         this.gelaRepository = gelaRepository;
-        this.KudeatuRepository = kudeatuRepository;
+        this.KudeatuRepository = kudeatuRepository; // ✪ OXEL
     }
 
     @GetMapping("/arrunta") // Nabigatzailean http://localhost:8080/ idaztean (GET eskaria)
@@ -90,12 +90,10 @@ public class arruntaController {
 
 
          // Azken 3 gailuak lortu
-        List<Kudeatu> azkenMugimenduak = KudeatuRepository.findKudeatuObjects();
+        List<Kudeatu> azkenMugimenduak = KudeatuRepository.findKudeatuObjects(); // ✪ OXEL
     
         // HTMLra bidali
-        model.addAttribute("azkenMugimenduak", azkenMugimenduak);
-
-
+        model.addAttribute("azkenMugimenduak", azkenMugimenduak); // ✪ OXEL
         // OXEL ↑
 
 

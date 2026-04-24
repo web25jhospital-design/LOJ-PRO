@@ -15,14 +15,12 @@ public interface GailuElektronikoaRepository extends JpaRepository<GailuElektron
 
     
     // OXEL ↓
-
         // Usamos una consulta nativa (SQL puro) para ir a lo seguro
     @Query(value = "SELECT COUNT(*) FROM gailuelektronikoa WHERE egoera = 'erabilgarri'", nativeQuery = true)
     long contarDisponibles();
 
     // Cuenta dispositivos cuyo campo 'egoera' coincida con el texto pasado
     long countByEgoera(String egoera);
-
     // OXEL ↑
 
 
@@ -46,7 +44,6 @@ public interface GailuElektronikoaRepository extends JpaRepository<GailuElektron
 
 
     // OXEL ↓
-
     @Query(value = "SELECT COUNT(*) FROM gailuelektronikoa WHERE egoera = 'mantenuan'", nativeQuery = true)
     long contarMantenuan();
 
@@ -57,9 +54,6 @@ public interface GailuElektronikoaRepository extends JpaRepository<GailuElektron
 
     // Azken 3 gailuak lortzen ditu alta dataren arabera ordenatuta (berrienak lehenago)
     List<GailuElektronikoa> findTop3ByOrderByAltaDataDesc();
-
-
-
     // OXEL ↑
 
 

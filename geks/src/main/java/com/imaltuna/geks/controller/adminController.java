@@ -1,7 +1,7 @@
 package com.imaltuna.geks.controller;
 
 import java.util.Date;
-import java.util.List;
+import java.util.List; // ✪ OXEL
 
 import org.springframework.beans.factory.annotation.Autowired; // ✪ OXEL
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -109,11 +109,10 @@ public class adminController {
 
 
          // Azken 3 gailuak lortu
-        List<Kudeatu> azkenMugimenduak = kudeatuRepository.findKudeatuObjects();
+        List<Kudeatu> azkenMugimenduak = kudeatuRepository.findKudeatuObjects(); // ✪ OXEL
     
         // HTMLra bidali
-        model.addAttribute("azkenMugimenduak", azkenMugimenduak);
-
+        model.addAttribute("azkenMugimenduak", azkenMugimenduak); // ✪ OXEL
         // OXEL ↑
 
 
