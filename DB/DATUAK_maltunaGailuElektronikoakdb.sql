@@ -70,11 +70,7 @@ INSERT INTO kudeatu
 (id_erabiltzailea, id_gailua, kudeatze_data, kudeatze_mota) VALUES
 (4, 1, '2026-02-15', 'gehitu'),
 (1, 3, '2026-03-05', 'editatu'),
-<<<<<<< HEAD
 (1, 3, '2026-03-06', 'esleitu'),
-=======
-(1, 3, '2026-03-06', 'gehitu'),
->>>>>>> 9f2662babe8928df78fa2e38e89a234c129aa7ec
 (4, 7, '2026-04-01', 'ezabatu');
 
 
