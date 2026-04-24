@@ -68,9 +68,10 @@ INSERT INTO erabiltzailea
 -- ========================================================
 INSERT INTO kudeatu 
 (id_erabiltzailea, id_gailua, kudeatze_data, kudeatze_mota) VALUES
-(4, 1, '2023-02-15', 'gehitu'),
-(1, 3, '2024-03-05', 'editatu'),
-(4, 7, '2025-11-01', 'ezabatu');
+(4, 1, '2026-02-15', 'gehitu'),
+(1, 3, '2026-03-05', 'editatu'),
+(1, 3, '2026-03-06', 'esleitu'),
+(4, 7, '2026-04-01', 'ezabatu');
 
 
 
