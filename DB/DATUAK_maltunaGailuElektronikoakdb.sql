@@ -36,11 +36,11 @@ INSERT INTO gailuElektronikoa
 ('Samsung', 'Galaxy Tab S7', 'SN12348', '2023-04-05', NULL, 'mantenuan', 'arbela digitala'),
 ('Acer', 'Aspire 5', 'SN12354', '2023-10-01', '2025-11-01', 'bajan', 'ordenagailua'),
 ('Asus', 'VivoBook 17', 'SN12364', '2022-10-01', '2024-11-01', 'bajan', 'ordenagailua'),
-('HP', 'EliteBook 840', 'SN12346', '2023-02-15', NULL, 'hartua', 'ordenagailu eramangarria'),
-('Samsung', 'Galaxy Tab S2', 'SN12351', '2024-04-05', NULL, 'hartua', 'arbela digitala'),
+('HP', 'EliteBook 840', 'SN12346', '2023-02-15', NULL, 'esleitua', 'ordenagailu eramangarria'),
+('Samsung', 'Galaxy Tab S2', 'SN12351', '2024-04-05', NULL, 'esleitua', 'arbela digitala'),
 ('Apple', 'i Mac', 'SN12370', '2024-05-12', NULL, 'mantenuan', 'tableta'),
-('Epson', 'EB-X41', 'SN12350', '2023-06-18', NULL, 'hartua', 'proiektorea'),
-('Canon', 'PIXMA G1000', 'SN22222', '2025-07-22', NULL, 'hartua', 'inprimagailua'),
+('Epson', 'EB-X41', 'SN12350', '2023-06-18', NULL, 'esleitua', 'proiektorea'),
+('Canon', 'PIXMA G1000', 'SN22222', '2025-07-22', NULL, 'esleitua', 'inprimagailua'),
 ('LG', '24MK600M', 'SN12352', '2023-08-30', NULL, 'mantenuan', 'monitorea');
 
 
@@ -68,9 +68,10 @@ INSERT INTO erabiltzailea
 -- ========================================================
 INSERT INTO kudeatu 
 (id_erabiltzailea, id_gailua, kudeatze_data, kudeatze_mota) VALUES
-(4, 1, '2023-02-15', 'gehitu'),
-(1, 3, '2024-03-05', 'editatu'),
-(4, 7, '2025-11-01', 'ezabatu');
+(4, 1, '2026-02-15', 'gehitu'),
+(1, 3, '2026-03-05', 'editatu'),
+(1, 3, '2026-03-06', 'esleitu'),
+(4, 7, '2026-04-01', 'ezabatu');
 
 
 

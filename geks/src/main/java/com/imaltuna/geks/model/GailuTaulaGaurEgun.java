@@ -15,12 +15,13 @@ public class GailuTaulaGaurEgun {
     private Date bajaData;
     private Integer idGela;      // 'Egon' taulatik
     private Date hasieraData;    // 'Egon' taulatik (Data Hartu)
+    private Date amaieraData;    // 'Egon' taulatik (Data Hartu)
 
 
 
     
     public GailuTaulaGaurEgun(Integer idGailua, String marka, String modeloa, String serieZenb, String mota,
-            GailuEgoera egoera, Date altaData, Date bajaData, Integer idGela, Date hasieraData) {
+            GailuEgoera egoera, Date altaData, Date bajaData, Integer idGela, Date hasieraData, Date amaieraData) {
         this.idGailua = idGailua;
         this.marka = marka;
         this.modeloa = modeloa;
@@ -31,6 +32,7 @@ public class GailuTaulaGaurEgun {
         this.bajaData = bajaData;
         this.idGela = idGela;
         this.hasieraData = hasieraData;
+        this.amaieraData = amaieraData;
     }
 
 
@@ -93,7 +95,13 @@ public class GailuTaulaGaurEgun {
     }
     public void setHasieraData(Date hasieraData) {
         this.hasieraData = hasieraData;
-    }   
+    }  
+    public Date getAmaieraData() {
+        return amaieraData;
+    }
+    public void setAmaieraData(Date amaieraData) {
+        this.amaieraData = amaieraData;
+    }    
 
 }
 

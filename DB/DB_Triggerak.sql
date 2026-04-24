@@ -27,4 +27,15 @@ BEGIN
     END IF;
 END;$$
 
+
+-- TRIGGER-a egon taulan UPDATE-a burutzean:
+DROP TRIGGER IF EXISTS trg_egon_update$$
+CREATE TRIGGER trg_egon_update 
+BEFORE UPDATE ON egon
+FOR EACH ROW
+BEGIN	
+	INSERT INTO kudeatu (id_gailua, id_erabiltzailea, kudeatze_data, kudeatze_mota)
+	VALUES (OLD.id_gailua, @erabiltzailea, NOW(), 'esleitu');	
+END;$$
+
 DELIMITER ;

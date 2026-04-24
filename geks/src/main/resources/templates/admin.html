@@ -105,7 +105,7 @@
                             </div>
                             <div>
                                 <button class="gehiBotoia btn btn-outline-light" type="button" data-bs-toggle="modal"
-                                    data-bs-target="#GailuBerria">
+                                    data-bs-target="#gailuBerria">
                                     <p>+</p>
                                     <p>Gehitu</p>
                                 </button>
@@ -182,9 +182,15 @@
                                     <td class="tdIdGela" th:text="${gailua.idGela}"></td>
                                     <td th:text="${gailua.hasieraData}"></td>
                                     <td>
-                                        <Button class="btn p-1" type="button" data-bs-toggle="modal" data-bs-target="#GailuUpdate"><i
+                                        <!-- th:if="${gailua.bajaData == null}" honekin baja emanda dagoen gailuan ez da aukerarik 
+                                        ematen gailua editatu edo ezabatzeko. -->
+                                        <Button class="btn p-1" type="button" data-bs-toggle="modal"
+                                            data-bs-target="#gailuUpdate"  th:if="${gailua.bajaData == null}"
+                                            onclick="gailuUpdateDatuakKargatu()"><i
                                                 class="bi bi-pencil-square text-primary fs-5 fw-bold"></i></Button>
-                                        <Button class="btn p-1" type="button" data-bs-toggle="modal" data-bs-target="#GailuEzabatu"><i
+                                        <Button class="btn p-1" id="${gailua.idGailua}" type="button" data-bs-toggle="modal"
+                                            data-bs-target="#gailuDelete " th:if="${gailua.bajaData == null}"
+                                            onclick="gailuDeleteGatuakKargatu()"><i
                                                 class="bi bi-trash text-danger fs-5 fw-bold"></i></Button>
                                     </td>
                                 </tr>
@@ -266,7 +272,7 @@
                             </div>
                         </div>
                     </nav>
-                   <!---------------------- GELEN LAN LEIHOA---------------------->
+                    <!---------------------- GELEN LAN LEIHOA---------------------->
                     <!-- BILAKETA FORMULARIOA -->
                     <div class="card border-light p-3 mb-4 shadow-sm">
                         <form action="">
@@ -285,7 +291,7 @@
                     <!-- BILAKETA FORMULARIOA AMAILERA -->
                     <!-- Gela TAULA -->
                     <div class="table-responsive bg-white p-3 rounded shadow-sm mb-4">
-                        <table id="gailuakTaula" class="table table-hover">
+                        <table id="gelakTaula" class="table table-hover">
                             <thead class="table-white">
                                 <tr>
                                     <th>ID</th>
@@ -297,7 +303,7 @@
                             </thead>
                             <tbody>
                                 <tr th:each="gela : ${gelak}">
-                                    <td th:text="${gela.idGela}"></td>
+                                    <td class="tdIdGelaGelaTaula" th:text="${gela.idGela}"></td>
                                     <td th:text="${gela.idEraikina}"></td>
                                     <td th:text="${gela.izena}"></td>
                                     <td th:text="${gela.deskribapena}"></td>
@@ -392,14 +398,10 @@
                     <div class="card border-light p-3 mb-4 shadow-sm">
                         <form action="">
                             <div class="row">
-                                <div class="col-12 col-lg-3">
-                                    <label for="selektErab" class="form-label fw-semibold">Erabiltzailea</label>
-                                    <select id="selektErab" class="form-select" aria-label="Default select example">
-                                        <option selected>Guztiak</option>
-                                        <option th:each="erabiltzailea : ${erabiltzaileak}"
-                                            th:value="${erabiltzailea.idErabiltzailea}"
-                                            th:text="${erabiltzailea.idErabiltzailea}"></option>
-                                    </select>
+                                <div class="col-12 col-lg-3 d-flex flex-column">
+                                    <label for="bilatuKudeaketa" class="form-label fw-semibold">Bilatu</label>
+                                    <input id="bilatuKudeaketa" class="form-control" type="text" placeholder="Bilatu ...">
+                                    <!-- <i class="bi bi-search"></i> -->
                                 </div>
                                 <div class="col-12 col-lg-3">
                                     <label for="selektGailua" class="form-label fw-semibold">Gailua</label>
@@ -410,8 +412,13 @@
                                     </select>
                                 </div>
                                 <div class="col-12 col-lg-3">
-                                    <label for="selektData" class="form-label fw-semibold">Kuadeatze Data</label>
-                                    <input id="selektData" class="form-control" type="date" placeholder="Data ...">
+                                    <label for="selektErab" class="form-label fw-semibold">Erabiltzailea</label>
+                                    <select id="selektErab" class="form-select" aria-label="Default select example">
+                                        <option selected>Guztiak</option>
+                                        <option th:each="erabiltzailea : ${erabiltzaileak}"
+                                            th:value="${erabiltzailea.idErabiltzailea}"
+                                            th:text="${erabiltzailea.idErabiltzailea}"></option>
+                                    </select>
                                 </div>
                                 <div class="col-12 col-lg-3">
                                     <label for="selektKudeaketaMota" class="form-label fw-semibold">Kuadeta Mota</label>
@@ -441,10 +448,10 @@
                             <tbody>
                                 <tr th:each="kudeaketa : ${kudeaketak}">
                                     <td th:text="${kudeaketa.idKudeatu}"></td>
-                                    <td th:text="${kudeaketa.idGailua}"></td>
-                                    <td th:text="${kudeaketa.idErabiltzailea}"></td>
+                                    <td class="tdGailua" th:text="${kudeaketa.idGailua}"></td>
+                                    <td class="tdErab" th:text="${kudeaketa.idErabiltzailea}"></td>
                                     <td th:text="${kudeaketa.kudeatzeData}"></td>
-                                    <td class="tdMota" th:text="${kudeaketa.kudeatzeMota}"></td>
+                                    <td class="tdMotaKudeaketa" th:text="${kudeaketa.kudeatzeMota}"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -512,13 +519,8 @@
         <!----------------------------------------------------------------------------------------------------------->
         <!--                                         GAILUA INSERT MODAL                                           -->
         <!----------------------------------------------------------------------------------------------------------->
-        <!-- Button trigger modal -->
-        <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#GailuBerria">
-                Launch static backdrop modal
-        </button> -->
-
         <!-- Modal -->
-        <div class="modal fade" id="GailuBerria" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        <div class="modal fade" id="gailuBerria" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -544,7 +546,8 @@
                             </div>
                             <div class="col-md-12">
                                 <label for="SerieZenbGailuaSortu" class="form-label fw-semibold">Serie Zenb</label>
-                                <input type="text" class="form-control" id="SerieZenbGailuaSortu" name="serieZenb" required>
+                                <input type="text" class="form-control" id="SerieZenbGailuaSortu" name="serieZenb"
+                                    required>
                                 <div class="valid-feedback">
                                     Ok!
                                 </div>
@@ -559,19 +562,20 @@
                             <div class="col-md-6">
                                 <label for="egoeraGailuaSortu" class="form-label fw-semibold">Egoera</label>
                                 <select class="form-select" id="egoeraGailuaSortu" name="egoera" required>
-                                    <option selected disabled value="">Aukeratu...</option>
+                                    <option selected  value="" readOnly>Aukeratu...</option>
                                     <option>erabilgarri</option>
-                                    <option>hartua</option>
-                                    <option>mantenuan</option>
-                                    <option>bajan</option>
+                                    <option disabled>esleitua</option>
+                                    <option disabled>mantenuan</option>
+                                    <option disabled>bajan</option>
                                 </select>
                                 <div class="invalid-feedback">
                                     Egoera aukeratu!
                                 </div>
                             </div>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Itxi</button>
-                                <button class="btn" type="submit" style="background-color: #1e3a8a; border-color: #1e3a8a; color: white;">Onartu</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Irten</button>
+                                <button class="btn" type="submit"
+                                    style="background-color: #1e3a8a; border-color: #1e3a8a; color: white;">Onartu</button>
                             </div>
                         </form>
                     </div>
@@ -585,13 +589,9 @@
         <!----------------------------------------------------------------------------------------------------------->
         <!--                                         GAILUA UPDATE MODAL                                           -->
         <!----------------------------------------------------------------------------------------------------------->
-        <!-- Button trigger modal -->
-        <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#GailuBerria">
-                Launch static backdrop modal
-        </button> -->
 
         <!-- Modal -->
-        <div class="modal fade" id="GailuUpdate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        <div class="modal fade" id="gailuUpdate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -600,51 +600,53 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form class="row g-3 needs-validation" action="/admin" method="post" novalidate>
-                            <div class="col-md-12">
-                                <label for="markaGailuaSortu" class="form-label fw-semibold">Marka</label>
-                                <input type="text" class="form-control" id="markaGailuaSortu" name="marka" required>
-                                <div class="valid-feedback">
-                                    Ok!
-                                </div>
+                        <form class="row g-3 needs-validation" action="/admin/update" method="post" novalidate>
+                            <div class="col-md-6">
+                                <label for="idGailuaUpdate" class="form-label fw-semibold">Id Gailua</label>
+                                <input type="text" class="form-control" id="idGailuaUpdate" name="idGailua" style="background-color:  rgb(248, 249, 250);" readonly>
                             </div>
-                            <div class="col-md-12">
-                                <label for="modeloaGailuaSortu" class="form-label fw-semibold">Modeloa</label>
-                                <input type="text" class="form-control" id="modeloaGailuaSortu" name="modeloa" required>
-                                <div class="valid-feedback">
-                                    Ok!
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <label for="SerieZenbGailuaSortu" class="form-label fw-semibold">Serie Zenb</label>
-                                <input type="text" class="form-control" id="SerieZenbGailuaSortu" name="serieZenb" required>
-                                <div class="valid-feedback">
-                                    Ok!
-                                </div>
+                            <div class="col-md-6 align-content-end">
+                                <!-- <button class="btn" type="submit" id="gailuaAltaBotoia" disabled
+                                    style="width: 100%; background-color: #1e3a8a; border-color: #1e3a8a; color: white;">Berriz Alta Eman</button> -->
                             </div>
                             <div class="col-md-6">
-                                <label for="motaGailuaSortu" class="form-label fw-semibold">Gailu Mota</label>
-                                <input type="text" class="form-control" id="motaGailuaSortu" name="mota" required>
-                                <div class="valid-feedback">
-                                    Ok!
-                                </div>
+                                <label for="markaGailuaUpdate" class="form-label fw-semibold">Marka</label>
+                                <input type="text" class="form-control" id="markaGailuaUpdate" name="marka" required>
                             </div>
                             <div class="col-md-6">
-                                <label for="egoeraGailuaSortu" class="form-label fw-semibold">Egoera</label>
-                                <select class="form-select" id="egoeraGailuaSortu" name="egoera" required>
-                                    <option selected disabled value="">Aukeratu...</option>
+                                <label for="modeloaGailuaUpdate" class="form-label fw-semibold">Modeloa</label>
+                                <input type="text" class="form-control" id="modeloaGailuaUpdate" name="modeloa"
+                                    required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="serieZenbGailuaUpdate" class="form-label fw-semibold" onchange="kk()">Serie Zenb</label>
+                                <input type="text" class="form-control" id="serieZenbGailuaUpdate" name="serieZenb"
+                                    required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="motaGailuaUpdate" class="form-label fw-semibold">Gailu Mota</label>
+                                <input type="text" class="form-control" id="motaGailuaUpdate" name="mota" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="egoeraGailuaUpdate" class="form-label fw-semibold">Egoera</label>
+                                <select class="form-select" id="egoeraGailuaUpdate" name="egoera" required onchange="gailuEgoeraAldatuDa()" >
+                                    <option selected value="">Aukeratu...</option>
                                     <option>erabilgarri</option>
-                                    <option>hartua</option>
+                                    <option>esleitua</option>
                                     <option>mantenuan</option>
-                                    <option>bajan</option>
+                                    <!-- <option disabled>bajan</option> -->
                                 </select>
-                                <div class="invalid-feedback">
-                                    Egoera aukeratu!
-                                </div>
                             </div>
-                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Itxi</button>
-                                <button class="btn" type="submit" style="background-color: #1e3a8a; border-color: #1e3a8a; color: white;">Onartu</button>
+                            <div class="col-md-6">
+                                <label for="idGelaUpdate" class="form-label fw-semibold">ID Gela</label>
+                                <input type="text" class="form-control" id="idGelaUpdate" name="idGela" onchange="gailuGelaAldatuDa()">
+                            </div>
+                            <div class="col-md-6">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100%;">Irten</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn" type="submit"
+                                    style="background-color: #1e3a8a; border-color: #1e3a8a; color: white; width: 100%">Aldatu</button>
                             </div>
                         </form>
 
@@ -656,6 +658,166 @@
         <!--                                         GAILUA UPDATE MODAL AMAIERA                                   -->
         <!----------------------------------------------------------------------------------------------------------->
 
+
+        <!----------------------------------------------------------------------------------------------------------->
+        <!--                                         GAILUA DELETE MODAL                                           -->
+        <!----------------------------------------------------------------------------------------------------------->
+        <!-- Modal -->
+        <div class="modal fade" id="gailuDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #1e3a8a; color: white;">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Gailu Elektronikoa Baja Eman</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="row g-3 needs-validation" action="/admin/delete" method="post" novalidate>
+                            <div class="col-md-6">
+                                <label for="idGailuaDelete" class="form-label fw-semibold">Id Gailua</label>
+                                <input type="text" class="form-control" id="idGailuaDelete" name="idGailua" style="background-color:  rgb(248, 249, 250);" readonly>
+                            </div>
+                            <div class="col-md-6 align-content-end">
+                                <!-- <button class="btn" type="submit" id="gailuaAltaBotoia" disabled
+                                    style="width: 100%; background-color: #1e3a8a; border-color: #1e3a8a; color: white;">Berriz Alta Eman</button> -->
+                            </div>
+                            <div class="col-md-6">
+                                <label for="markaGailuaDelete" class="form-label fw-semibold">Marka</label>
+                                <input type="text" class="form-control" id="markaGailuaDelete" name="marka" style="background-color:  rgb(248, 249, 250);" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="modeloaGailuaDelete" class="form-label fw-semibold">Modeloa</label>
+                                <input type="text" class="form-control" id="modeloaGailuaDelete" name="modeloa" style="background-color:  rgb(248, 249, 250);" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="serieZenbGailuaDelete" class="form-label fw-semibold" onchange="kk()">Serie Zenb</label>
+                                <input type="text" class="form-control" id="serieZenbGailuaDelete" name="serieZenb" style="background-color:  rgb(248, 249, 250);" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="motaGailuaDelete" class="form-label fw-semibold">Gailu Mota</label>
+                                <input type="text" class="form-control" id="motaGailuaDelete" name="mota" style="background-color:  rgb(248, 249, 250);" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="egoeraGailuaDelete" class="form-label fw-semibold">Egoera</label>
+                                <select class="form-select" id="egoeraGailuaDelete" name="egoera" style="background-color:  rgb(248, 249, 250);" readonly onchange="gailuEgoeraAldatuDa()" >
+                                    <option selected value="">Aukeratu...</option>
+                                    <option disabled>erabilgarri</option>
+                                    <option disabled>esleitua</option>
+                                    <option disabled>mantenuan</option>
+                                    <option disabled>bajan</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="idGelaDelete" class="form-label fw-semibold">ID Gela</label>
+                                <input type="text" class="form-control" id="idGelaDelete" name="idGela" style="background-color:  rgb(248, 249, 250);" readonly onchange="gailuGelaAldatuDa()">
+                            </div>
+                            <div class="col-md-6">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100%;">Irten</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn" type="submit"
+                                    style="background-color: #1e3a8a; border-color: #1e3a8a; color: white; width: 100%">Baja Eman</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+        <!-- Modal -->
+        <!-- <div class="modal fade" id="gailuDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #1e3a8a; color: white;">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Gailu Elektronikoa Ezabatu</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="row g-3 needs-validation" action="/admin" method="post" novalidate>
+                            <div class="col-md-6">
+                                <label for="idGailuaDelete" class="form-label fw-semibold">Id Gailua</label>
+                                <input type="text" class="form-control bg-secondary-subtle" id="idGailuaDelete" name="idGailua" 
+                                    readonly placeholder="kuku">
+                            </div>
+                            <button class="btn col-md-6" type="submit" id="btnEzabatuGaiua"
+                                    style="background-color: #1e3a8a; border-color: #1e3a8a; color: white;"
+                                    data-bs-toggle="modal" data-bs-target=".modalZiur" >Alta eman</button>
+                            <div class="col-md-6">
+                                <label for="markaGailuaDelete" class="form-label fw-semibold">Marka</label>
+                                <input type="text" class="form-control bg-secondary-subtle" id="markaGailuaDelete" name="marka" 
+                                    readonly placeholder="kuku">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="modeloaGailuaDelete" class="form-label fw-semibold">Modeloa</label>
+                                <input type="text" class="form-control bg-secondary-subtle" id="modeloaGailuaDelete" name="modeloa" 
+                                    readonly placeholder="kuku">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="serieZenbGailuaDelete" class="form-label fw-semibold">Serie Zenb</label>
+                                <input type="text" class="form-control bg-secondary-subtle" id="serieZenbGailuaDelete" name="serieZenb"
+                                     readonly placeholder="kuku">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="motaGailuaDelete" class="form-label fw-semibold">Gailu Mota</label>
+                                <input type="text" class="form-control bg-secondary-subtle" id="motaGailuaDelete" name="mota" 
+                                    readonly placeholder="kuku">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="egoeraGailuaDelete" class="form-label fw-semibold">Egoera</label>
+                                <input type="text" class="form-control bg-secondary-subtle" id="egoeraGailuaDelete" name="mota" 
+                                    readonly placeholder="kuku">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="idGelaDelete" class="form-label fw-semibold">ID Gela</label>
+                                <input type="text" class="form-control bg-secondary-subtle" id="idGelaDelete" name="idGela" 
+                                    readonly placeholder="kuku">
+                            </div>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Itxi</button>
+                                <button class="btn" type="submit" id="btnEzabatuGaiua"
+                                    style="background-color: #1e3a8a; border-color: #1e3a8a; color: white;"
+                                    data-bs-toggle="modal" data-bs-target=".modalZiur">Ezabatu</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!----------------------------------------------------------------------------------------------------------->
+        <!--                                         GAILUA DELETE MODAL AMAIERA                                   -->
+        <!----------------------------------------------------------------------------------------------------------->
+
+
+
+        <div class="modal modalZiur" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">GKS - Gailuak ezabatu</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Ziur gailua ezabatu nahi duzula?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
 </body>
 
 </html>
+

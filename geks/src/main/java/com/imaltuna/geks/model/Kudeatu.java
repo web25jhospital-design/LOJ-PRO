@@ -48,6 +48,7 @@ public class Kudeatu {
     public enum kudeaketaMota{
         gehitu,
         editatu,
+        esleitu,
         ezabatu
     }
 
