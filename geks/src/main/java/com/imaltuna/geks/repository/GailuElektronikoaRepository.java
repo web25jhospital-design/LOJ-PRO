@@ -55,6 +55,11 @@ public interface GailuElektronikoaRepository extends JpaRepository<GailuElektron
     
 
 
+    // Azken 3 gailuak lortzen ditu alta dataren arabera ordenatuta (berrienak lehenago)
+    List<GailuElektronikoa> findTop3ByOrderByAltaDataDesc();
+
+
+
     // OXEL ↑
 
 

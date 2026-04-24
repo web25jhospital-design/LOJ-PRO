@@ -1,6 +1,7 @@
 package com.imaltuna.geks.controller;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired; // ✪ OXEL
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,11 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.imaltuna.geks.model.Erabiltzailea;
 import com.imaltuna.geks.model.GailuElektronikoa;
+import com.imaltuna.geks.model.Kudeatu;
 import com.imaltuna.geks.repository.EgonRepository;
 import com.imaltuna.geks.repository.ErabiltzaileaRepository;
 import com.imaltuna.geks.repository.EraikinaRepository;
-import com.imaltuna.geks.repository.GailuElektronikoaRepository;
-import com.imaltuna.geks.repository.GelaRepository; // ✪ OXEL
+import com.imaltuna.geks.repository.GailuElektronikoaRepository; // ✪ OXEL
+import com.imaltuna.geks.repository.GelaRepository;
 import com.imaltuna.geks.repository.KudeatuRepository;
 
 import jakarta.servlet.http.HttpSession;
@@ -105,10 +107,10 @@ public class adminController {
 
 
          // Azken 3 gailuak lortu
-        // List<Kudeatu> azkenMugimenduak = kudeatuRepository.findKudeatuObjects(); //HAS COMENTADO ESTO
+        List<Kudeatu> azkenMugimenduak = kudeatuRepository.findKudeatuObjects();
     
         // HTMLra bidali
-        // model.addAttribute("azkenMugimenduak", azkenMugimenduak); //HAS COMENTADO ESTO
+        model.addAttribute("azkenMugimenduak", azkenMugimenduak);
 
 
         // OXEL ↑

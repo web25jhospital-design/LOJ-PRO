@@ -74,7 +74,7 @@ id_kudeatu INT AUTO_INCREMENT,
 id_erabiltzailea INT,
 id_gailua INT,
 kudeatze_data DATETIME NOT NULL,
-kudeatze_mota ENUM('gehitu', 'editatu', 'esleitu', 'ezabatu') NOT NULL, -- gehitu / editatu / esleitu / ezabatu
+kudeatze_mota ENUM('gehitu', 'editatu', 'ezabatu') NOT NULL, -- gehitu / editatu / ezabatu
 PRIMARY KEY (id_kudeatu, id_erabiltzailea, id_gailua),
 FOREIGN KEY (id_erabiltzailea) REFERENCES erabiltzailea(id_erabiltzailea),
 FOREIGN KEY (id_gailua) REFERENCES gailuElektronikoa(id_gailua)

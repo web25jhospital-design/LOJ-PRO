@@ -27,8 +27,8 @@ public interface KudeatuRepository extends JpaRepository<Kudeatu, Long> {
 
         // OXEL eta JULEN ↓
 
-        @Query("SELECT ALL FROM kudeatu ORDER BY kudeatzeData DESC LIMIT 3")
-        public List<Object> findKudeatuObjects();
+        @Query("SELECT ALL FROM Kudeatu ORDER BY kudeatzeData DESC LIMIT 3")
+        public List<Kudeatu> findKudeatuObjects();
 
         // OXEL eta JULEN ↑
 }

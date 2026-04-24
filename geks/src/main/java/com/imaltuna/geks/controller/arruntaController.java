@@ -7,11 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.imaltuna.geks.model.GailuElektronikoa;
+import com.imaltuna.geks.model.Kudeatu;
 import com.imaltuna.geks.repository.EgonRepository;
 import com.imaltuna.geks.repository.EraikinaRepository; // ✪ OXEL
 import com.imaltuna.geks.repository.GailuElektronikoaRepository;
 import com.imaltuna.geks.repository.GelaRepository;
+import com.imaltuna.geks.repository.KudeatuRepository;
 
 
 @Controller // Spring-i esaten dio klase honek HTTP eskariak (URLak) jasoko dituela
@@ -24,16 +25,18 @@ public class arruntaController {
     private final GailuElektronikoaRepository gailuelektronikoaRepository;
     private final EgonRepository egonRepository;
     private final GelaRepository gelaRepository;
+    private final KudeatuRepository KudeatuRepository;
 
 
     @Autowired // Lotura automatikoa.  Spring-ek automatikoki bilatuko du Repository-aren inplementazioa
     public arruntaController(EraikinaRepository eraikinaRepository, GailuElektronikoaRepository gailuelektronikoaRepository,
-        EgonRepository egonRepository, GelaRepository gelaRepository) {
+        EgonRepository egonRepository, GelaRepository gelaRepository, KudeatuRepository kudeatuRepository) {
         // this.erabiltzaileaRepository = erabiltzaileaRepository;
         this.eraikinaRepository = eraikinaRepository; // ✪ OXEL
         this.gailuelektronikoaRepository = gailuelektronikoaRepository;
         this.egonRepository = egonRepository;
         this.gelaRepository = gelaRepository;
+        this.KudeatuRepository = kudeatuRepository;
     }
 
     @GetMapping("/arrunta") // Nabigatzailean http://localhost:8080/ idaztean (GET eskaria)
@@ -87,7 +90,7 @@ public class arruntaController {
 
 
          // Azken 3 gailuak lortu
-        List<GailuElektronikoa> azkenMugimenduak = gailuelektronikoaRepository.findTop3ByOrderByAltaDataDesc();
+        List<Kudeatu> azkenMugimenduak = KudeatuRepository.findKudeatuObjects();
     
         // HTMLra bidali
         model.addAttribute("azkenMugimenduak", azkenMugimenduak);
