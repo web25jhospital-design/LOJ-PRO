@@ -317,47 +317,8 @@ function bilatuGailuaGela() {
 
 
 
-
-
-// admin edo arrunta pantailak eguneratzean, aurkitzen zeneko erlaitzean manten dadin:
-//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxx
-// // Detectar el hash en la URL y activar la pestaña correspondiente
-// document.addEventListener('DOMContentLoaded', function() {
-//    // Función para activar una pestaña por su ID
-//     function activateTab(tabId) {
-//         // Buscar el botón de la pestaña
-//         const tabButton = document.querySelector(`button[data-bs-target="${tabId}"]`);
-
-//         if (tabButton) {
-//             // Usar Bootstrap para activar la pestaña
-//             const bsTab = new bootstrap.Tab(tabButton);
-//             bsTab.show();
-//         }
-//     }
-
-//     // Verificar si hay hash en la URL al cargar
-//     const hash = window.location.hash;
-//     if (hash) {
-//         // Quitar el '#' del hash
-//         const tabId = hash.substring(1);
-//         activateTab('#' + tabId);
-//     }
-
-//     // Opcional: cuando se cambie de pestaña, actualizar el hash en la URL
-//     const tabButtons = document.querySelectorAll('button[data-bs-toggle="pill"]');
-//     tabButtons.forEach(button => {
-//         button.addEventListener('shown.bs.tab', function(event) {
-//             const targetId = event.target.getAttribute('data-bs-target');
-//             // Actualizar el hash en la URL sin recargar la página
-//             history.pushState(null, null, targetId);
-//         });
-//     });
-// });
-//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXxxx
-
-
 //---------------------
-// Formularioa balidatu
+// Formularioak balidatu
 //---------------------
 //Sartu beharreko guztia sartu dela konprobatzen da
 (function () {
@@ -378,17 +339,6 @@ function bilatuGailuaGela() {
     });
 })();
 
-
-
-//---------------------
-// Gailua ezabatu
-//---------------------
-// const gailuaEzabatuBotoia=document.querySelector("#btnEzabatuGaiua");
-// gailuaEzabatuBotoia.addEventListener("click", ezabatuGailua);
-
-// function ezabatuGailua(){
-//     alert("Ziur ezabatu nahi duzula?");
-// }
 
 //--------------------------------
 // Gailua Update formularioa osatu
@@ -414,6 +364,10 @@ function gailuUpdateDatuakKargatu() {
     idGela.value = tds[8].textContent;
 }
 
+//------------------------------------------------------------------------------------
+// UPDATE GAILUA MODAL
+//Formulario barruan gailuGelaAldatu aldatzean, konprobatu sartutako gela egokia dela.
+//------------------------------------------------------------------------------------
 function gailuGelaAldatuDa() {
 
     //erabiltzaileak sartutako gelako id-a
@@ -460,6 +414,11 @@ function gailuGelaAldatuDa() {
     }
 }
 
+
+//-------------------------------------------------------------------------------------
+// UPDATE GAILUA MODAL
+//Formulario barruan gailuEgoeraAldatu aldatzean, konprobatu sartutako gela egokia dela.
+//-------------------------------------------------------------------------------------
 function gailuEgoeraAldatuDa() {
     const gailuEgoeraInput = document.querySelector("#egoeraGailuaUpdate");
 
@@ -497,3 +456,180 @@ function gailuDeleteGatuakKargatu() {
     egoera.value = tds[5].textContent;
     idGela.value = tds[8].textContent;
 }
+
+//---------------------------------------
+// Erabiltzailea Update formularioa osatu
+//---------------------------------------
+function erabiltzaileaUpdateDatuakKargatu() {
+    const tr = event.target.closest('tr');
+    const tds = tr.querySelectorAll("td");
+
+    const id = document.querySelector("#idErabiltzaileaUpdate");
+    const izena = document.querySelector("#izenaErabUpdate");
+    const abizena = document.querySelector("#abizenaErabUpdate");
+    const erabizena = document.querySelector("#erabizenaErabUpdatu");
+    const pasahitza = document.querySelector("#pasahitzaErabUpdate");
+    const rola = document.querySelector("#erabrolaErabUpdate");
+
+    id.value = tds[0].textContent;
+    izena.value = tds[1].textContent;
+    abizena.value = tds[2].textContent;
+    erabizena.value = tds[3].textContent;
+    pasahitza.value = "*********";
+    rola.value = tds[4].textContent;
+}
+//---------------------------------------
+// Erabiltzailea Delete formularioa osatu
+//---------------------------------------
+function erabiltzaileaDeleteDatuakKargatu() {
+    const tr = event.target.closest('tr');
+    const tds = tr.querySelectorAll("td");
+
+    const id = document.querySelector("#idErabiltzaileaDelete");
+    const izena = document.querySelector("#izenaErabDelete");
+    const abizena = document.querySelector("#abizenaErabDelete");
+    const erabizena = document.querySelector("#erabizenaErabDelete");
+    const pasahitza = document.querySelector("#pasahitzaErabDelete");
+    const rola = document.querySelector("#erabrolaErabDelete");
+
+    id.value = tds[0].textContent;
+    izena.value = tds[1].textContent;
+    abizena.value = tds[2].textContent;
+    erabizena.value = tds[3].textContent;
+    pasahitza.value = "*********";
+    rola.value = tds[4].textContent;
+}
+
+//---------------------------------------------------------------------------------------------
+// INSERT ERABILTZAILEA MODAL
+//Formulario barruan erabiltzaileIzena aldatzean, konprobatu berria iadanik existitzen ez dela.
+//---------------------------------------------------------------------------------------------
+function erabIzenaAldatuDaInserten() {
+
+    //erabiltzaileak sartutako erabiltzaileizena
+    const erabizenaInput = document.querySelector("#erabizenaErabGehitu");
+    const erabizena = erabizenaInput.value;
+    //existitzen diren erabiltzaileIzen guztiak
+    const erabiltzaileenErabIzenak = document.querySelectorAll(".tderabizena");
+
+
+    if (erabizena != "") {
+        erabiltzaileenErabIzenak.forEach(item =>{
+            if (erabizena === item.textContent){
+                alert("Kontuz, erabiltzaile izen hau iada erabiltzen da!");
+                erabizenaInput.value="";
+            }
+        })
+    }    
+}
+//---------------------------------------------------------------------------------------------
+// UPDATE ERABILTZAILEA MODAL
+//Formulario barruan erabiltzaileIzena aldatzean, konprobatu berria iadanik existitzen ez dela.
+//---------------------------------------------------------------------------------------------
+function erabIzenaAldatuDaUpdaten() {
+
+    //erabiltzaileak sartutako erabiltzaileizena
+    const erabizenaInput = document.querySelector("#erabizenaErabUpdatu");
+    const erabizena = erabizenaInput.value;
+    //existitzen diren erabiltzaileIzen guztiak
+    const erabiltzaileenErabIzenak = document.querySelectorAll(".tderabizena");
+
+
+    if (erabizena != "") {
+        erabiltzaileenErabIzenak.forEach(item =>{
+            if (erabizena === item.textContent){
+                console.log ("eta hemen sartu da?");
+                alert("Kontuz, erabiltzaile izen hau iada erabiltzen da!");
+                erabizenaInput.value="";
+            }
+        })
+    }    
+}
+
+
+
+//---------------------------------------------------------------------------------------------
+// INSERT GELA MODAL
+//Formulario barruan gelaIzena aldatzean, konprobatu berria iadanik existitzen ez dela.
+//---------------------------------------------------------------------------------------------
+function gelaIzenaAldatuDaInserten() {
+
+    //erabiltzaileak sartutako gelaIzena
+    const gelaIzenaInput = document.querySelector("#izenaGelaGehitu");
+    const gelaIzena = gelaIzenaInput.value;
+    //existitzen diren gelaIzen guztiak
+    const gelaIzenak = document.querySelectorAll(".tdgelaIzena");
+
+
+    if (gelaIzena != "") {
+        gelaIzenak.forEach(item =>{
+            if (gelaIzena === item.textContent){
+                alert("Kontuz, gela izen hau iada erabiltzen da!");
+                gelaIzenaInput.value="";
+            }
+        })
+    }    
+}
+//---------------------------------------------------------------------------------------------
+// UPDATE Gela MODAL
+//Formulario barruan gelaIzena aldatzean, konprobatu berria iadanik existitzen ez dela.
+//---------------------------------------------------------------------------------------------
+function gelaIzenaAldatuDaUpdaten() {
+
+    //erabiltzaileak sartutako gelaIzena
+    const gelaIzenaInput = document.querySelector("#izenaGelaUpdate");
+    const gelaIzena = gelaIzenaInput.value;
+    //existitzen diren gelaIzen guztiak
+    const gelaIzenak = document.querySelectorAll(".tdgelaIzena");
+
+    if (gelaIzena != "") {
+        gelaIzenak.forEach(item =>{
+            if (gelaIzena === item.textContent){
+                alert("Kontuz, gela izen hau iada erabiltzen da!");
+                gelaIzenaInput.value="";
+            }
+        })
+    }    
+}
+
+//---------------------------------------
+// Gela Update formularioa osatu
+//---------------------------------------
+function gelaUpdateDatuakKargatu() {
+    const tr = event.target.closest('tr');
+    const tds = tr.querySelectorAll("td");
+
+    
+    const id = document.querySelector("#idGelaUpdate1");
+    const eraikina = document.querySelector("#idEraikinaGelaUpdate");
+    const izena = document.querySelector("#izenaGelaUpdate");
+    const deskribapena = document.querySelector("#deskribapenaGelaUpdate");
+
+    console.log ("id gela: "+tds[0].textContent );
+
+    id.value = tds[0].textContent;      // ID Gela
+    eraikina.value = tds[1].textContent; // ID Eraikina
+    izena.value = tds[2].textContent;    // Izena
+    deskribapena.value = tds[3].textContent; // Deskribapena
+}
+//---------------------------------------
+// Gela Delete formularioa osatu
+//---------------------------------------
+// function gelaDeleteDatuakKargatu() {
+//     const tr = event.target.closest('tr');
+//     const tds = tr.querySelectorAll("td");
+
+//     const id = document.querySelector("#idErabiltzaileaDelete");
+//     const izena = document.querySelector("#izenaErabDelete");
+//     const abizena = document.querySelector("#abizenaErabDelete");
+//     const erabizena = document.querySelector("#erabizenaErabDelete");
+//     const pasahitza = document.querySelector("#pasahitzaErabDelete");
+//     const rola = document.querySelector("#erabrolaErabDelete");
+
+//     id.value = tds[0].textContent;
+//     izena.value = tds[1].textContent;
+//     abizena.value = tds[2].textContent;
+//     erabizena.value = tds[3].textContent;
+//     pasahitza.value = "*********";
+//     rola.value = tds[4].textContent;
+// }

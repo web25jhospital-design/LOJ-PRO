@@ -8,7 +8,7 @@ import com.imaltuna.geks.model.Gela;
 
 
 @Repository // Spring-i esaten dio klase honek datu-basearekin komunikazioa kudeatzen duela
-public interface GelaRepository extends JpaRepository<Gela, Long> {
+public interface GelaRepository extends JpaRepository<Gela, Integer> {
 
    
     /* Hemen ez dugu metodorik idatzi behar momentuz.

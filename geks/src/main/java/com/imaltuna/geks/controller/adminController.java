@@ -16,6 +16,7 @@ import com.imaltuna.geks.model.Erabiltzailea;
 import com.imaltuna.geks.model.GailuEgoera;
 import com.imaltuna.geks.model.GailuElektronikoa;
 import com.imaltuna.geks.model.GailuTaulaGaurEgun;
+import com.imaltuna.geks.model.Gela;
 import com.imaltuna.geks.model.Kudeatu;
 import com.imaltuna.geks.repository.EgonRepository;
 import com.imaltuna.geks.repository.ErabiltzaileaRepository;
@@ -68,6 +69,7 @@ public class adminController {
         // Datu-baseko eraikin guztiak zerrenda batean lortu eta HTMLra pasatu
         // HTML-an "eraikinak" erabiliko dugu (th:each bidez normalean)
         model.addAttribute("eraikina", eraikinaRepository.findAll()); // ✪ OXEL
+        // model.addAttribute("eraikinIDak", eraikinaRepository.findDistinctID)
 
         // GailuElektronikoak
         model.addAttribute("gailuak", gailuelektronikoaRepository.findAll());
@@ -129,7 +131,7 @@ public class adminController {
     // --------------------------------------------------------------
     // GailuElektronikoa Gehitu INSERT
     // --------------------------------------------------------------
-    @PostMapping("/admin")
+    @PostMapping("/gailua/gehitu")
     public String sortuGailua(@ModelAttribute GailuElektronikoa gailuBerria, HttpSession session) {
 
         // Logeatutako erabiltzailea lortu SQLari pasatzeko:
@@ -149,7 +151,7 @@ public class adminController {
     // --------------------------------------------------------------
     // GailuElektronikoa Aldatu UPDATE
     // --------------------------------------------------------------
-    @PostMapping("/admin/update")
+    @PostMapping("/gailua/update")
     public String aldatuGailua(@ModelAttribute GailuTaulaGaurEgun gailua, HttpSession session) {
         boolean amaieraFetxaHutsik = false;
         boolean gelaAldatu = false;
@@ -228,11 +230,11 @@ public class adminController {
     }
 
     // --------------------------------------------------------------
-    // GailuElektronikoa Ezabatu UPDATE
+    // GailuElektronikoa Ezabatu DELETE
     // --------------------------------------------------------------
     // Gailua ez da ezabatuko, update bat egingo da baja data sartuaz eta egoera
     // bajan jarriaz.
-    @PostMapping("/admin/delete")
+    @PostMapping("/gailua/delete")
     public String ezabatuGailua(@ModelAttribute GailuTaulaGaurEgun gailua, HttpSession session) {
 
         // Logeatutako erabiltzailea lortu SQLari pasatzeko:
@@ -260,5 +262,124 @@ public class adminController {
         return "redirect:/admin";
 
     }
+
+    // --------------------------------------------------------------
+    // Erabiltzailea Gehitu INSERT
+    // --------------------------------------------------------------
+    @PostMapping("/erabiltzailea/gehitu")
+    public String sortuErabiltzailea(@ModelAttribute Erabiltzailea erabBerria, HttpSession session) {
+
+        // Logeatutako erabiltzailea lortu SQLari pasatzeko:
+        Erabiltzailea erabiltzailea = (Erabiltzailea) session.getAttribute("logeatutakoErab");
+        // MySQL-ko sesio aldagaia ezarri
+        jdbcTemplate.execute("SET @erabiltzailea = '" + erabiltzailea.getIdErabiltzailea() + "'");
+
+
+        // AltaData automatikoa momentukoa jarri
+        erabBerria.setAltaData(new Date());
+        // null hasieran
+        // gailuBerria.setBajaData(null);
+        
+
+        erabiltzaileaRepository.save(erabBerria);
+        return "redirect:/admin"; // Orria freskatu
+    }
+
+    
+
+    // --------------------------------------------------------------
+    // Erabiltzailea Aldatu UPDATE
+    // --------------------------------------------------------------
+    @PostMapping("/erabiltzailea/update")
+    public String updateErabiltzailea(@ModelAttribute Erabiltzailea erabBerria, HttpSession session) {
+
+        // Logeatutako erabiltzailea lortu SQLari pasatzeko:
+        Erabiltzailea erabiltzailea = (Erabiltzailea) session.getAttribute("logeatutakoErab");
+        // MySQL-ko sesio aldagaia ezarri
+        jdbcTemplate.execute("SET @erabiltzailea = '" + erabiltzailea.getIdErabiltzailea() + "'");
+
+       // Erabiltzailea taulan erabiltzailea aurkitu:
+        Erabiltzailea datubasekoErabiltzailea = erabiltzaileaRepository.findById(erabBerria.getIdErabiltzailea())
+                .orElseThrow(() -> new RuntimeException("Erabiltzailea ez da aurkitu ID: " + erabBerria.getIdErabiltzailea()));
+
+        // Pasahitza aldatu den konprobatu:
+        if (!erabBerria.getPasahitza().equals("*********")){
+            datubasekoErabiltzailea.setPasahitza(erabBerria.getPasahitza());
+        }
+        datubasekoErabiltzailea.setIzena(erabBerria.getIzena());
+        datubasekoErabiltzailea.setAbizena(erabBerria.getAbizena());
+        datubasekoErabiltzailea.setErabiltzaileIzena(erabBerria.getErabiltzaileIzena());
+        datubasekoErabiltzailea.setErabiltzaileRola(erabBerria.getErabiltzaileRola());
+        
+
+        erabiltzaileaRepository.save(datubasekoErabiltzailea);
+        return "redirect:/admin"; // Orria freskatu
+    }
+
+
+    // --------------------------------------------------------------
+    // Erabiltzailea Ezabatu DELETE
+    // --------------------------------------------------------------
+    @PostMapping("/erabiltzailea/delete")
+    public String ezabatuErabiltzailea(@ModelAttribute Erabiltzailea erabBerria, HttpSession session) {
+
+        // Logeatutako erabiltzailea lortu SQLari pasatzeko:
+        Erabiltzailea erabiltzailea = (Erabiltzailea) session.getAttribute("logeatutakoErab");
+        // MySQL-ko sesio aldagaia ezarri
+        jdbcTemplate.execute("SET @erabiltzailea = '" + erabiltzailea.getIdErabiltzailea() + "'");
+
+
+        // Erabiltzailea taulan erabiltzailea aurkitu:
+        Erabiltzailea datubasekoErabiltzailea = erabiltzaileaRepository.findById(erabBerria.getIdErabiltzailea())
+                .orElseThrow(() -> new RuntimeException("Erabiltzailea ez da aurkitu ID: " + erabBerria.getIdErabiltzailea()));
+
+        // Erabiltzailea prestatu baja emateko:
+        datubasekoErabiltzailea.setBajaData(new Date());
+        
+
+        erabiltzaileaRepository.save(datubasekoErabiltzailea);
+        return "redirect:/admin"; // Orria freskatu
+    }
+
+    // --------------------------------------------------------------
+    // Gela Gehitu INSERT
+    // --------------------------------------------------------------
+    @PostMapping("/gela/gehitu")
+    public String sortuGela(@ModelAttribute Gela gelaBerria, HttpSession session) {
+
+        // Logeatutako erabiltzailea lortu SQLari pasatzeko:
+        Erabiltzailea erabiltzailea = (Erabiltzailea) session.getAttribute("logeatutakoErab");
+        // MySQL-ko sesio aldagaia ezarri
+        jdbcTemplate.execute("SET @erabiltzailea = '" + erabiltzailea.getIdErabiltzailea() + "'");
+        
+
+        gelaRepository.save(gelaBerria);
+        return "redirect:/admin"; // Orria freskatu
+    }
+
+    // --------------------------------------------------------------
+    // Gela Aldatu INSERT
+    // --------------------------------------------------------------
+    @PostMapping("/gela/update")
+    public String aldatuGela(@ModelAttribute Gela gelaBerria, HttpSession session) {
+
+        // Logeatutako erabiltzailea lortu SQLari pasatzeko:
+        Erabiltzailea erabiltzailea = (Erabiltzailea) session.getAttribute("logeatutakoErab");
+        // MySQL-ko sesio aldagaia ezarri
+        jdbcTemplate.execute("SET @erabiltzailea = '" + erabiltzailea.getIdErabiltzailea() + "'");
+
+        // Gela taulan gela aurkitu:
+        Gela datubasekoGela = gelaRepository.findById(gelaBerria.getIdGela())
+                .orElseThrow(() -> new RuntimeException("Gela ez da aurkitu ID: " + gelaBerria.getIdGela()));
+        
+
+        datubasekoGela.setIdEraikina(gelaBerria.getIdEraikina());
+        datubasekoGela.setIzena(gelaBerria.getIzena());
+        datubasekoGela.setDeskribapena(gelaBerria.getDeskribapena());
+        gelaRepository.save(datubasekoGela);
+        return "redirect:/admin"; // Orria freskatu
+    }
+
+
 
 }

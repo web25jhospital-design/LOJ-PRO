@@ -350,7 +350,7 @@
                                             onclick="gailuUpdateDatuakKargatu()"><i
                                                 class="bi bi-pencil-square text-primary fs-5 fw-bold"></i></Button>
                                         <Button class="btn p-1" id="${gailua.idGailua}" type="button" data-bs-toggle="modal"
-                                            data-bs-target="#gailuDelete " th:if="${gailua.bajaData == null}"
+                                            data-bs-target="#gailuDelete" th:if="${gailua.bajaData == null}"
                                             onclick="gailuDeleteGatuakKargatu()"><i
                                                 class="bi bi-trash text-danger fs-5 fw-bold"></i></Button>
                                     </td>
@@ -373,7 +373,8 @@
                                 <p class="navbar-text">Eraikinen kudeaketa</p>
                             </div>
                             <div>
-                                <button class="gehiBotoia btn btn-outline-light" type="button">
+                                <button class="gehiBotoia btn btn-outline-light" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#gelaBerria">
                                     <p>+</p>
                                     <p>Gehitu</p>
                                 </button>
@@ -426,7 +427,8 @@
                                 <p class="navbar-text">Gelen kudeaketa</p>
                             </div>
                             <div>
-                                <button class="gehiBotoia btn btn-outline-light" type="button">
+                                <button class="gehiBotoia btn btn-outline-light" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#gelaBerria">
                                     <p>+</p>
                                     <p>Gehitu</p>
                                 </button>
@@ -466,12 +468,14 @@
                                 <tr th:each="gela : ${gelak}">
                                     <td class="tdIdGelaGelaTaula" th:text="${gela.idGela}"></td>
                                     <td th:text="${gela.idEraikina}"></td>
-                                    <td th:text="${gela.izena}"></td>
+                                    <td class="tdgelaIzena" th:text="${gela.izena}"></td>
                                     <td th:text="${gela.deskribapena}"></td>
                                     <td>
-                                        <Button class="btn p-1" type="button"><i
+                                        <Button class="btn p-1" type="button" data-bs-toggle="modal"
+                                            data-bs-target="#gelaUpdate" onclick="gelaUpdateDatuakKargatu()"><i
                                                 class="bi bi-pencil-square text-primary fs-5 fw-bold"></i></Button>
-                                        <Button class="btn p-1" type="button"><i
+                                        <Button class="btn p-1" type="button" data-bs-toggle="modal"
+                                            data-bs-target="#gelaDelete" onclick="gelaDeleteGatuakKargatu()"><i
                                                 class="bi bi-trash text-danger fs-5 fw-bold"></i></Button>
                                     </td>
                                 </tr>
@@ -493,7 +497,8 @@
                                 <p class="navbar-text">Erabiltzaileen kudeaketa</p>
                             </div>
                             <div>
-                                <button class="gehiBotoia btn btn-outline-light" type="button">
+                                <button class="gehiBotoia btn btn-outline-light" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#erabiltzaileBerria">
                                     <p>+</p>
                                     <p>Gehitu</p>
                                 </button>
@@ -521,14 +526,19 @@
                                     <td th:text="${erabiltzailea.idErabiltzailea}"></td>
                                     <td th:text="${erabiltzailea.izena}"></td>
                                     <td th:text="${erabiltzailea.abizena}"></td>
-                                    <td th:text="${erabiltzailea.erabiltzaileIzena}"></td>
+                                    <td class="tderabizena" th:text="${erabiltzailea.erabiltzaileIzena}"></td>
                                     <td class="tdRola" th:text="${erabiltzailea.erabiltzaileRola}"></td>
                                     <td th:text="${erabiltzailea.altaData}"></td>
                                     <td th:text="${erabiltzailea.bajaData}"></td>
                                     <td>
-                                        <Button class="btn p-1" type="button"><i
+                                        <Button class="btn p-1" type="button"  data-bs-toggle="modal"
+                                                data-bs-target="#erabiltzaileUpdate"  
+                                                th:if="${erabiltzailea.bajaData == null}"
+                                                onclick="erabiltzaileaUpdateDatuakKargatu()"><i
                                                 class="bi bi-pencil-square text-primary fs-5 fw-bold"></i></Button>
-                                        <Button class="btn p-1" type="button"><i
+                                        <Button class="btn p-1" type="button"  data-bs-toggle="modal"
+                                                data-bs-target="#erabiltzaileDelete"  
+                                                th:if="${erabiltzailea.bajaData == null}" onclick="erabiltzaileaDeleteDatuakKargatu()"><i
                                                 class="bi bi-trash text-danger fs-5 fw-bold"></i></Button>
                                     </td>
                                 </tr>
@@ -582,7 +592,7 @@
                                     </select>
                                 </div>
                                 <div class="col-12 col-lg-3">
-                                    <label for="selektKudeaketaMota" class="form-label fw-semibold">Kuadeta Mota</label>
+                                    <label for="selektKudeaketaMota" class="form-label fw-semibold">Kudeaketa Mota</label>
                                     <select id="selektKudeaketaMota" class="form-select"
                                         aria-label="Default select example">
                                         <option selected>Guztiak</option>
@@ -690,7 +700,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form class="row g-3 needs-validation" action="/admin" method="post" novalidate>
+                        <form class="row g-3 needs-validation" action="/gailua/gehitu" method="post" novalidate>
                             <div class="col-md-12">
                                 <label for="markaGailuaSortu" class="form-label fw-semibold">Marka</label>
                                 <input type="text" class="form-control" id="markaGailuaSortu" name="marka" required>
@@ -761,14 +771,13 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form class="row g-3 needs-validation" action="/admin/update" method="post" novalidate>
+                        <form class="row g-3 needs-validation" action="/gailua/update" method="post" novalidate>
                             <div class="col-md-6">
                                 <label for="idGailuaUpdate" class="form-label fw-semibold">Id Gailua</label>
                                 <input type="text" class="form-control" id="idGailuaUpdate" name="idGailua" style="background-color:  rgb(248, 249, 250);" readonly>
                             </div>
                             <div class="col-md-6 align-content-end">
-                                <!-- <button class="btn" type="submit" id="gailuaAltaBotoia" disabled
-                                    style="width: 100%; background-color: #1e3a8a; border-color: #1e3a8a; color: white;">Berriz Alta Eman</button> -->
+                                <!-- TARTIE LAGA BISUALKI TXUKUNAU GERAU DAIXEN -->
                             </div>
                             <div class="col-md-6">
                                 <label for="markaGailuaUpdate" class="form-label fw-semibold">Marka</label>
@@ -833,14 +842,13 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form class="row g-3 needs-validation" action="/admin/delete" method="post" novalidate>
+                        <form class="row g-3 needs-validation" action="/gailua/delete" method="post" novalidate>
                             <div class="col-md-6">
                                 <label for="idGailuaDelete" class="form-label fw-semibold">Id Gailua</label>
                                 <input type="text" class="form-control" id="idGailuaDelete" name="idGailua" style="background-color:  rgb(248, 249, 250);" readonly>
                             </div>
                             <div class="col-md-6 align-content-end">
-                                <!-- <button class="btn" type="submit" id="gailuaAltaBotoia" disabled
-                                    style="width: 100%; background-color: #1e3a8a; border-color: #1e3a8a; color: white;">Berriz Alta Eman</button> -->
+                                <!-- TARTIE LAGA BISUALKI TXUKUNAU GERAU DAIXEN -->
                             </div>
                             <div class="col-md-6">
                                 <label for="markaGailuaDelete" class="form-label fw-semibold">Marka</label>
@@ -885,96 +893,337 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
-
-        <!-- Modal -->
-        <!-- <div class="modal fade" id="gailuDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header" style="background-color: #1e3a8a; color: white;">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Gailu Elektronikoa Ezabatu</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form class="row g-3 needs-validation" action="/admin" method="post" novalidate>
-                            <div class="col-md-6">
-                                <label for="idGailuaDelete" class="form-label fw-semibold">Id Gailua</label>
-                                <input type="text" class="form-control bg-secondary-subtle" id="idGailuaDelete" name="idGailua" 
-                                    readonly placeholder="kuku">
-                            </div>
-                            <button class="btn col-md-6" type="submit" id="btnEzabatuGaiua"
-                                    style="background-color: #1e3a8a; border-color: #1e3a8a; color: white;"
-                                    data-bs-toggle="modal" data-bs-target=".modalZiur" >Alta eman</button>
-                            <div class="col-md-6">
-                                <label for="markaGailuaDelete" class="form-label fw-semibold">Marka</label>
-                                <input type="text" class="form-control bg-secondary-subtle" id="markaGailuaDelete" name="marka" 
-                                    readonly placeholder="kuku">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="modeloaGailuaDelete" class="form-label fw-semibold">Modeloa</label>
-                                <input type="text" class="form-control bg-secondary-subtle" id="modeloaGailuaDelete" name="modeloa" 
-                                    readonly placeholder="kuku">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="serieZenbGailuaDelete" class="form-label fw-semibold">Serie Zenb</label>
-                                <input type="text" class="form-control bg-secondary-subtle" id="serieZenbGailuaDelete" name="serieZenb"
-                                     readonly placeholder="kuku">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="motaGailuaDelete" class="form-label fw-semibold">Gailu Mota</label>
-                                <input type="text" class="form-control bg-secondary-subtle" id="motaGailuaDelete" name="mota" 
-                                    readonly placeholder="kuku">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="egoeraGailuaDelete" class="form-label fw-semibold">Egoera</label>
-                                <input type="text" class="form-control bg-secondary-subtle" id="egoeraGailuaDelete" name="mota" 
-                                    readonly placeholder="kuku">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="idGelaDelete" class="form-label fw-semibold">ID Gela</label>
-                                <input type="text" class="form-control bg-secondary-subtle" id="idGelaDelete" name="idGela" 
-                                    readonly placeholder="kuku">
-                            </div>
-                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Itxi</button>
-                                <button class="btn" type="submit" id="btnEzabatuGaiua"
-                                    style="background-color: #1e3a8a; border-color: #1e3a8a; color: white;"
-                                    data-bs-toggle="modal" data-bs-target=".modalZiur">Ezabatu</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div> -->
         <!----------------------------------------------------------------------------------------------------------->
         <!--                                         GAILUA DELETE MODAL AMAIERA                                   -->
         <!----------------------------------------------------------------------------------------------------------->
 
 
-
-        <div class="modal modalZiur" tabindex="-1">
+        <!----------------------------------------------------------------------------------------------------------->
+        <!--                                      ERABILTZAILEA INSERT MODAL                                       -->
+        <!----------------------------------------------------------------------------------------------------------->
+        <!-- Modal -->
+        <div class="modal fade" id="erabiltzaileBerria" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">GKS - Gailuak ezabatu</h5>
+                    <div class="modal-header" style="background-color: #1e3a8a; color: white;">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Erabiltzailea Gehitu</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p>Ziur gailua ezabatu nahi duzula?</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <form class="row g-3 needs-validation" action="/erabiltzailea/gehitu" method="post" novalidate>
+                            <div class="col-md-12">
+                                <label for="izenaErabGehitu" class="form-label fw-semibold">Izena</label>
+                                <input type="text" class="form-control" id="izenaErabGehitu" name="izena" required>
+                                <div class="valid-feedback">
+                                    Ok!
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="abizenaErabGehitu" class="form-label fw-semibold">Abizena</label>
+                                <input type="text" class="form-control" id="abizenaErabGehitu" name="abizena" required>
+                                <div class="valid-feedback">
+                                    Ok!
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="erabizenaErabGehitu" class="form-label fw-semibold">Erabiltzaile Izena</label>
+                                <input type="text" class="form-control" id="erabizenaErabGehitu" name="erabiltzaileIzena"
+                                    required onchange="erabIzenaAldatuDaInserten()">
+                                <div class="valid-feedback">
+                                    Ok!
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="pasahitzaErabGehitu" class="form-label fw-semibold">Pasahitza</label>
+                                <input type="password" class="form-control" id="pasahitzaErabGehitu" name="pasahitza"
+                                    required>
+                                <div class="valid-feedback">
+                                    Ok!
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="erabrolaErabGehitu" class="form-label fw-semibold">Egoera</label>
+                                <select class="form-select" id="erabrolaErabGehitu" name="erabiltzaileRola" required onchange="gailuEgoeraAldatuDa()" >
+                                    <option selected value="">Aukeratu...</option>
+                                    <option>admin</option>
+                                    <option>arrunta</option>
+                                </select>
+                            </div>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Irten</button>
+                                <button class="btn" type="submit"
+                                    style="background-color: #1e3a8a; border-color: #1e3a8a; color: white;">Onartu</button>
+                            </div>
+                            
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+        <!----------------------------------------------------------------------------------------------------------->
+        <!--                                         ERABILTZAILEA INSERT MODAL AMAIERA                            -->
+        <!----------------------------------------------------------------------------------------------------------->
 
+
+
+        <!----------------------------------------------------------------------------------------------------------->
+        <!--                                         ERABILTZAILEA UPDATE MODAL                                    -->
+        <!----------------------------------------------------------------------------------------------------------->
+
+        <!-- Modal -->
+        <div class="modal fade" id="erabiltzaileUpdate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #1e3a8a; color: white;">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Erabiltzailea Aldatu</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="row g-3 needs-validation" action="/erabiltzailea/update" method="post" novalidate>
+                            <div class="col-md-6">
+                                <label for="idErabiltzaileaUpdate" class="form-label fw-semibold">Id Gailua</label>
+                                <input type="text" class="form-control" id="idErabiltzaileaUpdate" name="idErabiltzailea" style="background-color:  rgb(248, 249, 250);" readonly>
+                            </div>
+                            <div class="col-md-6 align-content-end">
+                                <!-- TARTIE LAGA BISUALKI TXUKUNAU GERAU DAIXEN -->
+                            </div>
+                            <div class="col-md-6">
+                                <label for="izenaErabUpdate" class="form-label fw-semibold">Izena</label>
+                                <input type="text" class="form-control" id="izenaErabUpdate" name="izena" required>
+                                <div class="valid-feedback">
+                                    Ok!
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="abizenaErabUpdate" class="form-label fw-semibold">Abizena</label>
+                                <input type="text" class="form-control" id="abizenaErabUpdate" name="abizena" required>
+                                <div class="valid-feedback">
+                                    Ok!
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="erabizenaErabUpdatu" class="form-label fw-semibold">Erabiltzaile Izena</label>
+                                <input type="text" class="form-control" id="erabizenaErabUpdatu" name="erabiltzaileIzena"
+                                    required onchange="erabIzenaAldatuDaUpdaten()">
+                                <div class="valid-feedback">
+                                    Ok!
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="pasahitzaErabUpdate" class="form-label fw-semibold">Pasahitza</label>
+                                <input type="password" class="form-control" id="pasahitzaErabUpdate" name="pasahitza"
+                                    required>
+                                <div class="valid-feedback">
+                                    Ok!
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="erabrolaErabUpdate" class="form-label fw-semibold">Egoera</label>
+                                <select class="form-select" id="erabrolaErabUpdate" name="erabiltzaileRola" required>
+                                    <option selected value="">Aukeratu...</option>
+                                    <option>admin</option>
+                                    <option>arrunta</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 align-content-end">
+                                <!-- TARTIE LAGA BISUALKI TXUKUNAU GERAU DAIXEN -->
+                            </div>
+                            <div class="col-md-6">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100%;">Irten</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn" type="submit"
+                                    style="background-color: #1e3a8a; border-color: #1e3a8a; color: white; width: 100%">Aldatu</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!----------------------------------------------------------------------------------------------------------->
+        <!--                                         ERABILTZAILEA UPDATE MODAL AMAIERA                                   -->
+        <!----------------------------------------------------------------------------------------------------------->
+
+
+        <!----------------------------------------------------------------------------------------------------------->
+        <!--                                         ERABILTZAILEA DELETE MODAL                                           -->
+        <!----------------------------------------------------------------------------------------------------------->
+
+        <!-- Modal -->
+        <div class="modal fade" id="erabiltzaileDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #1e3a8a; color: white;">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Erabiltzailea Ezabatu</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="row g-3 needs-validation" action="/erabiltzailea/delete" method="post" novalidate>
+                            <div class="col-md-6">
+                                <label for="idErabiltzaileaDelete" class="form-label fw-semibold">Id Gailua</label>
+                                <input type="text" class="form-control" id="idErabiltzaileaDelete" name="idErabiltzailea" style="background-color:  rgb(248, 249, 250);" readonly>
+                            </div>
+                            <div class="col-md-6 align-content-end">
+                                <!-- TARTIE LAGA BISUALKI TXUKUNAU GERAU DAIXEN -->
+                            </div>
+                            <div class="col-md-6">
+                                <label for="izenaErabDelete" class="form-label fw-semibold">Izena</label>
+                                <input type="text" class="form-control" id="izenaErabDelete" name="izena" style="background-color:  rgb(248, 249, 250);" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="abizenaErabDelete" class="form-label fw-semibold">Abizena</label>
+                                <input type="text" class="form-control" id="abizenaErabDelete" name="abizena" style="background-color:  rgb(248, 249, 250);" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="erabizenaErabDelete" class="form-label fw-semibold">Erabiltzaile Izena</label>
+                                <input type="text" class="form-control" id="erabizenaErabDelete" name="erabiltzaileIzena"
+                                     style="background-color:  rgb(248, 249, 250);" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="pasahitzaErabDelete" class="form-label fw-semibold">Pasahitza</label>
+                                <input type="password" class="form-control" id="pasahitzaErabDelete" name="pasahitza"
+                                     style="background-color:  rgb(248, 249, 250);">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="erabrolaErabDelete" class="form-label fw-semibold">Egoera</label>
+                                <select class="form-select" id="erabrolaErabDelete" name="erabiltzaileRola" style="background-color:  rgb(248, 249, 250);" readonly onchange="gailuEgoeraAldatuDa()" >
+                                    <option selected value="">Aukeratu...</option>
+                                    <option>admin</option>
+                                    <option>arrunta</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 align-content-end">
+                                <!-- TARTIE LAGA BISUALKI TXUKUNAU GERAU DAIXEN -->
+                            </div>
+                            <div class="col-md-6">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="width: 100%;">Irten</button>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn" type="submit"
+                                    style="background-color: #1e3a8a; border-color: #1e3a8a; color: white; width: 100%">Baja Eman</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!----------------------------------------------------------------------------------------------------------->
+        <!--                                         ERABILTZAILEA DELETE MODAL AMAIERA                                   -->
+        <!----------------------------------------------------------------------------------------------------------->
+
+        <!----------------------------------------------------------------------------------------------------------->
+        <!--                                      GELA INSERT MODAL                                       -->
+        <!----------------------------------------------------------------------------------------------------------->
+        <!-- Modal -->
+        <div class="modal fade" id="gelaBerria" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #1e3a8a; color: white;">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Gela Gehitu</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="row g-3 needs-validation" action="/gela/gehitu" method="post" novalidate>
+                            <div class="col-md-12">
+                                <label for="izenaGelaGehitu" class="form-label fw-semibold">Izena</label>
+                                <input type="text" class="form-control" id="izenaGelaGehitu" name="izena" required
+                                        onchange="gelaIzenaAldatuDaInserten()">
+                                <div class="valid-feedback">
+                                    Ok!
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="deskribapenaGelaGehitu" class="form-label fw-semibold">Deskribapena</label>
+                                <input type="text" class="form-control" id="deskribapenaGelaGehitu" name="deskribapena" required>
+                                <div class="valid-feedback">
+                                    Ok!
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="idEraikinaGelaGehitu" class="form-label fw-semibold">Eraikina</label>
+                                <select class="form-select" id="idEraikinaGelaGehitu" name="idEraikina" required>
+                                    <option selected value="" >Aukeratu...</option>
+                                    <option th:each="e : ${eraikina}" th:value="${e.idEraikina}" th:text="${e.idEraikina}"></option>
+                                </select>
+                            </div>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Irten</button>
+                                <button class="btn" type="submit"
+                                    style="background-color: #1e3a8a; border-color: #1e3a8a; color: white;">Onartu</button>
+                            </div>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!----------------------------------------------------------------------------------------------------------->
+        <!--                                         GELA INSERT MODAL AMAIERA                            -->
+        <!----------------------------------------------------------------------------------------------------------->
+
+        <!----------------------------------------------------------------------------------------------------------->
+        <!--                                      GELA UPDATE MODAL                                       -->
+        <!----------------------------------------------------------------------------------------------------------->
+        <!-- Modal -->
+        <div class="modal fade" id="gelaUpdate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #1e3a8a; color: white;">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Gela Aldatu</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="row g-3 needs-validation" action="/gela/update" method="post" novalidate>
+                            <div class="col-md-6">
+                                <label for="idGelaUpdate1" class="form-label fw-semibold">Id Gela</label>
+                                <input type="text" class="form-control" id="idGelaUpdate1" name="idGela" style="background-color:  rgb(248, 249, 250);" readonly>
+                            </div>
+                            <div class="col-md-6 align-content-end">
+                                <!-- TARTIE LAGA BISUALKI TXUKUNAU GERAU DAIXEN -->
+                            </div>
+                            <div class="col-md-12">
+                                <label for="izenaGelaUpdate" class="form-label fw-semibold">Izena</label>
+                                <input type="text" class="form-control" id="izenaGelaUpdate" name="izena" required
+                                        onchange="gelaIzenaAldatuDaUpdaten()">
+                                <div class="valid-feedback">
+                                    Ok!
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="deskribapenaGelaUpdate" class="form-label fw-semibold">Deskribapena</label>
+                                <input type="text" class="form-control" id="deskribapenaGelaUpdate" name="deskribapena" required>
+                                <div class="valid-feedback">
+                                    Ok!
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="idEraikinaGelaUpdate" class="form-label fw-semibold">Eraikina</label>
+                                <select class="form-select" id="idEraikinaGelaUpdate" name="idEraikina" required>
+                                    <option selected value="" >Aukeratu...</option>
+                                    <option th:each="e : ${eraikina}" th:value="${e.idEraikina}" th:text="${e.idEraikina}"></option>
+                                </select>
+                            </div>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Irten</button>
+                                <button class="btn" type="submit"
+                                    style="background-color: #1e3a8a; border-color: #1e3a8a; color: white;">Onartu</button>
+                            </div>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!----------------------------------------------------------------------------------------------------------->
+        <!--                                         GELA UPDATE MODAL AMAIERA                            -->
+        <!----------------------------------------------------------------------------------------------------------->
 
 
 
