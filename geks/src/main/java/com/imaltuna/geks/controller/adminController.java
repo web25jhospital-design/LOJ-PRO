@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.imaltuna.geks.model.Egon;
 import com.imaltuna.geks.model.Erabiltzailea;
+import com.imaltuna.geks.model.Eraikina;
 import com.imaltuna.geks.model.GailuEgoera;
 import com.imaltuna.geks.model.GailuElektronikoa;
 import com.imaltuna.geks.model.GailuTaulaGaurEgun;
@@ -395,6 +396,20 @@ public class adminController {
         }
         // gela ezabatu datu basetik.
         gelaRepository.deleteById(gelaBerria.getIdGela());
+        return "redirect:/admin"; // Orria freskatu
+    }
+    // --------------------------------------------------------------
+    // Eraikina Gehitu INSERT
+    // --------------------------------------------------------------
+    @PostMapping("/eraikina/gehitu")
+    public String sortuGela(@ModelAttribute Eraikina eraikinBerria, HttpSession session) {
+
+        // Logeatutako erabiltzailea lortu SQLari pasatzeko:
+        Erabiltzailea erabiltzailea = (Erabiltzailea) session.getAttribute("logeatutakoErab");
+        // MySQL-ko sesio aldagaia ezarri
+        jdbcTemplate.execute("SET @erabiltzailea = '" + erabiltzailea.getIdErabiltzailea() + "'");
+
+        eraikinaRepository.save(eraikinBerria);
         return "redirect:/admin"; // Orria freskatu
     }
 

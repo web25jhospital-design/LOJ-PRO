@@ -687,3 +687,27 @@ function gelaDeleteDatuakKargatu() {
     izena.value = tds[2].textContent;    // Izena
     deskribapena.value = tds[3].textContent; // Deskribapena
 }
+
+
+//---------------------------------------------------------------------------------------------
+// INSERT ERAIKINA MODAL
+//Formulario barruan gelaIzena aldatzean, konprobatu berria iadanik existitzen ez dela.
+//---------------------------------------------------------------------------------------------
+function idEraikinaAldatuDaInserten() {
+
+    //erabiltzaileak sartutako gelaIzena
+    const eraikinaIdaInput = document.querySelector("#idEraikinaGehitu");
+    const eraikinaIda = eraikinaIdaInput.value;
+    //existitzen diren gelaIzen guztiak
+    const eraikinIdak = document.querySelectorAll(".tdIdEraikina");
+
+
+    if (eraikinaIda != "") {
+        eraikinIdak.forEach(item => {
+            if (eraikinaIda === item.textContent.toLowerCase()) {
+                alert("Kontuz, eraikin ID hau iada erabiltzen da!");
+                eraikinaIdaInput.value = "";
+            }
+        })
+    }
+}

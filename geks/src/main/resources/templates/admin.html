@@ -374,7 +374,7 @@
                             </div>
                             <div>
                                 <button class="gehiBotoia btn btn-outline-light" type="button" data-bs-toggle="modal"
-                                    data-bs-target="#gelaBerria">
+                                    data-bs-target="#eraikinBerria">
                                     <p>+</p>
                                     <p>Gehitu</p>
                                 </button>
@@ -397,7 +397,7 @@
                             </thead>
                             <tbody>
                                 <tr th:each="e : ${eraikina}">
-                                    <td th:text="${e.idEraikina}"></td>
+                                    <td class="tdIdEraikina" th:text="${e.idEraikina}"></td>
                                     <td th:text="${e.izena}"></td>
                                     <td th:text="${e.deskribapena}"></td>
                                     <td>
@@ -1282,6 +1282,57 @@
         <!--                                         GELA DELETE MODAL AMAIERA                            -->
         <!----------------------------------------------------------------------------------------------------------->
 
+
+        <!----------------------------------------------------------------------------------------------------------->
+        <!--                                      ERAIKINA INSERT MODAL                                       -->
+        <!----------------------------------------------------------------------------------------------------------->
+        <!-- Modal -->
+        <div class="modal fade" id="eraikinBerria" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #1e3a8a; color: white;">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Eraikina Gehitu</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="row g-3 needs-validation" action="/eraikina/gehitu" method="post" novalidate>
+                            <div class="col-md-12">
+                                <label for="idEraikinaGehitu" class="form-label fw-semibold">ID</label>
+                                <input type="text" class="form-control" id="idEraikinaGehitu" name="idEraikina" required
+                                        onchange="idEraikinaAldatuDaInserten()">
+                                <div class="valid-feedback">
+                                    Ok!
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="izenaEraikinaGehitu" class="form-label fw-semibold">Izena</label>
+                                <input type="text" class="form-control" id="izenaEraikinaGehitu" name="izena" required>
+                                <div class="valid-feedback">
+                                    Ok!
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="deskribapenaEraikinaGehitu" class="form-label fw-semibold">Deskribapena</label>
+                                <input type="text" class="form-control" id="deskribapenaEraikinaGehitu" name="deskribapena" required>
+                                <div class="valid-feedback">
+                                    Ok!
+                                </div>
+                            </div>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Irten</button>
+                                <button class="btn" type="submit"
+                                    style="background-color: #1e3a8a; border-color: #1e3a8a; color: white;">Onartu</button>
+                            </div>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!----------------------------------------------------------------------------------------------------------->
+        <!--                                         ERAIKINA INSERT MODAL AMAIERA                            -->
+        <!----------------------------------------------------------------------------------------------------------->
 
 </body>
 
