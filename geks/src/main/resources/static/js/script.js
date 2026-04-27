@@ -345,7 +345,7 @@ function bilatuGelaTaulan() {
 
         const errenkadakoEraikina = errenkada.querySelector(".tdEraikina");
         //Eraikina
-        if ((eraikina === "Guztiak" || eraikina === errenkadakoEraikina.textContent)) {
+        if (eraikina === "Guztiak" || eraikina === errenkadakoEraikina.textContent) {
             eraikinaIkusgai = true;
         }
         //Gela gakoa

@@ -377,6 +377,11 @@
                     <div class="card border-light p-3 mb-4 shadow-sm">
                         <form action="">
                             <div class="row">
+                                <div class="col-12 col-lg-3 d-flex flex-column">
+                                    <label for="bilatuGela" class="form-label fw-semibold">Bilatu</label>
+                                    <input id="bilatuGela" class="form-control" type="text" placeholder="Bilatu ...">
+                                    <!-- <i class="bi bi-search"></i> -->
+                                </div>
                                 <div class="col-12 col-lg-3">
                                     <label for="selektEraikina" class="form-label fw-semibold">Eraikina</label>
                                     <select id="selektEraikina" class="form-select" aria-label="Default select example">
@@ -388,7 +393,22 @@
                             </div>
                         </form>
                     </div>
+                    <!-- <div class="card border-light p-3 mb-4 shadow-sm">
+                        <form action="">
+                            <div class="row">
+                                <div class="col-12 col-lg-3">
+                                    <label for="selektEraikina" class="form-label fw-semibold">Eraikina</label>
+                                    <select id="selektEraikina" class="form-select" aria-label="Default select example">
+                                        <option selected>Guztiak</option>
+                                        <option th:each="e : ${eraikina}" th:value="${e.idEraikina}"
+                                            th:text="${e.idEraikina}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div> -->
                     <!-- BILAKETA FORMULARIOA AMAILERA -->
+
                     <!-- Gela TAULA -->
                     <div class="table-responsive bg-white p-3 rounded shadow-sm mb-4">
                         <table id="gelakTaula" class="table table-hover">
@@ -403,7 +423,7 @@
                             <tbody>
                                 <tr th:each="gela : ${gelak}">
                                     <td th:text="${gela.idGela}"></td>
-                                    <td th:text="${gela.idEraikina}"></td>
+                                    <td class="tdEraikina" th:text="${gela.idEraikina}"></td>
                                     <td th:text="${gela.izena}"></td>
                                     <td th:text="${gela.deskribapena}"></td>
                                 </tr>
