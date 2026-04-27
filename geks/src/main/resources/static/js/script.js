@@ -297,11 +297,11 @@ function bilatuGailuaGela() {
 
 
         const errenkadakoGela = errenkada.querySelector(".tdIdGela");
-        //Gailu mota
+        //Gailua ze gelatan
         if (gelaEgonHistorikoan === "Guztiak" || gelaEgonHistorikoan === errenkadakoGela.textContent) {
             gelaIkusgai = true;
         }
-        //Gailu egoera
+        //Gailua bilaketa
         const errenkadakoGailua = errenkada.querySelector(".tdIdGailua");
         if (gailuaEgonHistorikoan === "Guztiak" || gailuaEgonHistorikoan === errenkadakoGailua.textContent) {
             gailuaIkusgai = true;
@@ -314,6 +314,57 @@ function bilatuGailuaGela() {
         }
     });
 }
+
+
+///------------------------------
+// GELA FILTROAK
+//-------------------------------
+
+const eraikinaGelanInput = document.querySelector("#selektEraikina");
+if (eraikinaGelanInput) {
+    eraikinaGelanInput.addEventListener("change", bilatuGelaTaulan);
+}
+const bilatuGelanInput = document.querySelector("#bilatuGela");
+if (bilatuGelanInput) {
+    bilatuGelanInput.addEventListener("input", bilatuGelaTaulan);
+}
+
+function bilatuGelaTaulan() {
+    const eraikina = eraikinaGelanInput.value;
+    const gakoa = bilatuGelanInput.value.toLowerCase();
+
+
+    const errenkadakGelak = document.querySelectorAll("#gelakTaula tbody tr");
+
+
+    //Gailuak taulako errenkada bakoitza aztertu
+    errenkadakGelak.forEach(errenkada => {
+        let eraikinaIkusgai = false;
+        let gakoaIkusgai = false;
+
+
+        const errenkadakoEraikina = errenkada.querySelector(".tdEraikina");
+        //Eraikina
+        if ((eraikina === "Guztiak" || eraikina === errenkadakoEraikina.textContent)) {
+            eraikinaIkusgai = true;
+        }
+        //Gela gakoa
+        const errenkadaTextua = errenkada.innerText.toLowerCase();
+        if (gakoa === null || errenkadaTextua.includes(gakoa)) {
+            gakoaIkusgai = true;
+        }
+
+
+        if (eraikinaIkusgai && gakoaIkusgai) {
+            errenkada.style.display = "";
+        } else {
+            errenkada.style.display = "none";
+        }
+    });
+}
+
+
+
 
 
 
@@ -339,6 +390,13 @@ function bilatuGailuaGela() {
     });
 })();
 
+
+
+
+
+//-------------------------------------------------------------------------------------------------------------
+//------------------------------                  MODAL-EN SCRIPT-AK                 --------------------------
+//-------------------------------------------------------------------------------------------------------------
 
 //--------------------------------
 // Gailua Update formularioa osatu
@@ -514,13 +572,13 @@ function erabIzenaAldatuDaInserten() {
 
 
     if (erabizena != "") {
-        erabiltzaileenErabIzenak.forEach(item =>{
-            if (erabizena === item.textContent){
+        erabiltzaileenErabIzenak.forEach(item => {
+            if (erabizena === item.textContent) {
                 alert("Kontuz, erabiltzaile izen hau iada erabiltzen da!");
-                erabizenaInput.value="";
+                erabizenaInput.value = "";
             }
         })
-    }    
+    }
 }
 //---------------------------------------------------------------------------------------------
 // UPDATE ERABILTZAILEA MODAL
@@ -536,14 +594,14 @@ function erabIzenaAldatuDaUpdaten() {
 
 
     if (erabizena != "") {
-        erabiltzaileenErabIzenak.forEach(item =>{
-            if (erabizena === item.textContent){
-                console.log ("eta hemen sartu da?");
+        erabiltzaileenErabIzenak.forEach(item => {
+            if (erabizena === item.textContent) {
+                console.log("eta hemen sartu da?");
                 alert("Kontuz, erabiltzaile izen hau iada erabiltzen da!");
-                erabizenaInput.value="";
+                erabizenaInput.value = "";
             }
         })
-    }    
+    }
 }
 
 
@@ -562,13 +620,13 @@ function gelaIzenaAldatuDaInserten() {
 
 
     if (gelaIzena != "") {
-        gelaIzenak.forEach(item =>{
-            if (gelaIzena === item.textContent){
+        gelaIzenak.forEach(item => {
+            if (gelaIzena === item.textContent) {
                 alert("Kontuz, gela izen hau iada erabiltzen da!");
-                gelaIzenaInput.value="";
+                gelaIzenaInput.value = "";
             }
         })
-    }    
+    }
 }
 //---------------------------------------------------------------------------------------------
 // UPDATE Gela MODAL
@@ -583,13 +641,13 @@ function gelaIzenaAldatuDaUpdaten() {
     const gelaIzenak = document.querySelectorAll(".tdgelaIzena");
 
     if (gelaIzena != "") {
-        gelaIzenak.forEach(item =>{
-            if (gelaIzena === item.textContent){
+        gelaIzenak.forEach(item => {
+            if (gelaIzena === item.textContent) {
                 alert("Kontuz, gela izen hau iada erabiltzen da!");
-                gelaIzenaInput.value="";
+                gelaIzenaInput.value = "";
             }
         })
-    }    
+    }
 }
 
 //---------------------------------------
@@ -599,13 +657,13 @@ function gelaUpdateDatuakKargatu() {
     const tr = event.target.closest('tr');
     const tds = tr.querySelectorAll("td");
 
-    
+
     const id = document.querySelector("#idGelaUpdate1");
     const eraikina = document.querySelector("#idEraikinaGelaUpdate");
     const izena = document.querySelector("#izenaGelaUpdate");
     const deskribapena = document.querySelector("#deskribapenaGelaUpdate");
 
-    console.log ("id gela: "+tds[0].textContent );
+    console.log("id gela: " + tds[0].textContent);
 
     id.value = tds[0].textContent;      // ID Gela
     eraikina.value = tds[1].textContent; // ID Eraikina
@@ -615,21 +673,17 @@ function gelaUpdateDatuakKargatu() {
 //---------------------------------------
 // Gela Delete formularioa osatu
 //---------------------------------------
-// function gelaDeleteDatuakKargatu() {
-//     const tr = event.target.closest('tr');
-//     const tds = tr.querySelectorAll("td");
+function gelaDeleteDatuakKargatu() {
+    const tr = event.target.closest('tr');
+    const tds = tr.querySelectorAll("td");
 
-//     const id = document.querySelector("#idErabiltzaileaDelete");
-//     const izena = document.querySelector("#izenaErabDelete");
-//     const abizena = document.querySelector("#abizenaErabDelete");
-//     const erabizena = document.querySelector("#erabizenaErabDelete");
-//     const pasahitza = document.querySelector("#pasahitzaErabDelete");
-//     const rola = document.querySelector("#erabrolaErabDelete");
+    const id = document.querySelector("#idGelaDelete1");
+    const eraikina = document.querySelector("#idEraikinaGelaDelete");
+    const izena = document.querySelector("#izenaGelaDelete");
+    const deskribapena = document.querySelector("#deskribapenaGelaDelete");
 
-//     id.value = tds[0].textContent;
-//     izena.value = tds[1].textContent;
-//     abizena.value = tds[2].textContent;
-//     erabizena.value = tds[3].textContent;
-//     pasahitza.value = "*********";
-//     rola.value = tds[4].textContent;
-// }
+    id.value = tds[0].textContent;      // ID Gela
+    eraikina.value = tds[1].textContent; // ID Eraikina
+    izena.value = tds[2].textContent;    // Izena
+    deskribapena.value = tds[3].textContent; // Deskribapena
+}

@@ -440,6 +440,11 @@
                     <div class="card border-light p-3 mb-4 shadow-sm">
                         <form action="">
                             <div class="row">
+                                <div class="col-12 col-lg-3 d-flex flex-column">
+                                    <label for="bilatuGela" class="form-label fw-semibold">Bilatu</label>
+                                    <input id="bilatuGela" class="form-control" type="text" placeholder="Bilatu ...">
+                                    <!-- <i class="bi bi-search"></i> -->
+                                </div>
                                 <div class="col-12 col-lg-3">
                                     <label for="selektEraikina" class="form-label fw-semibold">Eraikina</label>
                                     <select id="selektEraikina" class="form-select" aria-label="Default select example">
@@ -467,7 +472,7 @@
                             <tbody>
                                 <tr th:each="gela : ${gelak}">
                                     <td class="tdIdGelaGelaTaula" th:text="${gela.idGela}"></td>
-                                    <td th:text="${gela.idEraikina}"></td>
+                                    <td class="tdEraikina" th:text="${gela.idEraikina}"></td>
                                     <td class="tdgelaIzena" th:text="${gela.izena}"></td>
                                     <td th:text="${gela.deskribapena}"></td>
                                     <td>
@@ -475,7 +480,7 @@
                                             data-bs-target="#gelaUpdate" onclick="gelaUpdateDatuakKargatu()"><i
                                                 class="bi bi-pencil-square text-primary fs-5 fw-bold"></i></Button>
                                         <Button class="btn p-1" type="button" data-bs-toggle="modal"
-                                            data-bs-target="#gelaDelete" onclick="gelaDeleteGatuakKargatu()"><i
+                                            data-bs-target="#gelaDelete" onclick="gelaDeleteDatuakKargatu()"><i
                                                 class="bi bi-trash text-danger fs-5 fw-bold"></i></Button>
                                     </td>
                                 </tr>
@@ -1225,6 +1230,57 @@
         <!--                                         GELA UPDATE MODAL AMAIERA                            -->
         <!----------------------------------------------------------------------------------------------------------->
 
+        <!----------------------------------------------------------------------------------------------------------->
+        <!--                                      GELA DELETE MODAL                                       -->
+        <!----------------------------------------------------------------------------------------------------------->
+        <!-- Modal -->
+        <div class="modal fade" id="gelaDelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: #1e3a8a; color: white;">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Gela Ezabatu</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="row g-3 needs-validation" action="/gela/delete" method="post" novalidate>
+                            <div class="col-md-6">
+                                <label for="idGelaDelete1" class="form-label fw-semibold">Id Gela</label>
+                                <input type="text" class="form-control" id="idGelaDelete1" name="idGela" style="background-color:  rgb(248, 249, 250);" readonly>
+                            </div>
+                            <div class="col-md-6 align-content-end">
+                                <!-- TARTIE LAGA BISUALKI TXUKUNAU GERAU DAIXEN -->
+                            </div>
+                            <div class="col-md-12">
+                                <label for="izenaGelaDelete" class="form-label fw-semibold">Izena</label>
+                                <input type="text" class="form-control" id="izenaGelaDelete" name="izena" 
+                                        onchange="gelaIzenaAldatuDaDeleten()" style="background-color:  rgb(248, 249, 250);" readonly>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="deskribapenaGelaDelete" class="form-label fw-semibold">Deskribapena</label>
+                                <input type="text" class="form-control" id="deskribapenaGelaDelete" name="deskribapena" style="background-color:  rgb(248, 249, 250);" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="idEraikinaGelaDelete" class="form-label fw-semibold">Eraikina</label>
+                                <select class="form-select" id="idEraikinaGelaDelete" name="idEraikina" style="background-color:  rgb(248, 249, 250);" readonly>
+                                    <option selected value="" >Aukeratu...</option>
+                                    <option th:each="e : ${eraikina}" th:value="${e.idEraikina}" th:text="${e.idEraikina}"></option>
+                                </select>
+                            </div>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Irten</button>
+                                <button class="btn" type="submit"
+                                    style="background-color: #1e3a8a; border-color: #1e3a8a; color: white;">Onartu</button>
+                            </div>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!----------------------------------------------------------------------------------------------------------->
+        <!--                                         GELA DELETE MODAL AMAIERA                            -->
+        <!----------------------------------------------------------------------------------------------------------->
 
 
 </body>
