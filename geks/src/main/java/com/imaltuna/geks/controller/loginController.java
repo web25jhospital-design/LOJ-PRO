@@ -40,7 +40,7 @@ public class loginController {
         
         Erabiltzailea erabDB = erabiltzaileaRepository.findByerabiltzaileIzena(erabiltzailea);
         // Erabiltzailea zuzena den konprobatzen da
-        if (erabDB != null && erabDB.getPasahitza().equals(pasahitza)) {
+        if ((erabDB != null) && (erabDB.getPasahitza().equals(pasahitza)) && (erabDB.getBajaData()==null)) {
             //model.addAttribute("logeatutakoErab", erabDB.getErabiltzaileIzena());
             // Model-ean jarri beharrean, Saioan (session) gordetzen dugu erabiltzailea zein den jakiteko
              session.setAttribute("logeatutakoErab", erabDB);

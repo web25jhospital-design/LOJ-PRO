@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.imaltuna.geks.model.Egon;
 import com.imaltuna.geks.model.Erabiltzailea;
@@ -26,7 +27,7 @@ import com.imaltuna.geks.repository.GailuElektronikoaRepository;
 import com.imaltuna.geks.repository.GelaRepository;
 import com.imaltuna.geks.repository.KudeatuRepository;
 
-import jakarta.servlet.http.HttpSession; // ✪ OXEL
+import jakarta.servlet.http.HttpSession;
 
 @Controller // Spring-i esaten dio klase honek HTTP eskariak (URLak) jasoko dituela
 public class adminController {
@@ -304,8 +305,15 @@ public class adminController {
         datubasekoErabiltzailea.setAbizena(erabBerria.getAbizena());
         datubasekoErabiltzailea.setErabiltzaileIzena(erabBerria.getErabiltzaileIzena());
         datubasekoErabiltzailea.setErabiltzaileRola(erabBerria.getErabiltzaileRola());
-
+        
         erabiltzaileaRepository.save(datubasekoErabiltzailea);
+
+        // aldatutako erabiltzailea saioa hasi dueneko bera bada, berriz erregistratzeko eskatuko zaio.
+        // aldaketak aplikatuta izan ditzan.
+        if (datubasekoErabiltzailea.getIdErabiltzailea().equals(erabiltzailea.getIdErabiltzailea())){
+            return "redirect:/";
+        }
+        
         return "redirect:/admin"; // Orria freskatu
     }
 
@@ -329,6 +337,14 @@ public class adminController {
         datubasekoErabiltzailea.setBajaData(new Date());
 
         erabiltzaileaRepository.save(datubasekoErabiltzailea);
+
+        // baja emandako erabiltzailea saioa hasi dueneko bera bada, berriz erregistratzeko eskatuko zaio.
+        // aldaketak aplikatuta izan ditzan.
+        if (datubasekoErabiltzailea.getIdErabiltzailea().equals(erabiltzailea.getIdErabiltzailea())){
+            return "redirect:/";
+        }
+
+
         return "redirect:/admin"; // Orria freskatu
     }
 
@@ -348,7 +364,7 @@ public class adminController {
     }
 
     // --------------------------------------------------------------
-    // Gela Aldatu INSERT
+    // Gela Aldatu UPDATE
     // --------------------------------------------------------------
     @PostMapping("/gela/update")
     public String aldatuGela(@ModelAttribute Gela gelaBerria, HttpSession session) {
@@ -370,7 +386,7 @@ public class adminController {
     }
 
     // --------------------------------------------------------------
-    // Gela Ezabatu INSERT
+    // Gela Ezabatu DELETE
     // --------------------------------------------------------------
     @PostMapping("/gela/delete")
     public String ezabatuGela(@ModelAttribute Gela gelaBerria, HttpSession session) {
@@ -398,6 +414,7 @@ public class adminController {
         gelaRepository.deleteById(gelaBerria.getIdGela());
         return "redirect:/admin"; // Orria freskatu
     }
+
     // --------------------------------------------------------------
     // Eraikina Gehitu INSERT
     // --------------------------------------------------------------
@@ -410,6 +427,61 @@ public class adminController {
         jdbcTemplate.execute("SET @erabiltzailea = '" + erabiltzailea.getIdErabiltzailea() + "'");
 
         eraikinaRepository.save(eraikinBerria);
+        return "redirect:/admin"; // Orria freskatu
+    }
+
+    // --------------------------------------------------------------
+    // Eraikina Aldatu UPDATE
+    // --------------------------------------------------------------
+    @PostMapping("/eraikina/update")
+    public String aldatuEraikina(@ModelAttribute Eraikina eraikinBerria, HttpSession session) {
+
+        // Logeatutako erabiltzailea lortu SQLari pasatzeko:
+        Erabiltzailea erabiltzailea = (Erabiltzailea) session.getAttribute("logeatutakoErab");
+        // MySQL-ko sesio aldagaia ezarri
+        jdbcTemplate.execute("SET @erabiltzailea = '" + erabiltzailea.getIdErabiltzailea() + "'");
+
+        // Eraikina taulan eraikina aurkitu:
+        Eraikina datubasekoEraikina = eraikinaRepository.findById(eraikinBerria.getIdEraikina())
+                .orElseThrow(() -> new RuntimeException("Eraikina ez da aurkitu ID: " + eraikinBerria.getIdEraikina()));
+
+        datubasekoEraikina.setIzena(eraikinBerria.getIzena());
+        datubasekoEraikina.setDeskribapena(eraikinBerria.getDeskribapena());
+        eraikinaRepository.save(datubasekoEraikina);
+        return "redirect:/admin"; // Orria freskatu
+    }
+
+    // --------------------------------------------------------------
+    // Eraikina Ezabatu DELETE
+    // --------------------------------------------------------------
+    @PostMapping("/eraikina/delete")
+    public String ezabatuEraikina(@ModelAttribute Eraikina eraikinDelete, HttpSession session) {
+
+        // Logeatutako erabiltzailea lortu SQLari pasatzeko:
+        Erabiltzailea erabiltzailea = (Erabiltzailea) session.getAttribute("logeatutakoErab");
+        // MySQL-ko sesio aldagaia ezarri
+        jdbcTemplate.execute("SET @erabiltzailea = '" + erabiltzailea.getIdErabiltzailea() + "'");
+
+        List<Integer> eraikinekoGelak = gelaRepository.findByIdEraikina(eraikinDelete.getIdEraikina());
+        if (!eraikinekoGelak.isEmpty()) {
+            for (Integer elem : eraikinekoGelak) {
+                List<Egon> egonDataHutsik = egonRepository.findByidGelaGaurEgun(elem);
+                if (egonDataHutsik != null) {
+                    for (Egon item : egonDataHutsik) {
+                        GailuElektronikoa datubasekoGailua = gailuelektronikoaRepository.findById(item.getIdGailua())
+                                .orElseThrow(
+                                        () -> new RuntimeException("Gailua ez da aurkitu ID: " + item.getIdGailua()));
+                        if (datubasekoGailua.getEgoera() == GailuEgoera.esleitua) {
+                            // Gailua prestatu gordetzeko(Updatea egiteko)
+                            datubasekoGailua.setEgoera(GailuEgoera.erabilgarri);
+                            // Updatea egin:
+                            gailuelektronikoaRepository.save(datubasekoGailua);
+                        }
+                    }
+                }
+            }
+        }
+        eraikinaRepository.deleteById(eraikinDelete.getIdEraikina());
         return "redirect:/admin"; // Orria freskatu
     }
 

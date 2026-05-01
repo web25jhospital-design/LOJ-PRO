@@ -689,6 +689,42 @@ function gelaDeleteDatuakKargatu() {
 }
 
 
+
+
+
+
+//---------------------------------------
+// Eraikina Update formularioa osatu
+//---------------------------------------
+function eraikinaUpdateDatuakKargatu() {
+    const tr = event.target.closest('tr');
+    const tds = tr.querySelectorAll("td");
+
+    const id = document.querySelector("#idEraikinaUpdate");
+    const izena = document.querySelector("#izenaEraikinaUpdate");
+    const deskribapena = document.querySelector("#deskribapenaEraikinaUpdate");
+
+    id.value = tds[0].textContent;
+    izena.value = tds[1].textContent;
+    deskribapena.value = tds[2].textContent;
+}
+//---------------------------------------
+// Eraikina Delete formularioa osatu
+//---------------------------------------
+function eraikinaDeleteDatuakKargatu() {
+    const tr = event.target.closest('tr');
+    const tds = tr.querySelectorAll("td");
+
+    const id = document.querySelector("#idEraikinaDelete");
+    const izena = document.querySelector("#izenaEraikinaDelete");
+    const deskribapena = document.querySelector("#deskribapenaEraikinaDelete");
+
+    id.value = tds[0].textContent;
+    izena.value = tds[1].textContent;
+    deskribapena.value = tds[2].textContent;
+}
+
+
 //---------------------------------------------------------------------------------------------
 // INSERT ERAIKINA MODAL
 //Formulario barruan gelaIzena aldatzean, konprobatu berria iadanik existitzen ez dela.
@@ -711,3 +747,57 @@ function idEraikinaAldatuDaInserten() {
         })
     }
 }
+
+
+
+function confirmAlertUpdateErabiltzailea() {
+    // Erabiltzaile aldaketaren abixua eman
+    alert("Erabiltzaile datuak aldatu dira!\nSaioa, aldatutako erabiltzailearena bada, berriz erregistratu beharko zara!");
+
+    return true; 
+}
+
+function confirmAlertDeleteErabiltzailea() {
+    if (confirm("Erabiltzailea baja emango da!\nSaioa, aldatutako erabiltzailearena bada, berriz erregistratu beharko zara!\nZiur zaude?")) {
+        return true;
+    }
+    return false;
+}
+
+// function confirmAlertDeleteErabiltzailea() {
+//     // Erakutsi modal-a
+//     var myModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+//     myModal.show();
+    
+//     // Promise bat itzuli (beharrezkoa formularioarekin lan egiteko)
+//     return new Promise((resolve) => {
+//         // "Bai" botoiaren klik-a
+//         document.getElementById('confirmDeleteBtn').onclick = function() {
+//             myModal.hide();
+//             resolve(true); // return true bezala
+//         };
+        
+//         // Modal-a itxi denean (Ez botoia edo X ikonoa)
+//         document.getElementById('confirmDeleteModal').addEventListener('hidden.bs.modal', function() {
+//             resolve(false); // return false bezala
+//         }, { once: true });
+//     });
+// }
+
+// async function handleSubmit(event) {
+//     // 1. async -> funtzio honek Promise bat itzuliko duela esan nahi du
+    
+//     event.preventDefault(); // Formularioa berehala ez bidaltzeko
+    
+//     // 2. await -> itxaron confirmAlertDeleteErabiltzailea() funtzioak erantzun arte
+//     // confirmAlertDeleteErabiltzailea()-k itzultzen duen Promise-a ebazten denean,
+//     // emaitza (true/false) "confirmed" aldagaian gordetzen da
+//     var confirmed = await confirmAlertDeleteErabiltzailea();
+    
+//     // 3. confirmed true bada (erabiltzaileak "Bai" sakatu du)
+//     if (confirmed) {
+//         // Formularioa bidali
+//         event.target.submit(); // "event.target" da formularioa bera
+//     }
+//     // confirmed false bada (erabiltzaileak "Ez" sakatu du), ez da ezer gertatzen
+// }
