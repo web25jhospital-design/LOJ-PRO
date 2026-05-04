@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.imaltuna.geks.model.Egon;
 import com.imaltuna.geks.model.Erabiltzailea;
@@ -179,7 +178,6 @@ public class adminController {
                 break;
             }
         }
-
         // Gela aldatu bada:
         if (gelaAldatu) {
             // Gailua gela bati esleituta dagoen ziurtatu
@@ -210,7 +208,6 @@ public class adminController {
             }
 
         }
-
         // GailuElektronikoak taulan gailua aurkitu:
         GailuElektronikoa datubasekoGailua = gailuelektronikoaRepository.findById(gailua.getIdGailua())
                 .orElseThrow(() -> new RuntimeException("Gailua ez da aurkitu ID: " + gailua.getIdGailua()));
@@ -258,7 +255,6 @@ public class adminController {
         gailuelektronikoaRepository.save(datubasekoGailua);
 
         return "redirect:/admin";
-
     }
 
     // --------------------------------------------------------------
@@ -344,7 +340,6 @@ public class adminController {
             return "redirect:/";
         }
 
-
         return "redirect:/admin"; // Orria freskatu
     }
 
@@ -377,7 +372,7 @@ public class adminController {
         // Gela taulan gela aurkitu:
         Gela datubasekoGela = gelaRepository.findById(gelaBerria.getIdGela())
                 .orElseThrow(() -> new RuntimeException("Gela ez da aurkitu ID: " + gelaBerria.getIdGela()));
-
+                
         datubasekoGela.setIdEraikina(gelaBerria.getIdEraikina());
         datubasekoGela.setIzena(gelaBerria.getIzena());
         datubasekoGela.setDeskribapena(gelaBerria.getDeskribapena());
@@ -484,5 +479,4 @@ public class adminController {
         eraikinaRepository.deleteById(eraikinDelete.getIdEraikina());
         return "redirect:/admin"; // Orria freskatu
     }
-
 }

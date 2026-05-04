@@ -515,6 +515,29 @@ function gailuDeleteGatuakKargatu() {
     idGela.value = tds[8].textContent;
 }
 
+//Gailua aldatzeko abixua eman
+function confirmAlertUpdateGailua() { 
+    // Gailuaren aldaketaren abixua eman
+    alert("Gailuaren datuak aldatu dira!");
+
+    return true; 
+}
+//Gailua baja emateko konfirmazioa eskatu
+function confirmAlertDeleteGailua() {
+    if (confirm("Gailua baja emango da!\nZiur zaude?")) {
+        return true;
+    }
+    return false;
+}
+
+
+
+
+
+
+
+
+
 //---------------------------------------
 // Erabiltzailea Update formularioa osatu
 //---------------------------------------
@@ -596,12 +619,25 @@ function erabIzenaAldatuDaUpdaten() {
     if (erabizena != "") {
         erabiltzaileenErabIzenak.forEach(item => {
             if (erabizena === item.textContent) {
-                console.log("eta hemen sartu da?");
                 alert("Kontuz, erabiltzaile izen hau iada erabiltzen da!");
                 erabizenaInput.value = "";
             }
         })
     }
+}
+//Erabiltzailea aldatzeko abixua eman
+function confirmAlertUpdateErabiltzailea() {
+    // Erabiltzaile aldaketaren abixua eman
+    alert("Erabiltzaile datuak aldatu dira!\nSaioa, aldatutako erabiltzailearena bada, berriz erregistratu beharko zara!");
+
+    return true; 
+}
+//Erabiltzailea baja emateko konfirmazioa eskatu
+function confirmAlertDeleteErabiltzailea() {
+    if (confirm("Erabiltzailea baja emango da!\nSaioa, baja emango duzun erabiltzailearena bada, berriz erregistratu beharko zara!\nZiur zaude?")) {
+        return true;
+    }
+    return false;
 }
 
 
@@ -632,23 +668,23 @@ function gelaIzenaAldatuDaInserten() {
 // UPDATE Gela MODAL
 //Formulario barruan gelaIzena aldatzean, konprobatu berria iadanik existitzen ez dela.
 //---------------------------------------------------------------------------------------------
-function gelaIzenaAldatuDaUpdaten() {
+// function gelaIzenaAldatuDaUpdaten() {
 
-    //erabiltzaileak sartutako gelaIzena
-    const gelaIzenaInput = document.querySelector("#izenaGelaUpdate");
-    const gelaIzena = gelaIzenaInput.value;
-    //existitzen diren gelaIzen guztiak
-    const gelaIzenak = document.querySelectorAll(".tdgelaIzena");
+//     //erabiltzaileak sartutako gelaIzena
+//     const gelaIzenaInput = document.querySelector("#izenaGelaUpdate");
+//     const gelaIzena = gelaIzenaInput.value;
+//     //existitzen diren gelaIzen guztiak
+//     const gelaIzenak = document.querySelectorAll(".tdgelaIzena");
 
-    if (gelaIzena != "") {
-        gelaIzenak.forEach(item => {
-            if (gelaIzena === item.textContent) {
-                alert("Kontuz, gela izen hau iada erabiltzen da!");
-                gelaIzenaInput.value = "";
-            }
-        })
-    }
-}
+//     if (gelaIzena != "") {
+//         gelaIzenak.forEach(item => {
+//             if (gelaIzena === item.textContent) {
+//                 alert("Kontuz, gela izen hau iada erabiltzen da!");
+//                 gelaIzenaInput.value = "";
+//             }
+//         })
+//     }
+// }
 
 //---------------------------------------
 // Gela Update formularioa osatu
@@ -662,8 +698,6 @@ function gelaUpdateDatuakKargatu() {
     const eraikina = document.querySelector("#idEraikinaGelaUpdate");
     const izena = document.querySelector("#izenaGelaUpdate");
     const deskribapena = document.querySelector("#deskribapenaGelaUpdate");
-
-    console.log("id gela: " + tds[0].textContent);
 
     id.value = tds[0].textContent;      // ID Gela
     eraikina.value = tds[1].textContent; // ID Eraikina
@@ -688,7 +722,20 @@ function gelaDeleteDatuakKargatu() {
     deskribapena.value = tds[3].textContent; // Deskribapena
 }
 
+//Gela aldatzeko abixua eman
+function confirmAlertUpdateGela() { 
+    // Gailuaren aldaketaren abixua eman
+    alert("Gelaren datuak aldatu dira!");
 
+    return true; 
+}
+//Gela ezabatzeko konfirmazioa eskatu
+function confirmAlertDeleteGela() {
+    if (confirm("Gela ezabatu egingo da!\nZiur zaude?")) {
+        return true;
+    }
+    return false;
+}
 
 
 
@@ -748,21 +795,23 @@ function idEraikinaAldatuDaInserten() {
     }
 }
 
-
-
-function confirmAlertUpdateErabiltzailea() {
-    // Erabiltzaile aldaketaren abixua eman
-    alert("Erabiltzaile datuak aldatu dira!\nSaioa, aldatutako erabiltzailearena bada, berriz erregistratu beharko zara!");
+//Eraikina aldatzeko abixua eman
+function confirmAlertUpdateEraikina() { 
+    // Gailuaren aldaketaren abixua eman
+    alert("Eraikinaren datuak aldatu dira!");
 
     return true; 
 }
-
-function confirmAlertDeleteErabiltzailea() {
-    if (confirm("Erabiltzailea baja emango da!\nSaioa, aldatutako erabiltzailearena bada, berriz erregistratu beharko zara!\nZiur zaude?")) {
+//Eraikina ezabatzeko konfirmazioa eskatu
+function confirmAlertDeleteEraikina() {
+    if (confirm("Eraikina ezabatu egingo da!\nZiur zaude?")) {
         return true;
     }
     return false;
 }
+
+
+
 
 // function confirmAlertDeleteErabiltzailea() {
 //     // Erakutsi modal-a

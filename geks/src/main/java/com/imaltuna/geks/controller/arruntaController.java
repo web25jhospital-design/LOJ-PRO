@@ -88,14 +88,12 @@ public class arruntaController {
         model.addAttribute("bajan", gailuelektronikoaRepository.contarBajan());
 
 
-
          // Azken 3 gailuak lortu
         List<Kudeatu> azkenMugimenduak = KudeatuRepository.findKudeatuObjects(); // ✪ OXEL
     
         // HTMLra bidali
         model.addAttribute("azkenMugimenduak", azkenMugimenduak); // ✪ OXEL
         // OXEL ↑
-
 
 
         // GAKOA: "arrunta" hitzak esaten dio Spring-i templates/arrunta.html fitxategia bilatzeko

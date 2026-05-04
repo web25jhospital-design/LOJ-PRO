@@ -28,8 +28,8 @@ INSERT INTO gela (id_eraikina, izena, deskribapena) VALUES
 -- ========================================================
 INSERT INTO gailuElektronikoa 
 (marka, modeloa, serie_zenb, alta_data, baja_data, egoera, mota) VALUES
-('Dell', 'OptiPlex 7090', 'SN12345', '2023-01-10', NULL, 'erabilgarri', 'ordenagailua'),
-('Lenovo', 'ThinkPad X1', 'SN12347', '2023-03-20', NULL, 'erabilgarri', 'ordenagailu eramangarria'),
+('Dell', 'OptiPlex 7090', 'SN12345', '2023-01-10', NULL, 'esleitua', 'ordenagailua'),
+('Lenovo', 'ThinkPad X1', 'SN12347', '2023-03-20', NULL, 'esleitua', 'ordenagailu eramangarria'),
 ('Apple', 'iPad Air', 'SN12349', '2023-05-12', NULL, 'erabilgarri', 'arbela digitala'),
 ('Canon', 'PIXMA G6050', 'SN12351', '2023-07-22', NULL, 'erabilgarri', 'inprimagailua'),
 ('Asus', 'VivoBook 15', 'SN12353', '2024-09-14', NULL, 'erabilgarri', 'ordenagailu eramangarria'),
@@ -70,7 +70,7 @@ INSERT INTO kudeatu
 (id_erabiltzailea, id_gailua, kudeatze_data, kudeatze_mota) VALUES
 (4, 1, '2026-02-15', 'gehitu'),
 (1, 3, '2026-03-05', 'editatu'),
-(1, 3, '2026-03-06', 'esleitu'),
+(1, 2, '2025-01-03', 'esleitu'),
 (4, 7, '2026-04-01', 'ezabatu');
 
 
@@ -80,8 +80,11 @@ INSERT INTO kudeatu
 -- ========================================================
 INSERT INTO egon 
 (id_gailua, id_gela, hasiera_data, amaiera_data) VALUES
-(1, 1, '2025-01-01', '2025-01-02'),
+(1, 1, '2026-01-01', '2026-01-02'),
+(1, 2, '2025-01-03', NULL),
 (9, 2, '2025-02-02', NULL),
 (10, 3, '2025-03-03', NULL),
+(2, 3, '2025-04-03', NULL),
+(3, 3, '2025-03-03', '2025-03-23'),
 (12, 4, '2025-01-04', NULL),
 (13, 5, '2025-03-05', NULL);

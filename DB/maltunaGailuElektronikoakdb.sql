@@ -76,8 +76,8 @@ id_gailua INT,
 kudeatze_data DATETIME NOT NULL,
 kudeatze_mota ENUM('gehitu', 'editatu', 'esleitu', 'ezabatu') NOT NULL, -- gehitu / editatu / esleitu / ezabatu
 PRIMARY KEY (id_kudeatu, id_erabiltzailea, id_gailua),
-FOREIGN KEY (id_erabiltzailea) REFERENCES erabiltzailea(id_erabiltzailea),
-FOREIGN KEY (id_gailua) REFERENCES gailuElektronikoa(id_gailua)
+FOREIGN KEY (id_erabiltzailea) REFERENCES erabiltzailea(id_erabiltzailea) ON UPDATE CASCADE ON DELETE CASCADE,
+FOREIGN KEY (id_gailua) REFERENCES gailuElektronikoa(id_gailua) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 
@@ -92,6 +92,6 @@ id_gela INT,
 hasiera_data DATETIME NOT NULL,
 amaiera_data DATETIME,
 PRIMARY KEY (id_egon, id_gailua),
-FOREIGN KEY (id_gailua) REFERENCES gailuElektronikoa(id_gailua),
-FOREIGN KEY (id_gela) REFERENCES gela(id_gela)
+FOREIGN KEY (id_gailua) REFERENCES gailuElektronikoa(id_gailua) ON UPDATE CASCADE ON DELETE CASCADE,
+FOREIGN KEY (id_gela) REFERENCES gela(id_gela) ON UPDATE CASCADE ON DELETE CASCADE
 );

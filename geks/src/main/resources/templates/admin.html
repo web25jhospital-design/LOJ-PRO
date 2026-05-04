@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Template - GEKS</title>
+    <title>GEKS MiguelAltuna</title>
 
     <!-- style -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -44,6 +44,7 @@
             <!----------------------------------------------------------------------------------------------------------->
             <!--                                                  NAV-a                                                -->
             <!----------------------------------------------------------------------------------------------------------->
+            <!-- Ezkerrean dagoen menua (Nagusia) -->
             <div class="nav flex-column nav-pills p-3 border-end" id="v-pills-tab" role="tablist"
                 aria-orientation="vertical">
                 <button class="menua nav-link active" id="v-pills-Dashboard-tab" data-bs-toggle="pill"
@@ -358,8 +359,9 @@
                                     <td class="tdIdGela" th:text="${gailua.idGela}"></td>
                                     <td th:text="${gailua.hasieraData}"></td>
                                     <td>
-                                        <!-- th:if="${gailua.bajaData == null}" honekin baja emanda dagoen gailuan ez da aukerarik 
-                                        ematen gailua editatu edo ezabatzeko. -->
+                                        <!-- gailua baja emana bada ez du aukerarik izango editatzeko edo berriz baja emateko: -->
+                                        <!-- honekin konprobatzen da hori: th:if="${gailua.bajaData == null}" -->
+                                         <!-- honek: data-bs-toggle="modal" data-bs-target="#gailuUpdate" ze leiho edo modal kargatu behar den dio. -->
                                         <Button class="btn p-1" type="button" data-bs-toggle="modal"
                                             data-bs-target="#gailuUpdate" th:if="${gailua.bajaData == null}"
                                             onclick="gailuUpdateDatuakKargatu()"><i
@@ -381,6 +383,7 @@
                 <!----------------------------------------------------------------------------------------------------------->
                 <!--                                               ERAIKINAK                                               -->
                 <!----------------------------------------------------------------------------------------------------------->
+                <!------------------ ERAIKIN HEADERA------------------>
                 <div class="tab-pane fade" id="v-pills-Eraikinak" role="tabpanel"
                     aria-labelledby="v-pills-Eraikinak-tab" tabindex="0">
                     <nav class="navbar p-0 mb-4">
@@ -398,7 +401,7 @@
                             </div>
                         </div>
                     </nav>
-
+                    <!------------------ ERAIKIN HEADERA AMAIERA------------------>
 
                     <!-- HEMEN GEHITU FALTA DANA -->
 
@@ -418,6 +421,7 @@
                                     <td th:text="${e.izena}"></td>
                                     <td th:text="${e.deskribapena}"></td>
                                     <td>
+                                        <!-- honek: data-bs-toggle="modal" data-bs-target="#eraikinaUpdate" ze leiho edo modal kargatu behar den dio. -->
                                         <Button class="btn p-1" type="button"><i
                                                 class="bi bi-pencil-square text-primary fs-5 fw-bold"
                                                 data-bs-toggle="modal" data-bs-target="#eraikinaUpdate"
@@ -440,6 +444,7 @@
                 <!----------------------------------------------------------------------------------------------------------->
                 <!--                                               GELAK                                                   -->
                 <!----------------------------------------------------------------------------------------------------------->
+                <!------------------ GELA HEADERA------------------>
                 <div class="tab-pane fade" id="v-pills-Gelak" role="tabpanel" aria-labelledby="v-pills-Gelak-tab"
                     tabindex="0">
                     <nav class="navbar p-0 mb-4">
@@ -457,6 +462,7 @@
                             </div>
                         </div>
                     </nav>
+                    <!------------------ GELA HEADERA AMAIERA ------------------>
                     <!---------------------- GELEN LAN LEIHOA---------------------->
                     <!-- BILAKETA FORMULARIOA -->
                     <div class="card border-light p-3 mb-4 shadow-sm">
@@ -498,6 +504,7 @@
                                     <td class="tdgelaIzena" th:text="${gela.izena}"></td>
                                     <td th:text="${gela.deskribapena}"></td>
                                     <td>
+                                        <!-- honek: data-bs-toggle="modal" data-bs-target="#gelaUpdate" ze leiho edo modal kargatu behar den dio. -->
                                         <Button class="btn p-1" type="button" data-bs-toggle="modal"
                                             data-bs-target="#gelaUpdate" onclick="gelaUpdateDatuakKargatu()"><i
                                                 class="bi bi-pencil-square text-primary fs-5 fw-bold"
@@ -560,6 +567,9 @@
                                     <td th:text="${erabiltzailea.altaData}"></td>
                                     <td th:text="${erabiltzailea.bajaData}"></td>
                                     <td>
+                                        <!-- Erabiltzailea baja emana bada ez du aukerarik izango editatzeko edo berriz baja emateko: -->
+                                        <!-- honekin konprobatzen da hori: th:if="${erabiltzailea.bajaData == null}" -->
+                                        <!-- honek: data-bs-toggle="modal" data-bs-target="#erabiltzaileUpdate" ze leiho edo modal kargatu behar den dio. -->
                                         <Button class="btn p-1" type="button" data-bs-toggle="modal"
                                             data-bs-target="#erabiltzaileUpdate"
                                             th:if="${erabiltzailea.bajaData == null}"
@@ -697,8 +707,8 @@
                                     <th>ID</th>
                                     <th>ID Gailua</th>
                                     <th>ID Gela</th>
-                                    <th>Alta Data</th>
-                                    <th>Baja Data</th>
+                                    <th>Hasiera Data</th>
+                                    <th>Amaiera Data</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -855,7 +865,8 @@
                             </div>
                             <div class="col-md-6">
                                 <button class="btn" type="submit"
-                                    style="background-color: #1e3a8a; border-color: #1e3a8a; color: white; width: 100%">Aldatu</button>
+                                    style="background-color: #1e3a8a; border-color: #1e3a8a; color: white; width: 100%"
+                                    onclick="return confirmAlertUpdateGailua()">Aldatu</button>
                             </div>
                         </form>
 
@@ -935,8 +946,8 @@
                             </div>
                             <div class="col-md-6">
                                 <button class="btn" type="submit"
-                                    style="background-color: #1e3a8a; border-color: #1e3a8a; color: white; width: 100%">Baja
-                                    Eman</button>
+                                    style="background-color: #1e3a8a; border-color: #1e3a8a; color: white; width: 100%"
+                                    onclick="return confirmAlertDeleteGailua()">Baja Eman</button>
                             </div>
                         </form>
 
@@ -1183,7 +1194,7 @@
         <!--                                         ERABILTZAILEA DELETE MODAL AMAIERA                                   -->
         <!----------------------------------------------------------------------------------------------------------->
         <!-- Modal konfirmaziorako -->
-        <div class="modal fade" id="confirmDeleteModal" tabindex="-1" data-bs-backdrop="static">
+        <!-- <div class="modal fade" id="confirmDeleteModal" tabindex="-1" data-bs-backdrop="static">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header bg-primary text-white">
@@ -1200,7 +1211,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         
 
@@ -1231,11 +1242,7 @@
                             </div>
                             <div class="col-md-12">
                                 <label for="deskribapenaGelaGehitu" class="form-label fw-semibold">Deskribapena</label>
-                                <input type="text" class="form-control" id="deskribapenaGelaGehitu" name="deskribapena"
-                                    required>
-                                <div class="valid-feedback">
-                                    Ok!
-                                </div>
+                                <input type="text" class="form-control" id="deskribapenaGelaGehitu" name="deskribapena">
                             </div>
                             <div class="col-md-6">
                                 <label for="idEraikinaGelaGehitu" class="form-label fw-semibold">Eraikina</label>
@@ -1284,32 +1291,26 @@
                             </div>
                             <div class="col-md-12">
                                 <label for="izenaGelaUpdate" class="form-label fw-semibold">Izena</label>
-                                <input type="text" class="form-control" id="izenaGelaUpdate" name="izena" required
-                                    onchange="gelaIzenaAldatuDaUpdaten()">
+                                <input type="text" class="form-control" id="izenaGelaUpdate" name="izena" style="background-color:  rgb(248, 249, 250);" readonly>
+                                <!-- required onchange="gelaIzenaAldatuDaUpdaten()"> -->
                                 <div class="valid-feedback">
                                     Ok!
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <label for="deskribapenaGelaUpdate" class="form-label fw-semibold">Deskribapena</label>
-                                <input type="text" class="form-control" id="deskribapenaGelaUpdate" name="deskribapena"
-                                    required>
-                                <div class="valid-feedback">
-                                    Ok!
-                                </div>
+                                <input type="text" class="form-control" id="deskribapenaGelaUpdate" name="deskribapena">
                             </div>
                             <div class="col-md-6">
                                 <label for="idEraikinaGelaUpdate" class="form-label fw-semibold">Eraikina</label>
-                                <select class="form-select" id="idEraikinaGelaUpdate" name="idEraikina" required>
-                                    <option selected value="">Aukeratu...</option>
-                                    <option th:each="e : ${eraikina}" th:value="${e.idEraikina}"
-                                        th:text="${e.idEraikina}"></option>
-                                </select>
+                                <input type="text" class="form-control" id="idEraikinaGelaUpdate" name="idEraikina"
+                                    style="background-color:  rgb(248, 249, 250);" readonly>
                             </div>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Irten</button>
                                 <button class="btn" type="submit"
-                                    style="background-color: #1e3a8a; border-color: #1e3a8a; color: white;">Aldatu</button>
+                                    style="background-color: #1e3a8a; border-color: #1e3a8a; color: white;"
+                                    onclick=" return confirmAlertUpdateGela()">Aldatu</button>
                             </div>
 
                         </form>
@@ -1366,7 +1367,8 @@
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Irten</button>
                                 <button class="btn" type="submit"
-                                    style="background-color: #1e3a8a; border-color: #1e3a8a; color: white;">Ezabatu</button>
+                                    style="background-color: #1e3a8a; border-color: #1e3a8a; color: white;"
+                                    onclick=" return confirmAlertDeleteGela()">Ezabatu</button>
                             </div>
 
                         </form>
@@ -1412,10 +1414,7 @@
                                 <label for="deskribapenaEraikinaGehitu"
                                     class="form-label fw-semibold">Deskribapena</label>
                                 <input type="text" class="form-control" id="deskribapenaEraikinaGehitu"
-                                    name="deskribapena" required>
-                                <div class="valid-feedback">
-                                    Ok!
-                                </div>
+                                    name="deskribapena">
                             </div>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Irten</button>
@@ -1462,15 +1461,13 @@
                                 <label for="deskribapenaEraikinaUpdate"
                                     class="form-label fw-semibold">Deskribapena</label>
                                 <input type="text" class="form-control" id="deskribapenaEraikinaUpdate"
-                                    name="deskribapena" required>
-                                <div class="valid-feedback">
-                                    Ok!
-                                </div>
+                                    name="deskribapena" >
                             </div>
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Irten</button>
                                 <button class="btn" type="submit"
-                                    style="background-color: #1e3a8a; border-color: #1e3a8a; color: white;">Aldatu</button>
+                                    style="background-color: #1e3a8a; border-color: #1e3a8a; color: white;"
+                                    onclick=" return confirmAlertUpdateEraikina()">Aldatu</button>
                             </div>
 
                         </form>
@@ -1520,7 +1517,8 @@
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Irten</button>
                                 <button class="btn" type="submit"
-                                    style="background-color: #1e3a8a; border-color: #1e3a8a; color: white;">Ezabatu</button>
+                                    style="background-color: #1e3a8a; border-color: #1e3a8a; color: white;"
+                                    onclick=" return confirmAlertDeleteEraikina()">Ezabatu</button>
                             </div>
 
                         </form>

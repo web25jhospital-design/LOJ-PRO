@@ -52,7 +52,6 @@ public class loginController {
                 //erabiltzailea zuzena bada eta arrunta baimenak baditu arrunta.html exekutatuko da
                 return "redirect:/arrunta"; // ✪
             }
-
         } else {
             //Erabiltzailea zuzena ez bada mezua bidaltzen da login.htmlra erabiltzaileari abixatzeko
             model.addAttribute("mezua", "* Erabiltzaile edo pasahitza okerra! Saiatu berriro");
