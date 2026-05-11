@@ -11,7 +11,7 @@ import com.imaltuna.geks.model.Erabiltzailea;
 import com.imaltuna.geks.model.Rola;
 import com.imaltuna.geks.repository.ErabiltzaileaRepository;
 
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession; // ABCD
 
 @Controller // Spring-i esaten dio klase honek HTTP eskariak (URLak) jasoko dituela
 public class loginController {
